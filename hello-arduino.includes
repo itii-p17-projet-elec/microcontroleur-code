@@ -1,0 +1,8 @@
+inc/
+src/
+tests/
+
+/usr/lib/avr/include/
+
+/usr/share/arduino/hardware/arduino/cores/arduino
+/usr/share/arduino/hardware/arduino/variants/standard
