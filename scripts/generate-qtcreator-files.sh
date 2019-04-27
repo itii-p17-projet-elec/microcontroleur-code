@@ -43,7 +43,7 @@ function	config_files_createOrUpdate()
 
 	echo "Makefile" > "${lFileName}"
 
-	find doc/ inc/ rsrc/ src/ tests/ -type f >> "${lFileName}"
+	find doc/ inc/ mk-inc/ rsrc/ src/ tests/ -type f >> "${lFileName}"
 }
 
 

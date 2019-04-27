@@ -6,3 +6,4 @@ tests/
 
 /usr/share/arduino/hardware/arduino/cores/arduino
 /usr/share/arduino/hardware/arduino/variants/standard
+/usr/share/arduino/libraries
