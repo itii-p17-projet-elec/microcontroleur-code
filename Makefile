@@ -69,6 +69,13 @@ SHELL:=/bin/bash
 
 MK_INCDIR   := mk-inc
 
+
+
+##  @brief  Default Make target.
+default: target
+
+
+
 include $(MK_INCDIR)/project-config.mk
 
 
@@ -105,10 +112,6 @@ include $(MK_INCDIR)/project-sources.mk
 # ------------------------------------------------------------------------------
 #   Target aliases
 # ------------------------------------------------------------------------------
-
-##  @brief  Default Make target.
-default: target
-
 
 ##  @brief  Target to build the main target.
 target: show_sources resources $(TARGETDIR)/$(TARGET)
