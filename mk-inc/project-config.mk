@@ -1,5 +1,5 @@
 ##  @brief  The Target Binary Program's name
-TARGETNAME		:= HelloArduino
+TARGETNAME		:= microcontroller-main
 
 
 
