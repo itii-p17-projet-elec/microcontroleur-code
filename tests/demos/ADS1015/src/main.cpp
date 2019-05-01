@@ -1,36 +1,15 @@
 #include <Arduino.h>
 
+#include "drivers/ADC/Adafruit_ADS1015.h"
 
 const int   C_PIN_LED   =  13;    // LED connected to digital pin 13
 
-char    g_char                  = '0';
-int     g_timer1_counterPreload = 0;
+Adafruit_ADS1015 ads1015;
+int16_t adc0, adc1, adc2, adc3;
+int16_t adc_diff_0_1    = 0;
+int16_t adc_diff_2_3    = 0;
 
-/* ########################################################################## */
-/* ########################################################################## */
-
-ISR(TIMER1_OVF_vect)        // interrupt service routine
-{
-    /* Reset timer */
-    TCNT1   = g_timer1_counterPreload;   // preload timer
-
-
-    digitalWrite(C_PIN_LED, HIGH);   // set the LED on
-    Serial.print( g_char );
-    if( g_char == '9' )
-    {
-        g_char  = '0';
-        Serial.println("");
-    }
-    else
-    {
-        g_char++;
-    }
-
-    // This delay is here just to let us see the LED blink - but it's bad habit!
-    delay(100);
-    digitalWrite(C_PIN_LED, LOW);
-}
+static const char   C_CHAR_SEP  = ',';
 
 /* ########################################################################## */
 /* ########################################################################## */
@@ -39,31 +18,14 @@ void setup()
 {
     pinMode(C_PIN_LED, OUTPUT);
 
-    //Initialize serial and wait for port to open:
+
     Serial.begin(9600);
-    while (!Serial)
-    {
-        ; // wait for serial port to connect. Needed for Leonardo only
-    }
-
-    // prints title with ending line break
     Serial.println("\n~~~ Hello, World ! ~~~");
+    Serial.println("# Demo for TI ADS1015 sensor.");
 
-
-    // initialize timer1
-    noInterrupts();           // disable all interrupts
-    TCCR1A = 0;
-    TCCR1B = 0;
-
-    // Set timer1_counter to the correct value for our interrupt interval
-    g_timer1_counterPreload = 49910;   // preload timer 65536-16MHz/256/2Hz
-
-    TCNT1 = g_timer1_counterPreload;   // preload timer
-
-    TCCR1B |= (1 << CS12);    // 1024 prescaler
-    TCCR1B |= (1 << CS10);    // 1024 prescaler
-    TIMSK1 |= (1 << TOIE1);   // enable timer overflow interrupt
-    interrupts();             // enable all interrupts
+    Serial.println("Getting single-ended readings from AIN0..3");
+    Serial.println("ADC Range: +/- 6.144V (1 bit = 3mV)");
+    ads1015.begin();
 }
 
 /* ########################################################################## */
@@ -71,8 +33,56 @@ void setup()
 
 void loop()
 {
-    /* Nothing to do here for this software - everything is done during
-     * interrupts ! */
+    digitalWrite(C_PIN_LED, HIGH);
+
+    adc0 = ads1015.readADC_SingleEnded(0);
+    adc1 = ads1015.readADC_SingleEnded(1);
+    adc2 = ads1015.readADC_SingleEnded(2);
+    adc3 = ads1015.readADC_SingleEnded(3);
+    adc_diff_0_1 = ads1015.readADC_Differential_0_1();
+    adc_diff_2_3 = ads1015.readADC_Differential_2_3();
+
+    digitalWrite(C_PIN_LED, LOW);
+
+#if 1
+    Serial.println("+-- New measure :");
+    Serial.print("    +-- AIN0: "); Serial.print(adc0);Serial.print(" ( "); Serial.print(adc0 * 3);Serial.println(" mV )");
+    Serial.print("    +-- AIN1: "); Serial.print(adc1);Serial.print(" ( "); Serial.print(adc1 * 3);Serial.println(" mV )");
+    Serial.print("    +-- AIN2: "); Serial.print(adc2);Serial.print(" ( "); Serial.print(adc2 * 3);Serial.println(" mV )");
+    Serial.print("    +-- AIN3: "); Serial.print(adc3);Serial.print(" ( "); Serial.print(adc3 * 3);Serial.println(" mV )");
+
+    Serial.print("    +-- D01: ");
+    Serial.print(adc_diff_0_1);
+    Serial.print("(");
+    Serial.print(adc_diff_0_1 * 3);
+    Serial.println("mV)");
+
+    Serial.print("    +-- D23: ");
+    Serial.print(adc_diff_2_3);
+    Serial.print("(");
+    Serial.print(adc_diff_2_3 * 3);
+    Serial.println("mV)");
+    Serial.println("");
+
+    delay(1000);
+#else
+    Serial.print("$");
+    Serial.print(adc0);
+    Serial.print(C_CHAR_SEP);
+    Serial.print(adc1);
+    Serial.print(C_CHAR_SEP);
+    Serial.print(adc2);
+    Serial.print(C_CHAR_SEP);
+    Serial.print(adc3);
+    Serial.print(C_CHAR_SEP);
+    Serial.print(adc_diff_0_1);
+    Serial.print(C_CHAR_SEP);
+    Serial.print(adc_diff_2_3);
+    Serial.print(C_CHAR_SEP);
+    Serial.print("*\r\n");
+    delay(100);
+#endif
+
 }
 
 /* ########################################################################## */
