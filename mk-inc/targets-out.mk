@@ -1,7 +1,7 @@
 
 
 
-$(BUILDDIR)/$(TARGET:%.hex=%.elf): $(ARDUINO_CORE_OBJECTS) $(OBJECTS)	#help: Main application's target.
+$(BUILDDIR)/$(TARGET:%.hex=%.elf): $(OBJECTS) $(ARDUINO_LIBS)	#help: Main application's target.
 	@echo -e "${lColorLD}    LD  $@${CLREOL}${FMT_STD}" $(TRACE_LOG)
 	@if [ ! "$(TRACES)" -eq "0" ] ; then \
 	        echo "$(LD) $(LDFLAGS) -o $@ $^" $(TRACE_REDIRECT); \
