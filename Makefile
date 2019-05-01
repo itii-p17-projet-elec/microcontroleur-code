@@ -106,7 +106,7 @@ include $(MK_INCDIR)/build-options.mk
 
 include $(MK_INCDIR)/colors.mk
 include $(MK_INCDIR)/traces.mk
-include $(MK_INCDIR)/project-sources.mk
+include $(MK_INCDIR)/sources.mk
 
 
 
