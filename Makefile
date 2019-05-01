@@ -81,7 +81,8 @@ include $(MK_INCDIR)/project-config.mk
 
 
 include $(MK_INCDIR)/arduino-config.mk
-include $(MK_INCDIR)/project-directories.mk
+
+include $(MK_INCDIR)/directories.mk
 
 
 
@@ -89,8 +90,8 @@ include $(MK_INCDIR)/project-directories.mk
 #   Arduino-related declarations
 # ------------------------------------------------------------------------------
 
-include $(MK_INCDIR)/arduino-sources-core.mk
-include $(MK_INCDIR)/arduino-targets-default.mk
+include $(MK_INCDIR)/arduino-lib-core.mk
+include $(MK_INCDIR)/arduino-lib-wire.mk
 
 
 
@@ -105,7 +106,7 @@ include $(MK_INCDIR)/build-options.mk
 
 include $(MK_INCDIR)/colors.mk
 include $(MK_INCDIR)/traces.mk
-include $(MK_INCDIR)/project-sources.mk
+include $(MK_INCDIR)/sources.mk
 
 
 
@@ -141,7 +142,7 @@ tests: show_sources_tests resources $(TARGET_TESTS_AUTO) #help: Builds all test 
 ##  @brief  Target to display detected source files.
 show_sources: directories	#help: Displays detected source files.
 	@echo -e "\n${lColorSrcList}List of auto-detected sources :${FMT_STD}\n" $(TRACE_LOG)
-	@for file in $(ARDUINO_CORE_SOURCES) $(SOURCES); do \
+	@for file in $(ARDUINO_SOURCES) $(SOURCES); do \
 		echo "+-- $${file}" $(TRACE_LOG); \
 	done
 	@echo ""
@@ -161,7 +162,7 @@ show_sources_tests: directories	#help: Displays detected test source files.
 ##  @brief  Target to display detected source files.
 show_objects: directories	#help: Displays detected source files.
 	@echo -e "\n${lColorSrcList}List of objects :${FMT_STD}\n" $(TRACE_LOG)
-	@for file in $(ARDUINO_CORE_OBJECTS); do \
+	@for file in $(ARDUINO_OBJECTS) $(OBJECTS); do \
 		echo "+-- $${file}" $(TRACE_LOG); \
 	done
 	@echo ""
