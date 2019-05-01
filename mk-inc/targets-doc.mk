@@ -17,10 +17,11 @@ doc: doxygen	#help: build development documentation.
 ##  @brief  Target to generate Doxygen documentation.
 doxygen: directories	#help: Target to generate Doxygen documentation.
 	@echo -e "${lColorDoc}    DOC $@${CLREOL}${FMT_STD}" $(TRACE_LOG)
+	@$(eval lCMD:=$(BIN_DOXYGEN) $(DIR_DOC)/doxygen/doxygen.conf)
 	@if [ ! "$(TRACES)" -eq "0" ] ; then \
-		echo "$(BIN_DOXYGEN) $(DIR_DOC)/doxygen/doxygen.conf" $(TRACE_REDIRECT); \
+	        echo "$(lCMD)" $(TRACE_REDIRECT); \
 	fi
-	@$(BIN_DOXYGEN) $(DIR_DOC)/doxygen/doxygen.conf $(TRACE_REDIRECT)
+	@$(lCMD) $(TRACE_REDIRECT)
 
 
 
