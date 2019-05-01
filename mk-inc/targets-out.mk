@@ -1,16 +1,21 @@
 
 
 
-$(BUILDDIR)/$(TARGET:%.hex=%.elf): $(ARDUINO_CORE_OBJECTS) $(OBJECTS)	#help: Main application's target.
+$(BUILDDIR)/$(TARGET:%.hex=%.elf): $(OBJECTS) $(ARDUINO_LIBS)	#help: Main application's target.
 	@echo -e "${lColorLD}    LD  $@${CLREOL}${FMT_STD}" $(TRACE_LOG)
+	@$(eval lCMD:=$(LD) $(LDFLAGS) -o $@ $^ $(LIBS))
 	@if [ ! "$(TRACES)" -eq "0" ] ; then \
-	        echo "$(LD) $(LDFLAGS) -o $@ $^" $(TRACE_REDIRECT); \
+	        echo "$(lCMD)"; \
 	fi
-	@$(LD) $(LDFLAGS) -o $@ $^ $(LIBS) $(TRACE_REDIRECT)
+	@$(lCMD)
 
 
 
 $(TARGETDIR)/$(TARGET): $(BUILDDIR)/$(TARGET:%.hex=%.elf)
 	@echo -e "${lColorLD}    HEX $@${CLREOL}${FMT_STD}" $(TRACE_LOG)
-	avr-objcopy -O ihex -R .eeprom $< $@
+	@$(eval lCMD:=avr-objcopy -O ihex -R .eeprom $< $@)
+	@if [ ! "$(TRACES)" -eq "0" ] ; then \
+	        echo "$(lCMD)"; \
+	fi
+	@$(lCMD)
 
