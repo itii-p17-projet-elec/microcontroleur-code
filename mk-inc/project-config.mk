@@ -7,3 +7,5 @@ SRCEXT      := cpp
 DEPEXT      := d
 OBJEXT      := o
 
+
+DIRECTORIES:=

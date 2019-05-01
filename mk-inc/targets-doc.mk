@@ -1,6 +1,10 @@
 BIN_DOXYGEN     := doxygen
+
+DIR_DOC	 := doc
 DIR_DOC_OUT     :=$(DIR_OUTPUT)/doc/
 
+DIRECTORIES	+= $(DIR_DOC)
+DIRECTORIES	+= $(DIR_DOC_OUT)
 
 
 ##  @brief  Target to build development documentation.
