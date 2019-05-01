@@ -91,7 +91,6 @@ include $(MK_INCDIR)/project-directories.mk
 
 include $(MK_INCDIR)/arduino-lib-core.mk
 include $(MK_INCDIR)/arduino-lib-wire.mk
-include $(MK_INCDIR)/arduino-targets-default.mk
 
 
 
