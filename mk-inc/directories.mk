@@ -29,6 +29,12 @@ DIRECTORIES	+= $(TESTSDIR)
 
 
 
+DIRECTORIES_CLEAN	+= $(BUILDDIRROOT)
+
+DIRECTORIES_CLEANER	+= $(DIR_OUTPUT)
+
+
+
 ##  @brief Convenience target to make directories we'll need.
 directories:	#help: Convenience target to make directories we'll need.
 	@mkdir -p $(shell dirname $(FILE_TRACE))

@@ -6,6 +6,8 @@ DIR_DOC_OUT     :=$(DIR_OUTPUT)/doc/
 DIRECTORIES	+= $(DIR_DOC)
 DIRECTORIES	+= $(DIR_DOC_OUT)
 
+DIRECTORIES_CLEANER	+= $(DIR_DOC_OUT)
+
 
 ##  @brief  Target to build development documentation.
 doc: doxygen	#help: build development documentation.
