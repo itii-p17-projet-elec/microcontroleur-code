@@ -6,13 +6,13 @@ SRCDIR	  := src
 INCDIR	  := inc
 BUILDDIRROOT    := build
 BUILDDIR        := $(BUILDDIRROOT)/$(ARDUINO_BOARD)/$(MCU)
-BUILDDIRSRC     := $(BUILDDIR)/src/
-BUILDDIRTST     := $(BUILDDIR)/tests/
-DIR_OUTPUT      := ./out/
+BUILDDIRSRC     := $(BUILDDIR)/src
+BUILDDIRTST     := $(BUILDDIR)/tests
+DIR_OUTPUT      := ./out
 TARGETDIR       := $(DIR_OUTPUT)/bin
-TARGETDIR_TST   :=$(TARGETDIR)/tests/
-RESDIR	  := rsrc
-TESTSDIR	:= tests
+TARGETDIR_TST   :=$(TARGETDIR)/tests
+RESDIR          := rsrc
+TESTSDIR        := tests
 
 
 DIRECTORIES	+= $(SRCDIR)

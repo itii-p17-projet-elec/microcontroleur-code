@@ -81,7 +81,8 @@ include $(MK_INCDIR)/project-config.mk
 
 
 include $(MK_INCDIR)/arduino-config.mk
-include $(MK_INCDIR)/project-directories.mk
+
+include $(MK_INCDIR)/directories.mk
 
 
 
