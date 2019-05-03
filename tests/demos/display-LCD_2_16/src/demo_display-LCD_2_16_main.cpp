@@ -58,6 +58,10 @@ namespace   LCDKeypadShield
 
 
 
+    uint8_t     g_backlightValue    = 0xFF;
+
+
+
     TeButtonsID getPressedButton(void)
     {
         TeButtonsID retval  = BUTTON_NONE;
@@ -177,15 +181,68 @@ void setup()
 /* ########################################################################## */
 /* ########################################################################## */
 
+LCDKeypadShield::TeButtonsID    g_keypad_lastState
+                                        = LCDKeypadShield::BUTTON_NONE;
+
 void loop()
 {
+    /*
+     *  Update outputs
+     */
+    /* Move cursor to the beginning of the second line */
     lcd.setCursor(0, 1);
 
-    lcd.print( LCDKeypadShield::buttonName(
-                   LCDKeypadShield::getPressedButton() ) );
-    lcd.print( "        " );
+    /* Display the name of the currently pressed button */
+    lcd.print( LCDKeypadShield::buttonName( g_keypad_lastState ) );
+    lcd.print( "        " ); /*< Add a few blanks to erase the display */
 
-    delay(200);
+    /* Set the backlight luminosity using a PWM on backlight LED. */
+    analogWrite( C_PIN_LCD_BACKLIGHT,
+                 LCDKeypadShield::g_backlightValue > 255 ?
+                        255
+                    :   LCDKeypadShield::g_backlightValue );
+
+
+
+    /*
+     *  Update inputs
+     */
+    static LCDKeypadShield::TeButtonsID s_Keypad_currentState
+            = LCDKeypadShield::BUTTON_NONE;
+
+    /* Get keypad buttons' current state */
+    s_Keypad_currentState   = LCDKeypadShield::getPressedButton();
+
+
+
+    /*
+     *  Process
+     */
+    /* If a new button has been pressed, then reset backlight dimmer value. */
+    if(     s_Keypad_currentState != g_keypad_lastState
+        &&  s_Keypad_currentState != LCDKeypadShield::BUTTON_NONE )
+    {
+        LCDKeypadShield::g_backlightValue   = 0xFF;
+
+        Serial.print( "New keypad state : " );
+        Serial.println( LCDKeypadShield::buttonName( s_Keypad_currentState ) );
+    }
+    /* If we still get a positive value, dim further the LCD backlight. */
+    else if( (LCDKeypadShield::g_backlightValue - 5) >= 0 )
+    {
+        LCDKeypadShield::g_backlightValue   -= 5;
+    }
+    /* If there's no activity, shut down display's backlight. */
+    else
+    {
+        LCDKeypadShield::g_backlightValue   = 0;
+    }
+
+    /* Update last known state value */
+    g_keypad_lastState  = s_Keypad_currentState;
+
+    /* Loop delay... */
+    delay(50);
 }
 
 /* ########################################################################## */
