@@ -8,8 +8,12 @@
  */
 
 #include <Arduino.h>
+#include <avr/power.h>
+#include <avr/sleep.h>
 
 #include <LiquidCrystal.h>
+
+#include "LCDKeypadShield.h"
 
 /**
  *  @brief  The E_PIN_USAGE enum defines microcontroller's pins names & usage.
@@ -33,6 +37,18 @@ enum    E_PIN_USAGE
 /* ########################################################################## */
 /* ########################################################################## */
 
+/* 16MHz / 256 / 20Hz */
+const int    C_TIMER1_COUNTER_PRELOAD   = 62411;
+
+
+bool    flag_timer1    = false;
+
+
+LCDKeypadShield::TeButtonsID    g_keypad_currentState
+                                        = LCDKeypadShield::BUTTON_NONE;
+LCDKeypadShield::TeButtonsID    g_keypad_lastState
+                                        = LCDKeypadShield::BUTTON_NONE;
+
 /** Objet LiquidCrystal pour communication avec l'écran LCD */
 LiquidCrystal lcd( C_PIN_LCD_RS,
                    C_PIN_LCD_EN,
@@ -44,107 +60,42 @@ LiquidCrystal lcd( C_PIN_LCD_RS,
 /* ########################################################################## */
 /* ########################################################################## */
 
-namespace   LCDKeypadShield
+ISR(TIMER1_OVF_vect)        // interrupt service routine
 {
-    typedef enum    EButtonsID
-    {
-        BUTTON_NONE     = 0x00, /*!< Pas de bouton appuyé */
-        BUTTON_UP       = 0x01, /*!< Bouton UP (haut) */
-        BUTTON_DOWN     = 0x02, /*!< Bouton DOWN (bas) */
-        BUTTON_LEFT     = 0x04, /*!< Bouton LEFT (gauche) */
-        BUTTON_RIGHT    = 0x08, /*!< Bouton RIGHT (droite) */
-        BUTTON_SELECT   = 0x10  /*!< Bouton SELECT */
-    }   TeButtonsID;
+    /* Reset timer */
+    TCNT1   = C_TIMER1_COUNTER_PRELOAD; // preload timer
+    Serial.println("<INT>");
+
+
+    digitalWrite(C_PIN_LED, HIGH);   // set the LED on
+
+
+    /*
+     *  Update outputs
+     */
+    /* Move cursor to the beginning of the second line */
+    lcd.setCursor(0, 1);
+
+    /* Display the name of the currently pressed button */
+    lcd.print( LCDKeypadShield::buttonName( g_keypad_lastState ) );
+    lcd.print( "        " ); /*< Add a few blanks to erase the display */
+
+    /* Set the backlight luminosity using a PWM on backlight LED. */
+    analogWrite( C_PIN_LCD_BACKLIGHT,
+                 LCDKeypadShield::g_backlightValue > 255 ?
+                        255
+                    :   LCDKeypadShield::g_backlightValue );
 
 
 
-    uint8_t     g_backlightValue    = 0xFF;
+    /*
+     *  Update inputs
+     */
+    /* Get keypad buttons' current state */
+    g_keypad_currentState
+            = LCDKeypadShield::getPressedButton(C_PIN_KEYPAD_SW);
 
-
-
-    TeButtonsID getPressedButton(void)
-    {
-        TeButtonsID retval  = BUTTON_NONE;
-
-        /* Lit l'état des boutons */
-        int value = analogRead(C_PIN_KEYPAD_SW);
-        Serial.print( "Value = " );
-        Serial.println( value );
-
-
-        /* Calcul de l'état des boutons */
-        if (value < 50)
-        {
-            retval  = BUTTON_RIGHT;
-        }
-        else if (value < 250)
-        {
-            retval  = BUTTON_UP;
-        }
-        else if (value < 450)
-        {
-            retval  = BUTTON_DOWN;
-        }
-        else if (value < 650)
-        {
-            retval  = BUTTON_LEFT;
-        }
-        else if (value < 850)
-        {
-            retval  = BUTTON_SELECT;
-        }
-        else
-        {
-            retval  = BUTTON_NONE;
-        }
-
-
-        return retval;
-    }
-
-
-
-    static char*    buttonName(const TeButtonsID& pID)
-    {
-        char*   retval  = NULL;
-
-
-        switch(pID)
-        {
-            case BUTTON_DOWN:
-                retval  = (char*)"DOWN";
-                break;
-
-
-            case BUTTON_LEFT:
-                retval  = (char*)"LEFT";
-                break;
-
-
-            case BUTTON_RIGHT:
-                retval  = (char*)"RIGHT";
-                break;
-
-
-            case BUTTON_SELECT:
-                retval  = (char*)"SELECT";
-                break;
-
-
-            case BUTTON_UP:
-                retval  = (char*)"UP";
-                break;
-
-
-            case BUTTON_NONE:
-            default:
-                retval  = (char*)"NONE";
-                break;
-        }
-
-
-        return retval;
-    }
+    flag_timer1 = true;
 }
 
 /* ########################################################################## */
@@ -170,48 +121,68 @@ void setup()
     lcd.print("Hello World !");
     Serial.println("    +-- Done.");
 
+
+    Serial.println("+-- Initialize Timer 1...");
+    TCCR1A = 0;
+    TCCR1B = 0;
+
+    TCNT1   = C_TIMER1_COUNTER_PRELOAD; // preload timer
+    TCCR1B |= (1 << CS12);    // 256 prescaler
+
+
     delay(1000);
     Serial.println("+-- Now starting main loop.");
 
     lcd.clear();
     lcd.setCursor(0, 0);
     lcd.print("Switch:");
+
+    /* Enable interrupts */
+    TIMSK1 |= (1 << TOIE1);   // enable timer overflow interrupt
 }
 
 /* ########################################################################## */
 /* ########################################################################## */
 
-LCDKeypadShield::TeButtonsID    g_keypad_lastState
-                                        = LCDKeypadShield::BUTTON_NONE;
+void    enterSleep(void)
+{
+  set_sleep_mode(SLEEP_MODE_IDLE);
+
+  sleep_enable();
+
+
+  /* Disable all of the unused peripherals. This will reduce power
+   * consumption further and, more importantly, some of these
+   * peripherals may generate interrupts that will wake our Arduino from
+   * sleep!
+   */
+  power_adc_disable();
+  power_spi_disable();
+//  power_timer0_disable();
+//  power_timer2_disable();
+  power_twi_disable();
+
+  /* Now enter sleep mode. */
+  sleep_mode();
+
+  /* The program will continue from here after the timer timeout*/
+  sleep_disable(); /* First thing to do is disable sleep. */
+
+  /* Re-enable the peripherals. */
+  power_all_enable();
+}
+
+/* ########################################################################## */
+/* ########################################################################## */
 
 void loop()
 {
-    /*
-     *  Update outputs
-     */
-    /* Move cursor to the beginning of the second line */
-    lcd.setCursor(0, 1);
+    while( ! flag_timer1 )
+    {
+        delay(10);
+    }
 
-    /* Display the name of the currently pressed button */
-    lcd.print( LCDKeypadShield::buttonName( g_keypad_lastState ) );
-    lcd.print( "        " ); /*< Add a few blanks to erase the display */
-
-    /* Set the backlight luminosity using a PWM on backlight LED. */
-    analogWrite( C_PIN_LCD_BACKLIGHT,
-                 LCDKeypadShield::g_backlightValue > 255 ?
-                        255
-                    :   LCDKeypadShield::g_backlightValue );
-
-
-
-    /*
-     *  Update inputs
-     */
-    static LCDKeypadShield::TeButtonsID s_Keypad_currentState
-            = LCDKeypadShield::BUTTON_NONE;
-
-    /* Get keypad buttons' current state */
-    s_Keypad_currentState   = LCDKeypadShield::getPressedButton();
+    flag_timer1 = false;
 
 
 
@@ -219,13 +190,10 @@ void loop()
      *  Process
      */
     /* If a new button has been pressed, then reset backlight dimmer value. */
-    if(     s_Keypad_currentState != g_keypad_lastState
-        &&  s_Keypad_currentState != LCDKeypadShield::BUTTON_NONE )
+    if(     g_keypad_currentState != g_keypad_lastState
+        &&  g_keypad_currentState != LCDKeypadShield::BUTTON_NONE )
     {
         LCDKeypadShield::g_backlightValue   = 0xFF;
-
-        Serial.print( "New keypad state : " );
-        Serial.println( LCDKeypadShield::buttonName( s_Keypad_currentState ) );
     }
     /* If we still get a positive value, dim further the LCD backlight. */
     else if( (LCDKeypadShield::g_backlightValue - 5) >= 0 )
@@ -239,10 +207,10 @@ void loop()
     }
 
     /* Update last known state value */
-    g_keypad_lastState  = s_Keypad_currentState;
+    g_keypad_lastState  = g_keypad_currentState;
 
-    /* Loop delay... */
-    delay(50);
+    digitalWrite(C_PIN_LED, LOW);
+    enterSleep();
 }
 
 /* ########################################################################## */
