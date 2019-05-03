@@ -39,6 +39,7 @@ before_install:
 
 script:
   - make
+  - cd tests/demos/display-LCD_2_16 && make
 #  - make tests
 #  - make run-tests-auto
 #  - make distclean
