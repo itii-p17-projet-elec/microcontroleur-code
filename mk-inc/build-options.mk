@@ -19,6 +19,9 @@ LIBS	    += -lc
 LIBS	    += -lm
 
 
+STD:=c++11
+
+
 CFLAGS:=
 CFLAGS+= -c
 CFLAGS+= -g
@@ -42,6 +45,7 @@ CXXFLAGS+= -c
 CXXFLAGS+= -g
 CXXFLAGS+= -Os
 CXXFLAGS+= -Wall
+CXXFLAGS+= -std=$(STD)
 CXXFLAGS+= -fno-exceptions
 CXXFLAGS+= -ffunction-sections
 CXXFLAGS+= -fdata-sections

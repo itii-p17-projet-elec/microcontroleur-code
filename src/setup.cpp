@@ -1,47 +1,47 @@
-//#include <WProgram.h>
+/* System includes */
+
+/* Libraries includes */
 #include <Arduino.h>
 
+/* Project includes */
 #include "hardware_defines.h"
+#include "variables_globales.h"
+
+
+/* ########################################################################## */
+/* ########################################################################## */
+/*
+ *  Forward declarations
+ */
+void    setup_pins(void);
+void    setup_serial(void);
+void    setup_timer1(void);
 
 /* ########################################################################## */
 /* ########################################################################## */
 
-char    g_char                  = '0';
-int     g_timer1_counterPreload = 0;
-
-/* ########################################################################## */
-/* ########################################################################## */
-
-ISR(TIMER1_OVF_vect)        // interrupt service routine
+void    setup(void)
 {
-    /* Reset timer */
-    TCNT1   = g_timer1_counterPreload;   // preload timer
+    setup_pins();
 
+    setup_serial();
 
-    digitalWrite(C_PIN_LED, HIGH);   // set the LED on
-    Serial.print( g_char );
-    if( g_char == '9' )
-    {
-        g_char  = '0';
-        Serial.println("");
-    }
-    else
-    {
-        g_char++;
-    }
-
-    // This delay is here just to let us see the LED blink - but it's bad habit!
-    delay(100);
-    digitalWrite(C_PIN_LED, LOW);
+    setup_timer1();
 }
 
 /* ########################################################################## */
 /* ########################################################################## */
 
-void setup()
+void    setup_pins(void)
 {
     pinMode(C_PIN_LED, OUTPUT);
+}
 
+/* ########################################################################## */
+/* ########################################################################## */
+
+void    setup_serial(void)
+{
     //Initialize serial and wait for port to open:
     Serial.begin(9600);
     while (!Serial)
@@ -51,8 +51,13 @@ void setup()
 
     // prints title with ending line break
     Serial.println("\n~~~ Hello, World ! ~~~");
+}
 
+/* ########################################################################## */
+/* ########################################################################## */
 
+void    setup_timer1(void)
+{
     // initialize timer1
     noInterrupts();           // disable all interrupts
     TCCR1A = 0;
@@ -73,33 +78,5 @@ void setup()
     interrupts();             // enable all interrupts
 }
 
-/* ########################################################################## */
-/* ########################################################################## */
-
-void loop()
-{
-    /* Nothing to do here for this software - everything is done during
-     * interrupts ! */
-}
-
-/* ########################################################################## */
-/* ########################################################################## */
-# if 0
-int main(void)
-{
-    init(); /*< From Arduino Framework */
-
-    setup();
-
-
-    /*
-     *  Main loop
-     */
-    for (;;)
-    {
-       loop();
-    }
-}
-#endif
 /* ########################################################################## */
 /* ########################################################################## */
