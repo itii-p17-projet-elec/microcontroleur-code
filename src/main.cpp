@@ -1,8 +1,10 @@
 //#include <WProgram.h>
 #include <Arduino.h>
 
+#include "hardware_defines.h"
 
-const int   C_PIN_LED   =  13;    // LED connected to digital pin 13
+/* ########################################################################## */
+/* ########################################################################## */
 
 char    g_char                  = '0';
 int     g_timer1_counterPreload = 0;

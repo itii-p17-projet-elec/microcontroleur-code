@@ -8,6 +8,7 @@ ARDUINO_BOARD=mega2560
 ifeq ($(ARDUINO_BOARD),mega2560)
     MCU=atmega2560
     F_CPU=16000000
+    DEFINES += -D_BOARD_MEGA2560_
     INC += -I$(ARDUINO_PATH)/hardware/arduino/variants/mega
 
     PORT=/dev/ttyACM0
