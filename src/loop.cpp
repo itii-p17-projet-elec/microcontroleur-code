@@ -1,12 +1,15 @@
 #include <Arduino.h>
 
+/* Project includes */
+#include "display/FSMContext.h"
+
+
 /* ########################################################################## */
 /* ########################################################################## */
 
 void loop()
 {
-    /* Nothing to do here for this software - everything is done during
-     * interrupts ! */
+    Display::FSMContext::Instance()->updateDisplay();
 }
 
 /* ########################################################################## */

@@ -6,6 +6,7 @@
 /* Project includes */
 #include "hardware_defines.h"
 #include "variables_globales.h"
+#include "display/FSMContext.h"
 
 
 /* ########################################################################## */
@@ -27,6 +28,9 @@ void    setup(void)
     setup_serial();
 
     setup_timer1();
+
+    /* Initialize the display by creating the FSM singleton instance */
+    Display::FSMContext::Instance();
 }
 
 /* ########################################################################## */
