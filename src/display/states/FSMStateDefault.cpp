@@ -1,13 +1,11 @@
 /* Corresponding header inclusion */
-#include "FSMContext.h"
+#include "FSMStateDefault.h"
 
 /* System includes */
 
 /* Libraries includes */
 
 /* Project includes */
-#include "FSMAbstractState.h"
-#include "states/FSMStateDefault.h"
 
 
 namespace Display {
@@ -15,37 +13,41 @@ namespace Display {
 /* ########################################################################## */
 /* ########################################################################## */
 
-FSMContext::FSMContext(void)
+FSMStateDefault::FSMStateDefault(void)
 {
-    /* Set the default state of the UI */
-    this->m_currentStatePtr = FSMStateDefault::Instance();
+
 }
 
 /* ########################################################################## */
 /* ########################################################################## */
 
-void    FSMContext::changeState(FSMAbstractState *pFutureState)
+void    FSMStateDefault::on_button_pressed(void)
 {
-    this->m_currentStatePtr->on_state_exit();
-
-    this->m_currentStatePtr = pFutureState;
-    this->m_currentStatePtr->on_state_enter();
+    // TODO
 }
 
 /* ########################################################################## */
 /* ########################################################################## */
 
-FSMAbstractState*   FSMContext::currentState(void) const
+void    FSMStateDefault::on_state_enter(void)
 {
-    return this->m_currentStatePtr;
+    // TODO
 }
 
 /* ########################################################################## */
 /* ########################################################################## */
 
-void FSMContext::updateDisplay()
+void    FSMStateDefault::on_state_exit(void)
 {
-    this->currentState()->updateDisplay();
+    // TODO
+}
+
+/* ########################################################################## */
+/* ########################################################################## */
+
+void    FSMStateDefault::updateDisplay(void)
+{
+    // TODO
 }
 
 /* ########################################################################## */

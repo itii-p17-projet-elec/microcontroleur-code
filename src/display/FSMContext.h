@@ -4,14 +4,16 @@
 /* Inherited classes */
 #include "common/TSingleton.hpp"
 
-namespace Display {
-
-
 /* System includes */
 
 /* Libraries includes */
 
 /* Project includes */
+
+namespace Display {
+
+class FSMAbstractState;
+
 
 /* ########################################################################## */
 /* ########################################################################## */
@@ -22,6 +24,17 @@ class   FSMContext
     friend class    TSingleton<FSMContext>;
 
 public:
+
+    void    changeState(FSMAbstractState* pFutureState);
+
+
+    FSMAbstractState*   currentState(void) const;
+
+
+    void    updateDisplay(void);
+
+
+
 protected:
 private:
 
@@ -32,6 +45,8 @@ private:
 public:
 protected:
 private:
+
+    FSMAbstractState*   m_currentStatePtr;
 
 };
 
