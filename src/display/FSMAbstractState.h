@@ -17,9 +17,9 @@ namespace Display {
 /* ########################################################################## */
 
 class   FSMAbstractState
-        :   public TSingleton<FSMAbstractState>
+//        :   public TSingleton<FSMAbstractState>
 {
-    friend class    TSingleton<FSMAbstractState>;
+//    friend class    TSingleton<FSMAbstractState>;
 
 public:
 
