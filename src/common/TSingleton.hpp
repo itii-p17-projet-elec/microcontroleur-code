@@ -15,7 +15,7 @@ template<class T>   class   TSingleton
 {
 public:
 
-    static T&   Instance()
+    static T*   Instance()
     {
         return m_i;
     }
@@ -32,7 +32,7 @@ private:
 public:
 protected:
 
-    static T    m_i;
+    static T*   m_i;
 
 
 
@@ -43,7 +43,7 @@ private:
 /* ########################################################################## */
 /* ########################################################################## */
 
-template <class T> T    TSingleton<T>::m_i=T();
+template<class T> T*    TSingleton<T>::m_i  = new T();
 
 /* ########################################################################## */
 /* ########################################################################## */
