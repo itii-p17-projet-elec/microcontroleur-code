@@ -41,6 +41,12 @@ public:
     virtual void    updateDisplay(void) = 0;
 
 
+    /**
+     *  @brief  This method signals to the state that a button has been pressed.
+     */
+    virtual void    on_button_pressed(void) = 0;
+
+
 
 
 
