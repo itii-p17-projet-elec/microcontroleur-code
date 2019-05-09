@@ -4,14 +4,15 @@
 /* Inherited classes */
 #include "common/TSingleton.hpp"
 
-namespace Display {
-
 
 /* System includes */
 
 /* Libraries includes */
 
 /* Project includes */
+#include "drivers/Keypad.h"
+
+namespace Display {
 
 /* ########################################################################## */
 /* ########################################################################## */
@@ -44,7 +45,7 @@ public:
     /**
      *  @brief  This method signals to the state that a button has been pressed.
      */
-    virtual void    on_button_pressed(void) = 0;
+    virtual void    on_button_pressed(const Keypad::TeButtonsID& pButtonID) = 0;
 
 
 

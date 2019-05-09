@@ -10,6 +10,7 @@
 #include <LiquidCrystal.h>
 
 /* Project includes */
+#include "drivers/Keypad.h"
 
 namespace Display {
 
@@ -35,6 +36,9 @@ public:
 
 
     void    updateDisplay(void);
+
+
+    void    on_button_pressed(const Keypad::TeButtonsID &pButtonID);
 
 
 

@@ -34,6 +34,14 @@ ISR(TIMER1_OVF_vect)        // interrupt service routine
     ++s_interrupts_count;
 
 
+    /* If a button has been pressed, raise flag to signal to main loop that
+     * something has changed */
+    if( g_keypad.updateState() != 0 )
+    {
+        g_flag_keypad   = true;
+    }
+
+
     /* set the activity LED off */
     digitalWrite(C_PIN_LED_ACTIVITY, lLEDPreviousState);
 }

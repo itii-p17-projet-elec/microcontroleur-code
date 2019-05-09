@@ -93,6 +93,17 @@ FSMAbstractState*   FSMContext::currentState(void) const
 /* ########################################################################## */
 /* ########################################################################## */
 
+void    FSMContext::on_button_pressed(const Keypad::TeButtonsID &pButtonID)
+{
+    if( this->currentState() != nullptr )
+    {
+        this->currentState()->on_button_pressed(pButtonID);
+    }
+}
+
+/* ########################################################################## */
+/* ########################################################################## */
+
 void FSMContext::updateDisplay()
 {
     this->currentState()->updateDisplay();

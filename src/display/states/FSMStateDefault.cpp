@@ -24,9 +24,10 @@ FSMStateDefault::FSMStateDefault(void)
 /* ########################################################################## */
 /* ########################################################################## */
 
-void    FSMStateDefault::on_button_pressed(void)
+void    FSMStateDefault::on_button_pressed(const Keypad::TeButtonsID &pButtonID)
 {
-    // TODO
+    Serial.print("StateDefault : Pressed button : ");
+    Serial.println( Keypad::buttonName(pButtonID) );
 }
 
 /* ########################################################################## */

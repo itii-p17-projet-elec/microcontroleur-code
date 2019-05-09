@@ -32,7 +32,7 @@ public:
 
     virtual void    updateDisplay(void);
 
-    virtual void    on_button_pressed(void);
+    virtual void    on_button_pressed(const Keypad::TeButtonsID& pButtonID);
 
 
 
