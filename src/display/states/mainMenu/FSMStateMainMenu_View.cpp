@@ -29,6 +29,8 @@ FSMStateMainMenu_View::FSMStateMainMenu_View(void)
 
 void    FSMStateMainMenu_View::on_button_pressed(const Keypad::TeButtonsID &pButtonID)
 {
+    FSMAbstractState::on_button_pressed(pButtonID);
+
     Serial.print("FSMStateMainMenu_View : Pressed button : ");
     Serial.println( Keypad::buttonName(pButtonID) );
 

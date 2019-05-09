@@ -51,7 +51,7 @@ public:
     /**
      *  @brief  This method signals to the state that a button has been pressed.
      */
-    virtual void    on_button_pressed(const Keypad::TeButtonsID& pButtonID) = 0;
+    virtual void    on_button_pressed(const Keypad::TeButtonsID& pButtonID);
 
 
 
@@ -70,6 +70,8 @@ private:
 public:
 protected:
 private:
+
+    uint8_t _m_lcdBacklightDimmer;
 
 };
 

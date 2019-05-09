@@ -27,6 +27,8 @@ FSMStateDefault::FSMStateDefault(void)
 
 void    FSMStateDefault::on_button_pressed(const Keypad::TeButtonsID &pButtonID)
 {
+    FSMAbstractState::on_button_pressed(pButtonID);
+
     Serial.print("StateDefault : Pressed button : ");
     Serial.println( Keypad::buttonName(pButtonID) );
 
@@ -50,7 +52,7 @@ void    FSMStateDefault::on_button_pressed(const Keypad::TeButtonsID &pButtonID)
 void    FSMStateDefault::on_state_enter(void)
 {
     Serial.println( "Entering FSMStateDefault." );
-    g_LCD_backlightValue    = 0x00;
+    g_LCD_backlightValue    = 0xFF;
     g_LCD.clear();
 
     g_LCD.setCursor(0,0);
