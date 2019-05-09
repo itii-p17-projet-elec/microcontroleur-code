@@ -3,6 +3,8 @@
 /* Project includes */
 #include "hardware_defines.h"
 #include "variables_globales.h"
+
+#include "PowerMgmt.h"
 #include "display/FSMContext.h"
 
 
@@ -14,6 +16,8 @@ void loop()
     /* set the activity LED on */
     int lLEDPreviousState   = digitalRead(C_PIN_LED_ACTIVITY);
     digitalWrite(C_PIN_LED_ACTIVITY, HIGH);
+
+
 
     if( g_flag_keypad )
     {
@@ -31,7 +35,7 @@ void loop()
     digitalWrite(C_PIN_LED_ACTIVITY, lLEDPreviousState);
 
     /* Wait to be woken up */
-    delay(1000);
+    PowerMgmt::enterSleep();
 }
 
 /* ########################################################################## */
