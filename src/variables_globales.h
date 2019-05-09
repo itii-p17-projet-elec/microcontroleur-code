@@ -16,7 +16,10 @@
 
 extern const int    C_TIMER1_COUNTER_PRELOAD;
 
-extern bool     g_flag_keypad;
+//extern bool     g_flag_keypad;
+
+extern bool     g_flag_processDelayedEvents_1s;
+extern bool     g_flag_processDelayedEvents_50ms;
 
 extern Keypad   g_keypad;
 

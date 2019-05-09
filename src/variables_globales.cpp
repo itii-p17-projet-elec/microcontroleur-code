@@ -20,7 +20,21 @@ const int    C_TIMER1_COUNTER_PRELOAD   = 62411;
  *  @brief  This flag shall be raised by ISR when an activity is detected on
  *          the keypad ; It is then reset by the main loop.
  */
-bool    g_flag_keypad   = false;
+//bool    g_flag_keypad   = false;
+
+
+/**
+ *  @brief  This flag is raised by an ISR every second to signal the main loop
+ *          that some events shall be processed.
+ */
+bool    g_flag_processDelayedEvents_1s  = false;
+
+
+/**
+ *  @brief  This flag is raised by an ISR every 50 ms to signal the main loop
+ *          that some events shall be processed.
+ */
+bool    g_flag_processDelayedEvents_50ms    = false;
 
 
 /**

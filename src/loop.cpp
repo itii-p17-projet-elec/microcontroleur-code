@@ -18,18 +18,32 @@ void loop()
     digitalWrite(C_PIN_LED_ACTIVITY, HIGH);
 
 
-
-    if( g_flag_keypad )
+    if( g_flag_processDelayedEvents_50ms )
     {
-        /* Reset the flag */
-        g_flag_keypad   = false;
+        g_flag_processDelayedEvents_50ms    = false;
 
-        /* Trigger events */
-        Display::FSMContext::Instance()
-                ->on_button_pressed( g_keypad.lastPressedButton() );
+
+        /* If a button has been pressed, raise flag to signal to main loop that
+         * something has changed */
+        if( g_keypad.updateState() != 0 )
+        {
+            Display::FSMContext::Instance()
+                    ->on_button_pressed( g_keypad.lastPressedButton() );
+        }
+
+
+        Display::FSMContext::Instance()->update_50ms();
     }
 
-    Display::FSMContext::Instance()->updateDisplay();
+
+    if( g_flag_processDelayedEvents_1s )
+    {
+        g_flag_processDelayedEvents_1s  = false;
+
+        Display::FSMContext::Instance()->update_1s();
+    }
+
+
 
     /* set the activity LED off */
     digitalWrite(C_PIN_LED_ACTIVITY, lLEDPreviousState);
