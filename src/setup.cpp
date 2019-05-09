@@ -44,7 +44,11 @@ void    setup_pins(void)
 {
     pinMode(C_PIN_KEYPAD_SW, INPUT);
 
+    pinMode(C_PIN_LCD_BACKLIGHT, OUTPUT);
     pinMode(C_PIN_LED_ACTIVITY, OUTPUT);
+
+
+    digitalWrite(C_PIN_LCD_BACKLIGHT, HIGH);
 }
 
 /* ########################################################################## */

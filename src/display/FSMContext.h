@@ -17,6 +17,7 @@ namespace Display {
 class FSMAbstractState;
 
 extern LiquidCrystal    g_LCD;
+extern uint8_t          g_LCD_backlightValue;
 
 
 /* ########################################################################## */

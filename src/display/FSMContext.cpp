@@ -24,6 +24,12 @@ LiquidCrystal   g_LCD( C_PIN_LCD_RS,
                        C_PIN_LCD_D2,
                        C_PIN_LCD_D3 );
 
+
+/**
+ *  @brief  This variable holds the current PWM value of the LCD backlight.
+ */
+uint8_t          g_LCD_backlightValue   = 0xFF;
+
 /* ########################################################################## */
 /* ########################################################################## */
 
@@ -114,6 +120,7 @@ void    FSMContext::update_1s()
 
 void    FSMContext::update_50ms()
 {
+    analogWrite( C_PIN_LCD_BACKLIGHT, g_LCD_backlightValue );
 }
 
 /* ########################################################################## */
