@@ -28,6 +28,7 @@ LiquidCrystal   g_LCD( C_PIN_LCD_RS,
 /* ########################################################################## */
 
 FSMContext::FSMContext(void)
+    :   m_currentStatePtr( nullptr )
 {
     /* Initialize LCD */
     g_LCD.begin(16, 2);
@@ -40,7 +41,8 @@ FSMContext::FSMContext(void)
 
 
     /* Set the default state of the UI */
-    this->m_currentStatePtr = FSMStateDefault::Instance();
+    FSMStateDefault::Instance();
+    this->changeState( (FSMAbstractState*) FSMStateDefault::Instance() );
 }
 
 /* ########################################################################## */
@@ -48,7 +50,33 @@ FSMContext::FSMContext(void)
 
 void    FSMContext::changeState(FSMAbstractState *pFutureState)
 {
-    this->m_currentStatePtr->on_state_exit();
+    Serial.println( "FSMContext : Entering changeState." );
+    /*
+     *  Verify pre-requisites
+     */
+    /* Refuse to go to a null state */
+    if( pFutureState == 0 )
+    {
+        Serial.println( "ERR Future state is null !" );
+        return;
+    }
+
+
+    /* Do not change state if it's the same as the current one */
+    if( pFutureState == this->m_currentStatePtr )
+    {
+        Serial.println( "ERR Future state is current state !" );
+        return;
+    }
+
+
+    /*
+     *  Go to new state
+     */
+    if( this->m_currentStatePtr != 0 )
+    {
+        this->m_currentStatePtr->on_state_exit();
+    }
 
     this->m_currentStatePtr = pFutureState;
     this->m_currentStatePtr->on_state_enter();
