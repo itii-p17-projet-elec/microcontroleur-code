@@ -27,6 +27,7 @@ ISR(TIMER1_OVF_vect)        // interrupt service routine
 
 
     /* set the activity LED on */
+    int lLEDPreviousState   = digitalRead(C_PIN_LED_ACTIVITY);
     digitalWrite(C_PIN_LED_ACTIVITY, HIGH);
 
 
@@ -34,7 +35,7 @@ ISR(TIMER1_OVF_vect)        // interrupt service routine
 
 
     /* set the activity LED off */
-    digitalWrite(C_PIN_LED_ACTIVITY, LOW);
+    digitalWrite(C_PIN_LED_ACTIVITY, lLEDPreviousState);
 }
 
 /* ########################################################################## */

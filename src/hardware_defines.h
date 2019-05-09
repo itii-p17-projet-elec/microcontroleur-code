@@ -16,7 +16,7 @@ enum    E_PIN_USAGE
     C_PIN_LCD_BACKLIGHT         = 10,
 
     /** Internal LED connected to digital pin 13 */
-    C_PIN_LED                   = 13,
+    C_PIN_LED_ACTIVITY          = 13,
 
     C_PIN_KEYPAD_SW             = 54 /*< This is A0 on mega2560 */
 };

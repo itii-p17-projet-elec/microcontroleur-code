@@ -34,6 +34,7 @@ void    setup(void)
 
     /* This shall be done at last as it enables interrupts */
     setup_timer1();
+    digitalWrite(C_PIN_LED_ACTIVITY, LOW);
 }
 
 /* ########################################################################## */
@@ -41,7 +42,7 @@ void    setup(void)
 
 void    setup_pins(void)
 {
-    pinMode(C_PIN_LED, OUTPUT);
+    pinMode(C_PIN_LED_ACTIVITY, OUTPUT);
 }
 
 /* ########################################################################## */
