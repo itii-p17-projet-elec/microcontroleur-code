@@ -7,12 +7,15 @@
 /* System includes */
 
 /* Libraries includes */
+#include <LiquidCrystal.h>
 
 /* Project includes */
 
 namespace Display {
 
 class FSMAbstractState;
+
+extern LiquidCrystal    g_LCD;
 
 
 /* ########################################################################## */
