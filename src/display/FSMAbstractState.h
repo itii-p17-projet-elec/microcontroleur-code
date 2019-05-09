@@ -39,7 +39,13 @@ public:
      *  @brief  This method shall be periodically called by the main thread to
      *          update displayed informations.
      */
-    virtual void    updateDisplay(void) = 0;
+    virtual void    update_1s(void) = 0;
+
+    /**
+     *  @brief  This method shall be periodically called by the main thread to
+     *          update displayed informations.
+     */
+    virtual void    update_50ms(void);
 
 
     /**

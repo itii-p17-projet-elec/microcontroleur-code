@@ -83,7 +83,7 @@ void    FSMStateMainMenu_View::on_state_exit(void)
 /* ########################################################################## */
 /* ########################################################################## */
 
-void    FSMStateMainMenu_View::updateDisplay(void)
+void    FSMStateMainMenu_View::update_1s(void)
 {
     //TODO
 }

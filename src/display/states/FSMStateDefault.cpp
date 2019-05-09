@@ -71,7 +71,7 @@ void    FSMStateDefault::on_state_exit(void)
 /* ########################################################################## */
 /* ########################################################################## */
 
-void    FSMStateDefault::updateDisplay(void)
+void    FSMStateDefault::update_1s(void)
 {
 
     g_LCD.setCursor(0,1);

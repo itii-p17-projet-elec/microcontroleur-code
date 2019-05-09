@@ -30,7 +30,7 @@ public:
     virtual void    on_state_exit(void);
 
 
-    virtual void    updateDisplay(void);
+    virtual void    update_1s(void);
 
     virtual void    on_button_pressed(const Keypad::TeButtonsID& pButtonID);
 

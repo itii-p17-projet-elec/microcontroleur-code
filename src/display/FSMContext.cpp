@@ -112,7 +112,10 @@ void    FSMContext::on_button_pressed(const Keypad::TeButtonsID &pButtonID)
 
 void    FSMContext::update_1s()
 {
-    this->currentState()->updateDisplay();
+    if( this->currentState() != nullptr )
+    {
+        this->currentState()->update_1s();
+    }
 }
 
 /* ########################################################################## */
@@ -120,6 +123,12 @@ void    FSMContext::update_1s()
 
 void    FSMContext::update_50ms()
 {
+    if( this->currentState() != nullptr )
+    {
+        this->currentState()->update_50ms();
+    }
+
+
     analogWrite( C_PIN_LCD_BACKLIGHT, g_LCD_backlightValue );
 }
 
