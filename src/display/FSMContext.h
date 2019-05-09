@@ -35,7 +35,8 @@ public:
     FSMAbstractState*   currentState(void) const;
 
 
-    void    updateDisplay(void);
+    void    update_1s(void);
+    void    update_50ms(void);
 
 
     void    on_button_pressed(const Keypad::TeButtonsID &pButtonID);
