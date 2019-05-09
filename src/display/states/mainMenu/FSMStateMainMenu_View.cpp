@@ -1,5 +1,5 @@
 /* Corresponding header inclusion */
-#include "FSMStateDefault.h"
+#include "FSMStateMainMenu_View.h"
 
 /* System includes */
 
@@ -7,8 +7,10 @@
 #include <Arduino.h>
 
 /* Project includes */
-#include "../FSMContext.h"
-#include "mainMenu/FSMStateMainMenu_View.h"
+#include "../../FSMContext.h"
+#include "../FSMStateDefault.h"
+#include "FSMStateMainMenu_Back.h"
+#include "FSMStateMainMenu_Config.h"
 
 
 namespace Display {
@@ -16,8 +18,8 @@ namespace Display {
 /* ########################################################################## */
 /* ########################################################################## */
 
-FSMStateDefault::FSMStateDefault(void)
-    :   m_updatesCount( 0 )
+FSMStateMainMenu_View::FSMStateMainMenu_View(void)
+    :   FSMAbstractState()
 {
 
 }
@@ -25,17 +27,28 @@ FSMStateDefault::FSMStateDefault(void)
 /* ########################################################################## */
 /* ########################################################################## */
 
-void    FSMStateDefault::on_button_pressed(const Keypad::TeButtonsID &pButtonID)
+void    FSMStateMainMenu_View::on_button_pressed(const Keypad::TeButtonsID &pButtonID)
 {
-    Serial.print("StateDefault : Pressed button : ");
+    Serial.print("FSMStateMainMenu_View : Pressed button : ");
     Serial.println( Keypad::buttonName(pButtonID) );
 
 
     switch( pButtonID )
     {
-        case    Keypad::BUTTON_SELECT:
+        case    Keypad::BUTTON_LEFT:
             FSMContext::Instance()->changeState(
-                        FSMStateMainMenu_View::Instance() );
+                        FSMStateMainMenu_Back::Instance() );
+            break;
+
+
+        case    Keypad::BUTTON_RIGHT:
+            FSMContext::Instance()->changeState(
+                        FSMStateMainMenu_Config::Instance() );
+            break;
+
+
+        case    Keypad::BUTTON_SELECT:
+            // TODO
             break;
 
 
@@ -47,36 +60,32 @@ void    FSMStateDefault::on_button_pressed(const Keypad::TeButtonsID &pButtonID)
 /* ########################################################################## */
 /* ########################################################################## */
 
-void    FSMStateDefault::on_state_enter(void)
+void    FSMStateMainMenu_View::on_state_enter(void)
 {
-    Serial.println( "Entering FSMStateDefault." );
-    g_LCD_backlightValue    = 0x00;
+    Serial.println( "Entering FSMStateMainMenu_View." );
     g_LCD.clear();
 
     g_LCD.setCursor(0,0);
-    g_LCD.print( "FSMStateDefault" );
+    g_LCD.print( "Main menu" );
 
     g_LCD.setCursor(0,1);
-//    g_LCD.print( "Hello, World !" );
+    g_LCD.print( "<     VIEW     >" );
 }
 
 /* ########################################################################## */
 /* ########################################################################## */
 
-void    FSMStateDefault::on_state_exit(void)
+void    FSMStateMainMenu_View::on_state_exit(void)
 {
-    g_LCD_backlightValue    = 0xFF;
+    // TODO
 }
 
 /* ########################################################################## */
 /* ########################################################################## */
 
-void    FSMStateDefault::updateDisplay(void)
+void    FSMStateMainMenu_View::updateDisplay(void)
 {
-
-    g_LCD.setCursor(0,1);
-    g_LCD.print( "Upd. cont: " );
-    g_LCD.print( this->m_updatesCount++ );
+    //TODO
 }
 
 /* ########################################################################## */
