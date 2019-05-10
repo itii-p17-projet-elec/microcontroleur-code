@@ -15,8 +15,13 @@ template<class T>   class   TSingleton
 {
 public:
 
-    static T&   Instance()
+    static T*   Instance()
     {
+        if( m_i == nullptr)
+        {
+            m_i = new T();
+        }
+
         return m_i;
     }
 
@@ -32,7 +37,7 @@ private:
 public:
 protected:
 
-    static T    m_i;
+    static T*   m_i;
 
 
 
@@ -43,7 +48,7 @@ private:
 /* ########################################################################## */
 /* ########################################################################## */
 
-template <class T> T    TSingleton<T>::m_i=T();
+template<class T> T*    TSingleton<T>::m_i  = nullptr;
 
 /* ########################################################################## */
 /* ########################################################################## */
