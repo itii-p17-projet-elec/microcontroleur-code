@@ -33,6 +33,13 @@ void loop()
 
 
         Display::FSMContext::Instance()->update_50ms();
+
+
+        if( g_flag_processDelayedEvents_50ms )
+        {
+            Serial.println( "WARNING"
+                            " : Over-run on 50ms delayed events process !" );
+        }
     }
 
 
@@ -41,6 +48,13 @@ void loop()
         g_flag_processDelayedEvents_1s  = false;
 
         Display::FSMContext::Instance()->update_1s();
+
+
+        if( g_flag_processDelayedEvents_1s )
+        {
+            Serial.println( "WARNING"
+                            " : Over-run on 1s delayed events process !" );
+        }
     }
 
 
