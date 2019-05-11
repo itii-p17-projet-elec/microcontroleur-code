@@ -42,5 +42,13 @@ bool    g_flag_processDelayedEvents_50ms    = false;
  */
 Keypad  g_keypad( C_PIN_KEYPAD_SW );
 
+
+
+/**
+ *  @brief  This object represents the external temperature sensor.
+ */
+CSensors    g_sensors;
+
 /* ########################################################################## */
 /* ########################################################################## */
+

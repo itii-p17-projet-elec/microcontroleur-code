@@ -49,6 +49,12 @@ void loop()
 
         Display::FSMContext::Instance()->update_1s();
 
+        if( g_sensors.temperature.readData() != 0 )
+        {
+            Serial.println("WARN : An error occured while reading temperature"
+                           " from AM2320 sensor.");
+        }
+
 
         if( g_flag_processDelayedEvents_1s )
         {

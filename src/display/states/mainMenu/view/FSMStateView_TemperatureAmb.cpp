@@ -1,5 +1,5 @@
 /* Corresponding header inclusion */
-#include "FSMStateMainMenu_View.h"
+#include "FSMStateView_TemperatureAmb.h"
 
 /* System includes */
 
@@ -7,11 +7,11 @@
 #include <Arduino.h>
 
 /* Project includes */
-#include "../../FSMContext.h"
-#include "../FSMStateDefault.h"
-#include "FSMStateMainMenu_Back.h"
-#include "FSMStateMainMenu_Config.h"
-#include "view/FSMStateView_TemperatureAmb.h"
+#include "variables_globales.h"
+#include "display/FSMContext.h"
+
+#include "../FSMStateMainMenu_View.h"
+#include "FSMStateView_Back.h"
 
 
 namespace Display {
@@ -19,7 +19,7 @@ namespace Display {
 /* ########################################################################## */
 /* ########################################################################## */
 
-FSMStateMainMenu_View::FSMStateMainMenu_View(void)
+FSMStateView_TemperatureAmb::FSMStateView_TemperatureAmb(void)
     :   FSMAbstractState()
 {
 
@@ -28,11 +28,11 @@ FSMStateMainMenu_View::FSMStateMainMenu_View(void)
 /* ########################################################################## */
 /* ########################################################################## */
 
-void    FSMStateMainMenu_View::on_button_pressed(const Keypad::TeButtonsID &pButtonID)
+void    FSMStateView_TemperatureAmb::on_button_pressed(const Keypad::TeButtonsID &pButtonID)
 {
     FSMAbstractState::on_button_pressed(pButtonID);
 
-    Serial.print("FSMStateMainMenu_View : Pressed button : ");
+    Serial.print("FSMStateView_TemperatureAmb : Pressed button : ");
     Serial.println( Keypad::buttonName(pButtonID) );
 
 
@@ -40,19 +40,13 @@ void    FSMStateMainMenu_View::on_button_pressed(const Keypad::TeButtonsID &pBut
     {
         case    Keypad::BUTTON_LEFT:
             FSMContext::Instance()->changeState(
-                        FSMStateMainMenu_Back::Instance() );
+                        FSMStateView_Back::Instance() );
             break;
 
 
         case    Keypad::BUTTON_RIGHT:
             FSMContext::Instance()->changeState(
-                        FSMStateMainMenu_Config::Instance() );
-            break;
-
-
-        case    Keypad::BUTTON_SELECT:
-            FSMContext::Instance()->changeState(
-                        FSMStateView_TemperatureAmb::Instance() );
+                        FSMStateView_Back::Instance() );
             break;
 
 
@@ -64,22 +58,21 @@ void    FSMStateMainMenu_View::on_button_pressed(const Keypad::TeButtonsID &pBut
 /* ########################################################################## */
 /* ########################################################################## */
 
-void    FSMStateMainMenu_View::on_state_enter(void)
+void    FSMStateView_TemperatureAmb::on_state_enter(void)
 {
-    Serial.println( "Entering FSMStateMainMenu_View." );
+    Serial.println( "Entering FSMStateView_TemperatureAmb." );
     g_LCD.clear();
 
     g_LCD.setCursor(0,0);
-    g_LCD.print( "Main menu" );
+    g_LCD.print( "< Ambient temp >" );
 
-    g_LCD.setCursor(0,1);
-    g_LCD.print( "<     VIEW     >" );
+    this->update_1s();
 }
 
 /* ########################################################################## */
 /* ########################################################################## */
 
-void    FSMStateMainMenu_View::on_state_exit(void)
+void    FSMStateView_TemperatureAmb::on_state_exit(void)
 {
     // TODO
 }
@@ -87,9 +80,11 @@ void    FSMStateMainMenu_View::on_state_exit(void)
 /* ########################################################################## */
 /* ########################################################################## */
 
-void    FSMStateMainMenu_View::update_1s(void)
+void    FSMStateView_TemperatureAmb::update_1s(void)
 {
-    //TODO
+    g_LCD.setCursor(0,1);
+    g_LCD.print( g_sensors.temperature.temperature_degC(), 2 );
+    g_LCD.print( " C          " );
 }
 
 /* ########################################################################## */

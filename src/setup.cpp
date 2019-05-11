@@ -28,6 +28,9 @@ void    setup(void)
     setup_serial();
 
 
+    g_sensors.initialize();
+
+
     /* Initialize the display by creating the FSM singleton instance */
     Display::FSMContext::Instance();
 

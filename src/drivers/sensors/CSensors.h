@@ -1,5 +1,5 @@
-#ifndef VARIABLES_GLOBALES_H
-#define VARIABLES_GLOBALES_H
+#ifndef CSENSORS_H
+#define CSENSORS_H
 
 /* Inherited classes */
 
@@ -9,24 +9,42 @@
 /* Libraries includes */
 
 /* Project includes */
-#include "drivers/Keypad.h"
-#include "drivers/sensors/CSensors.h"
+#include "drivers/sensors/AM2320.h"
 
 /* ########################################################################## */
 /* ########################################################################## */
 
-extern const int    C_TIMER1_COUNTER_PRELOAD;
+class   CSensors
+{
+public:
 
-//extern bool     g_flag_keypad;
+    CSensors(void);
 
-extern bool     g_flag_processDelayedEvents_1s;
-extern bool     g_flag_processDelayedEvents_50ms;
 
-extern Keypad   g_keypad;
+    void    initialize(void);
 
-extern CSensors g_sensors;
+
+
+protected:
+private:
+
+
+
+public:
+
+    /**
+     *  @brief  This object represents the external temperature sensor.
+     */
+    AM2320  temperature;
+
+
+
+protected:
+private:
+
+};
 
 /* ########################################################################## */
 /* ########################################################################## */
 
-#endif  /*< VARIABLES_GLOBALES_H */
+#endif  /*< CSENSORS_H */
