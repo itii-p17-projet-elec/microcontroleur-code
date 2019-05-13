@@ -84,6 +84,16 @@ const char*   Keypad::buttonName(const Keypad::TeButtonsID &pID)
 /**
  *  @brief  Accessor to \ref Keypad::m_buttonLastPressed.
  */
+Keypad::TeButtonsID Keypad::currentlyPressedButton(void) const
+{
+    return this->readPressedButton(this->c_pinNbr);
+}
+
+/* ########################################################################## */
+/* ########################################################################## */
+/**
+ *  @brief  Accessor to \ref Keypad::m_buttonLastPressed.
+ */
 Keypad::TeButtonsID Keypad::lastPressedButton(void) const
 {
     return this->m_buttonLastPressed;

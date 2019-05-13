@@ -38,6 +38,7 @@ public:
 
     uint8_t         updateState(void);
 
+    TeButtonsID     currentlyPressedButton(void) const;
     TeButtonsID     lastPressedButton(void) const;
 
 

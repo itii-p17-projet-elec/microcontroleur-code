@@ -1,5 +1,5 @@
 /* Corresponding header inclusion */
-#include "FSMStateMainMenu_Config.h"
+#include "FSMStateConfig_EmissionDelay.h"
 
 /* System includes */
 
@@ -7,10 +7,12 @@
 #include <Arduino.h>
 
 /* Project includes */
-#include "../../FSMContext.h"
-#include "FSMStateMainMenu_Back.h"
-#include "FSMStateMainMenu_View.h"
-#include "config/FSMStateConfig_EmissionDelay.h"
+#include "variables_globales.h"
+#include "display/FSMContext.h"
+
+#include "../FSMStateMainMenu_Config.h"
+#include "FSMStateConfig_Back.h"
+#include "FSMStateConfig_EmissionDelay_Edit.h"
 
 
 namespace Display {
@@ -18,7 +20,7 @@ namespace Display {
 /* ########################################################################## */
 /* ########################################################################## */
 
-FSMStateMainMenu_Config::FSMStateMainMenu_Config(void)
+FSMStateConfig_EmissionDelay::FSMStateConfig_EmissionDelay(void)
     :   FSMAbstractState()
 {
 
@@ -27,11 +29,11 @@ FSMStateMainMenu_Config::FSMStateMainMenu_Config(void)
 /* ########################################################################## */
 /* ########################################################################## */
 
-void    FSMStateMainMenu_Config::on_button_pressed(const Keypad::TeButtonsID &pButtonID)
+void    FSMStateConfig_EmissionDelay::on_button_pressed(const Keypad::TeButtonsID &pButtonID)
 {
     FSMAbstractState::on_button_pressed(pButtonID);
 
-    Serial.print("FSMStateMainMenu_Config : Pressed button : ");
+    Serial.print("FSMStateConfig_EmissionDelay : Pressed button : ");
     Serial.println( Keypad::buttonName(pButtonID) );
 
 
@@ -39,19 +41,27 @@ void    FSMStateMainMenu_Config::on_button_pressed(const Keypad::TeButtonsID &pB
     {
         case    Keypad::BUTTON_LEFT:
             FSMContext::Instance()->changeState(
-                        FSMStateMainMenu_View::Instance() );
+                        FSMStateConfig_Back::Instance() );
             break;
 
 
         case    Keypad::BUTTON_RIGHT:
             FSMContext::Instance()->changeState(
-                        FSMStateMainMenu_Back::Instance() );
+                        FSMStateConfig_Back::Instance() );
             break;
 
 
         case    Keypad::BUTTON_SELECT:
             FSMContext::Instance()->changeState(
-                        FSMStateConfig_EmissionDelay::Instance() );
+                        FSMStateConfig_EmissionDelay_Edit::Instance() );
+            break;
+
+
+        case Keypad::BUTTON_DOWN:
+            break;
+
+
+        case Keypad::BUTTON_UP:
             break;
 
 
@@ -63,32 +73,33 @@ void    FSMStateMainMenu_Config::on_button_pressed(const Keypad::TeButtonsID &pB
 /* ########################################################################## */
 /* ########################################################################## */
 
-void    FSMStateMainMenu_Config::on_state_enter(void)
+void    FSMStateConfig_EmissionDelay::on_state_enter(void)
 {
-    Serial.println( "Entering FSMStateMainMenu_Config." );
+    Serial.println( "Entering FSMStateConfig_EmissionDelay." );
     g_LCD.clear();
 
     g_LCD.setCursor(0,0);
-    g_LCD.print( "Main menu" );
+    g_LCD.print( "< Emit. period >" );
 
-    g_LCD.setCursor(0,1);
-    g_LCD.print( "<    CONFIG    >" );
+    g_LCD.setCursor(5,1);
+    g_LCD.print( g_parameters.m_data.sensors_periodicTransmissionDelay_s );
+    g_LCD.print( " s          " );
 }
 
 /* ########################################################################## */
 /* ########################################################################## */
 
-void    FSMStateMainMenu_Config::on_state_exit(void)
+void    FSMStateConfig_EmissionDelay::on_state_exit(void)
 {
-    // TODO
+    /* Nothing to do */
 }
 
 /* ########################################################################## */
 /* ########################################################################## */
 
-void    FSMStateMainMenu_Config::update_1s(void)
+void    FSMStateConfig_EmissionDelay::update_1s(void)
 {
-    //TODO
+    /* Nothing to do */
 }
 
 /* ########################################################################## */
