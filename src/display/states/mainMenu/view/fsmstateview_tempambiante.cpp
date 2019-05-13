@@ -87,7 +87,7 @@ void    FSMStateView_TempAmbiante::on_state_exit(void)
 
 void    FSMStateView_TempAmbiante::update_1s(void)
 {
-    displayOnLCD((char*)g_sensors.temperature.temperature_degC(), 0, 1, 2);
+    displayOnLCD(g_sensors.temperature.temperature_degC(), 0, 1, 2);
     displayOnLCD((char*)" C          " );
 }
 

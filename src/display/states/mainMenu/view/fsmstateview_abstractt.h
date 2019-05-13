@@ -22,6 +22,7 @@ protected:
     virtual int     displayOnLCD(char* data);
     virtual int     displayOnLCD(char* data, int posX, int posY);
     virtual int     displayOnLCD(char* data, int posX, int posY, int a);
+	    int	    displayOnLCD(float data, int posX, int posY, int a);
 
 private:
 

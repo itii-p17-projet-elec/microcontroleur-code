@@ -34,7 +34,7 @@ FSMStateView_AbstractT::~FSMStateView_AbstractT(void)
 int     FSMStateView_AbstractT::displayOnLCD(char* data)
 {
     try{
-    g_LCD.print(data);
+    Display::g_LCD.print(data);
     } catch(...) {
         return 0;
     }
@@ -49,8 +49,8 @@ int     FSMStateView_AbstractT::displayOnLCD(char* data)
 int     FSMStateView_AbstractT::displayOnLCD(char* data, int posX, int posY)
 {
     try{
-    g_LCD.setCursor(posX, posY);
-    g_LCD.print(data);
+    Display::g_LCD.setCursor(posX, posY);
+    Display::g_LCD.print(data);
     } catch(...) {
         return 0;
     }
@@ -65,8 +65,24 @@ int     FSMStateView_AbstractT::displayOnLCD(char* data, int posX, int posY)
 int     FSMStateView_AbstractT::displayOnLCD(char* data, int posX, int posY, int a)
 {
     try{
-    g_LCD.setCursor(posX, posY);
-    g_LCD.print(data, a);
+    Display::g_LCD.setCursor(posX, posY);
+    Display::g_LCD.print(data, a);
+    } catch(...) {
+        return 0;
+    }
+    return 1;
+}
+
+/* ########################################################################## */
+/* ########################################################################## */
+
+/* @brief returns 1 if it successfully displayed on the LCD, else 0
+*/
+int     FSMStateView_AbstractT::displayOnLCD(float data, int posX, int posY, int a)
+{
+    try{
+    Display::g_LCD.setCursor(posX, posY);
+    Display::g_LCD.print(data, a);
     } catch(...) {
         return 0;
     }

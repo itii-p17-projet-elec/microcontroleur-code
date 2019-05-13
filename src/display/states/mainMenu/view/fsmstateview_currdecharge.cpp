@@ -87,7 +87,7 @@ void    FSMStateView_CurrDecharge::on_state_exit(void)
 
 void    FSMStateView_CurrDecharge::update_1s(void)
 {
-    displayOnLCD((char*)g_sensors.temperature.temperature_degC(), 0, 1, 2); ///////////// NEED g_sensors.current.getCurrentDeload_Amp(); /////////////
+    displayOnLCD(g_sensors.temperature.temperature_degC(), 0, 1, 2); ///////////// NEED g_sensors.current.getCurrentDeload_Amp(); /////////////
     displayOnLCD((char*)" C          ");
 }
 

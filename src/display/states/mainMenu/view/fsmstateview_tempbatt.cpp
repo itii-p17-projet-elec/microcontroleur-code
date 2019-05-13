@@ -87,7 +87,7 @@ void    FSMStateView_TempBatt::on_state_exit(void)
 
 void    FSMStateView_TempBatt::update_1s(void)
 {
-    displayOnLCD((char*)g_sensors.temperature.temperature_degC(), 0, 1, 2); ///////////// NEED g_sensors.temperatureBatt.temperature_degC(); /////////////
+    displayOnLCD(g_sensors.temperature.temperature_degC(), 0, 1, 2); ///////////// NEED g_sensors.temperatureBatt.temperature_degC(); /////////////
     displayOnLCD((char*)" C          ");
 }
 
