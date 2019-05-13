@@ -13,12 +13,24 @@
 
 void    processDelayedEvents_1s(void)
 {
+    static uint16_t s_delayedEventsCount    = 0;
+
+
     g_sensors.update();
 
     Display::FSMContext::Instance()->update_1s();
 
+    /*
+     *  Trigger emission of data to data collection server
+     */
+    if( (s_delayedEventsCount % g_sensors_periodicTransmissionDelay_s) == 0 )
     {
+        Serial.print( __FUNCTION__ );
+        Serial.println( " :: Sending data..." );
     }
+
+
+    s_delayedEventsCount++;
 }
 
 /* ########################################################################## */

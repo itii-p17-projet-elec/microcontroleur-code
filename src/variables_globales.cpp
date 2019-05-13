@@ -49,6 +49,13 @@ Keypad  g_keypad( C_PIN_KEYPAD_SW );
  */
 CSensors    g_sensors;
 
+
+/**
+ *  @brief  This variable contains the delay between each periodic sensors data
+ *          emission, expressed in seconds.
+ */
+uint16_t    g_sensors_periodicTransmissionDelay_s   = 10;
+
 /* ########################################################################## */
 /* ########################################################################## */
 

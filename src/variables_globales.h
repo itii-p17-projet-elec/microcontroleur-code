@@ -26,6 +26,8 @@ extern Keypad   g_keypad;
 
 extern CSensors g_sensors;
 
+extern uint16_t g_sensors_periodicTransmissionDelay_s;
+
 /* ########################################################################## */
 /* ########################################################################## */
 
