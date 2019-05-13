@@ -39,14 +39,19 @@ void    FSMStateView_CurrConsoBatt::on_button_pressed(const Keypad::TeButtonsID 
     {
         case    Keypad::BUTTON_LEFT:
             FSMContext::Instance()->changeState(
-                        FSMStateView_Back::Instance() );
+                        FSMStateView_CurrDecharge::Instance() );
             break;
 
 
         case    Keypad::BUTTON_RIGHT:
             FSMContext::Instance()->changeState(
-                        FSMStateView_Back::Instance() );
+                        FSMStateView_Voltage::Instance() );
             break;
+
+
+        case    Keypad::BUTTON_UP:
+            FSMContext::Instance()->changeState(
+                        FSMStateMainMenu_View::Instance());
 
 
         default:

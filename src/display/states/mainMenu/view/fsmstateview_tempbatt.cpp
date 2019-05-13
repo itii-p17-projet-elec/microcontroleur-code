@@ -39,14 +39,19 @@ void    FSMStateView_TempBatt::on_button_pressed(const Keypad::TeButtonsID &pBut
     {
         case    Keypad::BUTTON_LEFT:
             FSMContext::Instance()->changeState(
-                        FSMStateView_Back::Instance() );
+                        FSMStateView_TempAmbiante::Instance() );
             break;
 
 
         case    Keypad::BUTTON_RIGHT:
             FSMContext::Instance()->changeState(
-                        FSMStateView_Back::Instance() );
+                        FSMStateView_CurrCharge::Instance() );
             break;
+
+
+        case    Keypad::BUTTON_UP:
+            FSMContext::Instance()->changeState(
+                        FSMStateMainMenu_View::Instance());
 
 
         default:

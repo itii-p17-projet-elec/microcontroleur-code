@@ -37,14 +37,19 @@ void    FSMStateView_Voltage::on_button_pressed(const Keypad::TeButtonsID &pButt
     {
         case    Keypad::BUTTON_LEFT:
             FSMContext::Instance()->changeState(
-                        FSMStateView_Back::Instance() );
+                        FSMStateView_CurrConsoBatt::Instance() );
             break;
 
 
         case    Keypad::BUTTON_RIGHT:
             FSMContext::Instance()->changeState(
-                        FSMStateView_Back::Instance() );
+                        FSMStateView_PercentageLoadBatt::Instance() );
             break;
+
+
+        case    Keypad::BUTTON_UP:
+            FSMContext::Instance()->changeState(
+                        FSMStateMainMenu_View::Instance());
 
 
         default:
