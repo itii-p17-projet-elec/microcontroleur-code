@@ -9,6 +9,7 @@
 /* Libraries includes */
 
 /* Project includes */
+#include "data/CParameters.h"
 #include "drivers/Keypad.h"
 #include "drivers/sensors/CSensors.h"
 
@@ -26,7 +27,7 @@ extern Keypad   g_keypad;
 
 extern CSensors g_sensors;
 
-extern uint16_t g_sensors_periodicTransmissionDelay_s;
+extern CParameters  g_parameters;
 
 /* ########################################################################## */
 /* ########################################################################## */

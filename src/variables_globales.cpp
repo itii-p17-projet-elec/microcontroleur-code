@@ -43,18 +43,17 @@ bool    g_flag_processDelayedEvents_50ms    = false;
 Keypad  g_keypad( C_PIN_KEYPAD_SW );
 
 
+/**
+ *  @brief  This class encapsulates all parameters that can be edited by the
+ *          operator.
+ */
+CParameters  g_parameters;
+
 
 /**
  *  @brief  This object represents the external temperature sensor.
  */
 CSensors    g_sensors;
-
-
-/**
- *  @brief  This variable contains the delay between each periodic sensors data
- *          emission, expressed in seconds.
- */
-uint16_t    g_sensors_periodicTransmissionDelay_s   = 10;
 
 /* ########################################################################## */
 /* ########################################################################## */
