@@ -52,7 +52,7 @@ void    FSMStateMainMenu_View::on_button_pressed(const Keypad::TeButtonsID &pBut
 
         case    Keypad::BUTTON_SELECT:
             FSMContext::Instance()->changeState(
-                        FSMStateView_TemperatureAmb::Instance() );
+                        FSMStateView_TempAmbiante::Instance() );
             break;
 
 
