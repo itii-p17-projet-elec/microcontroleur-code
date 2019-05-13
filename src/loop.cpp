@@ -23,7 +23,9 @@ void    processDelayedEvents_1s(void)
     /*
      *  Trigger emission of data to data collection server
      */
-    if( (s_delayedEventsCount % g_sensors_periodicTransmissionDelay_s) == 0 )
+    if(     (   s_delayedEventsCount
+            %   g_parameters.m_data.sensors_periodicTransmissionDelay_s )
+        ==  0 )
     {
         Serial.print( __FUNCTION__ );
         Serial.println( " :: Sending data..." );

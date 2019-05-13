@@ -14,6 +14,7 @@
 /*
  *  Forward declarations
  */
+void    setup_parameters(void);
 void    setup_pins(void);
 void    setup_serial(void);
 void    setup_timer1(void);
@@ -27,6 +28,8 @@ void    setup(void)
 
     setup_serial();
 
+    setup_parameters();
+
 
     g_sensors.initialize();
 
@@ -38,6 +41,15 @@ void    setup(void)
     /* This shall be done at last as it enables interrupts */
     setup_timer1();
     digitalWrite(C_PIN_LED_ACTIVITY, LOW);
+}
+
+/* ########################################################################## */
+/* ########################################################################## */
+
+void    setup_parameters(void)
+{
+    g_parameters.initialize();
+    g_EEPROM.loadData();
 }
 
 /* ########################################################################## */

@@ -10,6 +10,7 @@
 
 /* Project includes */
 #include "data/CParameters.h"
+#include "drivers/EEPROMMgmt.h"
 #include "drivers/Keypad.h"
 #include "drivers/sensors/CSensors.h"
 
@@ -17,6 +18,8 @@
 /* ########################################################################## */
 
 extern const int    C_TIMER1_COUNTER_PRELOAD;
+
+extern  EEPROMMgmt  g_EEPROM;
 
 //extern bool     g_flag_keypad;
 

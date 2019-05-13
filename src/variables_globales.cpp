@@ -17,6 +17,12 @@ const int    C_TIMER1_COUNTER_PRELOAD   = 62411;
 
 
 /**
+ *  @brief  This object manages EEPROM memory.
+ */
+EEPROMMgmt  g_EEPROM;
+
+
+/**
  *  @brief  This flag shall be raised by ISR when an activity is detected on
  *          the keypad ; It is then reset by the main loop.
  */

@@ -91,6 +91,7 @@ include $(MK_INCDIR)/directories.mk
 # ------------------------------------------------------------------------------
 
 include $(MK_INCDIR)/arduino-lib-core.mk
+include $(MK_INCDIR)/arduino-lib-EEPROM.mk
 include $(MK_INCDIR)/arduino-lib-LiquidCrystal.mk
 include $(MK_INCDIR)/arduino-lib-wire.mk
 
