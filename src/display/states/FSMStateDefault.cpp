@@ -56,10 +56,10 @@ void    FSMStateDefault::on_state_enter(void)
     g_LCD.clear();
 
     g_LCD.setCursor(0,0);
-    g_LCD.print( "FSMStateDefault" );
+    g_LCD.print( "  ITII-EII-P17" );
 
     g_LCD.setCursor(0,1);
-//    g_LCD.print( "Hello, World !" );
+    g_LCD.print( "Chargeur solaire" );
 }
 
 /* ########################################################################## */
@@ -75,10 +75,7 @@ void    FSMStateDefault::on_state_exit(void)
 
 void    FSMStateDefault::update_1s(void)
 {
-
-    g_LCD.setCursor(0,1);
-    g_LCD.print( "Upd. cont: " );
-    g_LCD.print( this->m_updatesCount++ );
+    /* Nothing to do */
 }
 
 /* ########################################################################## */
