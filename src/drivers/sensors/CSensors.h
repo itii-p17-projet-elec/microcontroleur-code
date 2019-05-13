@@ -23,6 +23,8 @@ public:
 
     void    initialize(void);
 
+    void    update(void);
+
 
 
 protected:
