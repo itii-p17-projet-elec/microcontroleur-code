@@ -4,7 +4,7 @@
 /* Inherited classes */
 #include "fsmstateview_abstractt.h"
 #include "common/TSingleton.hpp"
-#include "display/FSMAbstractState.h"
+#include "../../../FSMAbstractState.h"
 
 /* System includes */
 
