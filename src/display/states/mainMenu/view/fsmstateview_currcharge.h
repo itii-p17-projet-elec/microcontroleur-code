@@ -3,7 +3,8 @@
 
 /* Inherited classes */
 #include "fsmstateview_abstractcurr.h"
-#include "common/TSingleton.hpp"
+//#include "common/TSingleton.hpp"
+#include "../../../../common/TSingleton.hpp"
 #include "../../../FSMAbstractState.h"
 
 /* System includes */

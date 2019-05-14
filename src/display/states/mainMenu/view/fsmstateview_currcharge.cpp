@@ -7,8 +7,10 @@
 #include <Arduino.h>
 
 /* Project includes */
-#include "variables_globales.h"
-#include "display/FSMContext.h"
+//#include "variables_globales.h"
+//#include "display/FSMContext.h"
+#include "../../../../variables_globales.h"
+#include "../../../../display/FSMContext.h"
 
 #include "../../../FSMContext.h"
 #include "../../FSMStateDefault.h"
@@ -26,7 +28,7 @@
 
 FSMStateView_CurrCharge::FSMStateView_CurrCharge(void)
     : FSMStateView_AbstractCurr()
-    , Display::FSMAbstractState()
+    , FSMAbstractState()
 {
     return;
 }
@@ -59,7 +61,7 @@ void    FSMStateView_CurrCharge::on_button_pressed(const Keypad::TeButtonsID &pB
 
         case    Keypad::BUTTON_UP:
             FSMContext::Instance()->changeState(
-                        FSMStateMainMenu_View::Instance());
+                        FSMStateMainMenu_View::Instance() );
 
 
         default:
