@@ -10,8 +10,16 @@
 #include "variables_globales.h"
 #include "display/FSMContext.h"
 
+#include "../../../FSMContext.h"
+#include "../../FSMStateDefault.h"
+//#include "../../../FSMAbstractState.h"
+
 #include "../FSMStateMainMenu_View.h"
 #include "FSMStateView_Back.h"
+
+/* previous and next views */
+#include "fsmstateview_voltage.h"
+#include "fsmstateview_tempambiante.h"
 
 /* ########################################################################## */
 /* ########################################################################## */

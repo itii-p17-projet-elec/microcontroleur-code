@@ -13,6 +13,10 @@
 #include "../FSMStateMainMenu_View.h"
 #include "FSMStateView_Back.h"
 
+/* previous and next views */
+#include "fsmstateview_currconsobatt.h"
+#include "fsmstateview_percentageloadbatt.h"
+
 /* ########################################################################## */
 /* ########################################################################## */
 
