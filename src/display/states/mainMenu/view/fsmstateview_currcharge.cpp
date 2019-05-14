@@ -23,12 +23,14 @@
 #include "fsmstateview_tempbatt.h"
 #include "fsmstateview_currdecharge.h"
 
+namespace Display
+{
+
 /* ########################################################################## */
 /* ########################################################################## */
 
 FSMStateView_CurrCharge::FSMStateView_CurrCharge(void)
     : FSMStateView_AbstractCurr()
-    , FSMAbstractState()
 {
     return;
 }
@@ -103,3 +105,5 @@ void    FSMStateView_CurrCharge::update_1s(void)
 
 /* ########################################################################## */
 /* ########################################################################## */
+
+}   /*< namespace Display */

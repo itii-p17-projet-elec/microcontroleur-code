@@ -12,10 +12,10 @@
 
 /* Project includes */
 
+namespace Display {
 
 class FSMStateView_CurrConsoBatt
         : public    FSMStateView_AbstractCurr
-        , public    FSMAbstractState
         , public    TSingleton<FSMStateView_CurrConsoBatt>
 {
     friend class    TSingleton<FSMStateView_CurrConsoBatt>;
@@ -37,5 +37,7 @@ protected:
 private:
 
 };
+
+}   /*< namespace Display */
 
 #endif // FSMSTATEVIEW_CURRCONSOBATT_H

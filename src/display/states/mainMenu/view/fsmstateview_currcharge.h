@@ -13,10 +13,10 @@
 
 /* Project includes */
 
+namespace Display {
 
 class FSMStateView_CurrCharge
         : public    FSMStateView_AbstractCurr
-        , public    FSMAbstractState
         , public    TSingleton<FSMStateView_CurrCharge>
 {
     friend class    TSingleton<FSMStateView_CurrCharge>;
@@ -38,5 +38,7 @@ protected:
 private:
 
 };
+
+}   /*< namespace Display */
 
 #endif // FSMSTATEVIEW_CURRCHARGE_H

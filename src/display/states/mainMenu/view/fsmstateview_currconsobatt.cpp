@@ -21,12 +21,14 @@
 #include "fsmstateview_currdecharge.h"
 #include "fsmstateview_voltage.h"
 
+namespace Display
+{
+
 /* ########################################################################## */
 /* ########################################################################## */
 
 FSMStateView_CurrConsoBatt::FSMStateView_CurrConsoBatt(void)
     : FSMStateView_AbstractCurr()
-    , Display::FSMAbstractState()
 {
     return;
 }
@@ -101,3 +103,5 @@ void    FSMStateView_CurrConsoBatt::update_1s(void)
 
 /* ########################################################################## */
 /* ########################################################################## */
+
+}   /*< namespace Display */

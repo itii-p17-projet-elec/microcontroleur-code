@@ -4,7 +4,7 @@
 /* Inherited classes */
 #include "fsmstateview_abstractcurr.h"
 #include "common/TSingleton.hpp"
-#include "../../../FSMAbstractState.h"
+
 
 /* System includes */
 
@@ -12,10 +12,11 @@
 
 /* Project includes */
 
+namespace Display
+{
 
-class FSMStateView_CurrDecharge
+class   FSMStateView_CurrDecharge
         : public    FSMStateView_AbstractCurr
-        , public    FSMAbstractState
         , public    TSingleton<FSMStateView_CurrDecharge>
 {
     friend class    TSingleton<FSMStateView_CurrDecharge>;
@@ -37,5 +38,7 @@ protected:
 private:
 
 };
+
+}   /*< namespace Display */
 
 #endif // FSMSTATEVIEW_CURRDECHARGE_H

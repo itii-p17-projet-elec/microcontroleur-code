@@ -16,17 +16,18 @@
 
 #include "../FSMStateMainMenu_View.h"
 #include "FSMStateView_Back.h"
-
 /* previous and next views */
 #include "fsmstateview_currcharge.h"
 #include "fsmstateview_currconsobatt.h"
+
+namespace Display
+{
 
 /* ########################################################################## */
 /* ########################################################################## */
 
 FSMStateView_CurrDecharge::FSMStateView_CurrDecharge(void)
     : FSMStateView_AbstractCurr()
-    , Display::FSMAbstractState()
 {
     return;
 }
@@ -101,3 +102,5 @@ void    FSMStateView_CurrDecharge::update_1s(void)
 
 /* ########################################################################## */
 /* ########################################################################## */
+
+}   /*< namespace Display */

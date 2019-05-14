@@ -2,7 +2,7 @@
 #define FSMSTATEVIEW_ABSTRACTCURR_H
 
 /* Inherited classes */
-#include "fsmstateview_displayer.h"
+#include "../../../FSMAbstractState.h"
 
 /* System includes */
 
@@ -11,17 +11,20 @@
 /* Project includes */
 
 
+namespace Display
+{
+
 class FSMStateView_AbstractCurr
-        : public    FSMStateView_Displayer
+        :   public    FSMAbstractState
 {
 public:
     FSMStateView_AbstractCurr(void);
     virtual ~FSMStateView_AbstractCurr(void);
 
 protected:
-    virtual int     displayOnLCD(char* data);
-    virtual int     displayOnLCD(char* data, int posX, int posY);
-    virtual int     displayOnLCD(char* data, int posX, int posY, int a);
+    virtual int     displayOnLCD(const char* data);
+    virtual int     displayOnLCD(const char *data, int posX, int posY);
+    virtual int     displayOnLCD(const char* data, int posX, int posY, int a);
 	    int	    displayOnLCD(float data, int posX, int posY, int a);
 
 private:
@@ -32,5 +35,7 @@ public:
 protected:
 private:
 };
+
+}   /*< namespace Display */
 
 #endif // FSMSTATEVIEW_ABSTRACTCURR_H

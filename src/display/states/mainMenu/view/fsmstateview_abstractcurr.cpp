@@ -8,12 +8,17 @@
 /* Libraries includes */
 
 /* Project includes */
+#include "display/FSMContext.h"
+
+
+namespace Display
+{
 
 /* ########################################################################## */
 /* ########################################################################## */
 
 FSMStateView_AbstractCurr::FSMStateView_AbstractCurr(void)
-    : FSMStateView_Displayer()
+    :   FSMAbstractState()
 {
     return;
 }
@@ -31,13 +36,10 @@ FSMStateView_AbstractCurr::~FSMStateView_AbstractCurr(void)
 
 /* @brief returns 1 if it successfully displayed on the LCD, else 0
 */
-int     FSMStateView_AbstractCurr::displayOnLCD(char* data)
+int     FSMStateView_AbstractCurr::displayOnLCD(const char *data)
 {
-    try{
     Display::g_LCD.print(data);
-    } catch(...) {
-        return 0;
-    }
+
     return 1;
 }
 
@@ -46,14 +48,11 @@ int     FSMStateView_AbstractCurr::displayOnLCD(char* data)
 
 /* @brief returns 1 if it successfully displayed on the LCD, else 0
 */
-int     FSMStateView_AbstractCurr::displayOnLCD(char* data, int posX, int posY)
+int     FSMStateView_AbstractCurr::displayOnLCD(const char* data, int posX, int posY)
 {
-    try{
     Display::g_LCD.setCursor(posX, posY);
     Display::g_LCD.print(data);
-    } catch(...) {
-        return 0;
-    }
+
     return 1;
 }
 
@@ -62,16 +61,28 @@ int     FSMStateView_AbstractCurr::displayOnLCD(char* data, int posX, int posY)
 
 /* @brief returns 1 if it successfully displayed on the LCD, else 0
 */
-int     FSMStateView_AbstractCurr::displayOnLCD(char* data, int posX, int posY, int a)
+int     FSMStateView_AbstractCurr::displayOnLCD(const char *data, int posX, int posY, int a)
 {
-    try{
+    Display::g_LCD.setCursor(posX, posY);
+    Display::g_LCD.print(data);
+
+    return 1;
+}
+
+/* ########################################################################## */
+/* ########################################################################## */
+
+/* @brief returns 1 if it successfully displayed on the LCD, else 0
+*/
+int     FSMStateView_AbstractCurr::displayOnLCD(float data, int posX, int posY, int a)
+{
     Display::g_LCD.setCursor(posX, posY);
     Display::g_LCD.print(data, a);
-    } catch(...) {
-        return 0;
-    }
+
     return 1;
 }
 
 /* ########################################################################## */
 /* ########################################################################## */
+
+}   /*< namespace Display */

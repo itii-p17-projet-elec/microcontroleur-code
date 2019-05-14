@@ -11,7 +11,7 @@
 #include "display/FSMContext.h"
 
 #include "../FSMStateMainMenu_View.h"
-#include "FSMStateView_TemperatureAmb.h"
+#include "fsmstateview_tempambiante.h"
 
 
 namespace Display {
@@ -40,13 +40,13 @@ void    FSMStateView_Back::on_button_pressed(const Keypad::TeButtonsID &pButtonI
     {
         case    Keypad::BUTTON_LEFT:
             FSMContext::Instance()->changeState(
-                        FSMStateView_TemperatureAmb::Instance() );
+                        FSMStateView_TempAmbiante::Instance() );
             break;
 
 
         case    Keypad::BUTTON_RIGHT:
             FSMContext::Instance()->changeState(
-                        FSMStateView_TemperatureAmb::Instance() );
+                        FSMStateView_TempAmbiante::Instance() );
             break;
 
 

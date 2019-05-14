@@ -12,10 +12,11 @@
 
 #include "../FSMStateMainMenu_View.h"
 #include "FSMStateView_Back.h"
-
-/* previous and next views */
 #include "fsmstateview_currconsobatt.h"
 #include "fsmstateview_percentageloadbatt.h"
+
+
+namespace Display {
 
 /* ########################################################################## */
 /* ########################################################################## */
@@ -89,8 +90,7 @@ void    FSMStateView_Voltage::on_state_exit(void)
 
 void    FSMStateView_Voltage::update_1s(void)
 {
-    Display::g_LCD(g_sensors.temperature.temperature_degC(), 0, 1, 2); ///////////// NEED g_sensors.voltage.getvoltageBatt_Volt(); /////////////
-    displayOnLCD((char*)" C          ");
+    displayOnLCD((char*)"?? C          ");
 }
 
 /* ########################################################################## */
@@ -98,13 +98,10 @@ void    FSMStateView_Voltage::update_1s(void)
 
 /* @brief returns 1 if it successfully displayed on the LCD, else 0
 */
-int     FSMStateView_Voltage::displayOnLCD(char* data)
+int     FSMStateView_Voltage::displayOnLCD(const char *data)
 {
-    try{
     Display::g_LCD.print(data);
-    } catch(...) {
-        return 0;
-    }
+
     return 1;
 }
 
@@ -113,14 +110,11 @@ int     FSMStateView_Voltage::displayOnLCD(char* data)
 
 /* @brief returns 1 if it successfully displayed on the LCD, else 0
 */
-int     FSMStateView_Voltage::displayOnLCD(char* data, int posX, int posY)
+int     FSMStateView_Voltage::displayOnLCD(const char* data, int posX, int posY)
 {
-    try{
     Display::g_LCD.setCursor(posX, posY);
     Display::g_LCD.print(data);
-    } catch(...) {
-        return 0;
-    }
+
     return 1;
 }
 
@@ -129,16 +123,15 @@ int     FSMStateView_Voltage::displayOnLCD(char* data, int posX, int posY)
 
 /* @brief returns 1 if it successfully displayed on the LCD, else 0
 */
-int     FSMStateView_Voltage::displayOnLCD(char* data, int posX, int posY, int a)
+int     FSMStateView_Voltage::displayOnLCD(const char* data, int posX, int posY, int a)
 {
-    try{
     Display::g_LCD.setCursor(posX, posY);
-    Display::g_LCD.print(data, a);
-    } catch(...) {
-        return 0;
-    }
+    Display::g_LCD.print(data);
+
     return 1;
 }
 
 /* ########################################################################## */
 /* ########################################################################## */
+
+}   /*< namespace Display */

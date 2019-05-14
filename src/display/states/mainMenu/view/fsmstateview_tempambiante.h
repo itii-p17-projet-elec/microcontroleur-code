@@ -12,6 +12,7 @@
 
 /* Project includes */
 
+namespace Display {
 
 class FSMStateView_TempAmbiante
         : public    FSMStateView_AbstractT
@@ -37,5 +38,7 @@ protected:
 private:
 
 };
+
+}   /*< namespace Display */
 
 #endif // FSMSTATEVIEW_TEMPAMBIANTE_H

@@ -3,7 +3,6 @@
 
 
 /* Inherited classes */
-#include "fsmstateview_displayer.h"
 #include "common/TSingleton.hpp"
 #include "../../../FSMAbstractState.h"
 
@@ -13,6 +12,7 @@
 
 /* Project includes */
 
+namespace Display {
 
 class FSMStateView_Voltage
         : public    FSMAbstractState
@@ -27,9 +27,9 @@ public:
     virtual void    update_1s(void);
 
 protected:
-    virtual int     displayOnLCD(char* data);
-    virtual int     displayOnLCD(char* data, int posX, int posY);
-    virtual int     displayOnLCD(char* data, int posX, int posY, int a);
+    virtual int     displayOnLCD(const char* data);
+    virtual int     displayOnLCD(const char *data, int posX, int posY);
+    virtual int     displayOnLCD(const char* data, int posX, int posY, int a);
 
 private:
     FSMStateView_Voltage(void);
@@ -41,5 +41,7 @@ protected:
 private:
 
 };
+
+}   /*< namespace Display */
 
 #endif // FSMSTATEVIEW_VOLTAGE_H

@@ -12,6 +12,8 @@
 
 /* Project includes */
 
+namespace Display
+{
 
 class FSMStateView_TempBatt
         : public    FSMStateView_AbstractT
@@ -37,5 +39,7 @@ protected:
 private:
 
 };
+
+}   /*< namespace Display */
 
 #endif // FSMSTATEVIEW_TEMPBATT_H

@@ -16,10 +16,11 @@
 
 #include "../FSMStateMainMenu_View.h"
 #include "FSMStateView_Back.h"
-
-/* previous and next views */
 #include "fsmstateview_percentageloadbatt.h"
 #include "fsmstateview_tempbatt.h"
+
+
+namespace Display {
 
 /* ########################################################################## */
 /* ########################################################################## */
@@ -99,7 +100,7 @@ void    FSMStateView_TempAmbiante::update_1s(void)
     displayOnLCD((char*)" C          " );
 }
 
-
-
 /* ########################################################################## */
 /* ########################################################################## */
+
+}   /*< namespace Display */
