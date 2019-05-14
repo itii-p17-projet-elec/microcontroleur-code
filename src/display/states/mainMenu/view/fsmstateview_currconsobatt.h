@@ -1,7 +1,6 @@
 #ifndef FSMSTATEVIEW_CURRCONSOBATT_H
 #define FSMSTATEVIEW_CURRCONSOBATT_H
 
-
 /* Inherited classes */
 #include "fsmstateview_abstractcurr.h"
 #include "common/TSingleton.hpp"
@@ -19,7 +18,6 @@ class FSMStateView_CurrConsoBatt
         , public    FSMAbstractState
         , public    TSingleton<FSMStateView_CurrConsoBatt>
 {
-public:
     friend class    TSingleton<FSMStateView_CurrConsoBatt>;
 
 public:

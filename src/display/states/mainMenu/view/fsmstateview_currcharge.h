@@ -1,7 +1,6 @@
 #ifndef FSMSTATEVIEW_CURRCHARGE_H
 #define FSMSTATEVIEW_CURRCHARGE_H
 
-
 /* Inherited classes */
 #include "fsmstateview_abstractcurr.h"
 #include "common/TSingleton.hpp"
@@ -19,7 +18,6 @@ class FSMStateView_CurrCharge
         , public    FSMAbstractState
         , public    TSingleton<FSMStateView_CurrCharge>
 {
-public:
     friend class    TSingleton<FSMStateView_CurrCharge>;
 
 public:
