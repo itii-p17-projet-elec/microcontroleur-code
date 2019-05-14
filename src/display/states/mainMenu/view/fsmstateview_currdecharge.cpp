@@ -18,7 +18,7 @@
 
 FSMStateView_CurrDecharge::FSMStateView_CurrDecharge(void)
     : FSMStateView_AbstractCurr()
-    , FSMAbstractState()
+    , Display::FSMAbstractState()
 {
     return;
 }
@@ -65,7 +65,7 @@ void    FSMStateView_CurrDecharge::on_button_pressed(const Keypad::TeButtonsID &
 void    FSMStateView_CurrDecharge::on_state_enter(void)
 {
     Serial.println( "Entering FSMStateView_CurrDecharge." );
-    g_LCD.clear();
+    Display::g_LCD.clear();
 
     displayOnLCD("< Curr Decharge >", 0, 0);
 

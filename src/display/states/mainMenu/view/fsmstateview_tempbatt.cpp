@@ -18,7 +18,7 @@
 
 FSMStateView_TempBatt::FSMStateView_TempBatt(void)
     : FSMStateView_AbstractT()
-    , FSMAbstractState()
+    , Display::FSMAbstractState()
 {
     return;
 }
@@ -65,7 +65,7 @@ void    FSMStateView_TempBatt::on_button_pressed(const Keypad::TeButtonsID &pBut
 void    FSMStateView_TempBatt::on_state_enter(void)
 {
     Serial.println( "Entering FSMStateView_TempBatt." );
-    g_LCD.clear();
+    Display::g_LCD.clear();
 
     displayOnLCD("< Battery temp >", 0, 0);
 

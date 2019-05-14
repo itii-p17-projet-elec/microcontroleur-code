@@ -17,7 +17,7 @@
 /* ########################################################################## */
 
 FSMStateView_Voltage::FSMStateView_Voltage(void)
-    : FSMAbstractState()
+    : Display::FSMAbstractState()
 {
     return;
 }
@@ -63,7 +63,7 @@ void    FSMStateView_Voltage::on_button_pressed(const Keypad::TeButtonsID &pButt
 void    FSMStateView_Voltage::on_state_enter(void)
 {
     Serial.println( "Entering FSMStateView_Voltage." );
-    g_LCD.clear();
+    Display::g_LCD.clear();
 
     displayOnLCD("< Voltage Batt >", 0, 0);
 

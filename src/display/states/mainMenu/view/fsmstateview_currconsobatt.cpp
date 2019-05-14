@@ -18,7 +18,7 @@
 
 FSMStateView_CurrConsoBatt::FSMStateView_CurrConsoBatt(void)
     : FSMStateView_AbstractCurr()
-    , FSMAbstractState()
+    , Display::FSMAbstractState()
 {
     return;
 }
@@ -65,7 +65,7 @@ void    FSMStateView_CurrConsoBatt::on_button_pressed(const Keypad::TeButtonsID 
 void    FSMStateView_CurrConsoBatt::on_state_enter(void)
 {
     Serial.println( "Entering FSMStateView_CurrConsoBatt." );
-    g_LCD.clear();
+    Display::g_LCD.clear();
 
     displayOnLCD("< Curr Cons.Batt >", 0, 0);
 

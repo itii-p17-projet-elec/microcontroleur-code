@@ -17,7 +17,7 @@
 /* ########################################################################## */
 
 FSMStateView_PercentageLoadBatt::FSMStateView_PercentageLoadBatt(void)
-    : FSMAbstractState()
+    : Display::FSMAbstractState()
 {
     return;
 }
@@ -63,7 +63,7 @@ void    FSMStateView_PercentageLoadBatt::on_button_pressed(const Keypad::TeButto
 void    FSMStateView_PercentageLoadBatt::on_state_enter(void)
 {
     Serial.println( "Entering FSMStateView_PercentageLoadBatt." );
-    g_LCD.clear();
+    Display::g_LCD.clear();
 
     displayOnLCD("< Voltage Batt >", 0, 0);
 

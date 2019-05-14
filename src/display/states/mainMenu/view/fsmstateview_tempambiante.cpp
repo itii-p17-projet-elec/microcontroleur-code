@@ -18,7 +18,7 @@
 
 FSMStateView_TempAmbiante::FSMStateView_TempAmbiante(void)
     : FSMStateView_AbstractT()
-    , FSMAbstractState()
+    , Display::FSMAbstractState()
 {
     return;
 }
@@ -65,7 +65,7 @@ void    FSMStateView_TempAmbiante::on_button_pressed(const Keypad::TeButtonsID &
 void    FSMStateView_TempAmbiante::on_state_enter(void)
 {
     Serial.println( "Entering FSMStateView_TempAmbiante." );
-    g_LCD.clear();
+    Display::g_LCD.clear();
 
     displayOnLCD("< Ambient temp >", 0, 0);
 

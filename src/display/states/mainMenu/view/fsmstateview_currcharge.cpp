@@ -18,7 +18,7 @@
 
 FSMStateView_CurrCharge::FSMStateView_CurrCharge(void)
     : FSMStateView_AbstractCurr()
-    , FSMAbstractState()
+    , Display::FSMAbstractState()
 {
     return;
 }
@@ -65,7 +65,7 @@ void    FSMStateView_CurrCharge::on_button_pressed(const Keypad::TeButtonsID &pB
 void    FSMStateView_CurrCharge::on_state_enter(void)
 {
     Serial.println( "Entering FSMStateView_CurrCharge." );
-    g_LCD.clear();
+    Display::g_LCD.clear();
 
     displayOnLCD("< Curr Load >", 0, 0);
 
