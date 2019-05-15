@@ -5,6 +5,8 @@
 #include "variables_globales.h"
 
 #include "PowerMgmt.h"
+#include "comm/protocol/ProtocolManager.h"
+#include "comm/protocol/messages/AMBTMP.h"
 #include "display/FSMContext.h"
 
 
@@ -29,6 +31,11 @@ void    processDelayedEvents_1s(void)
     {
         Serial.print( __FUNCTION__ );
         Serial.println( " :: Sending data..." );
+
+
+        Comm::ProtocolManager::Instance()->sendMessage(
+                    Comm::Messages::AMBTMP::Instance() );
+
     }
 
 
