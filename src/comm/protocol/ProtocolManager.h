@@ -24,7 +24,10 @@ class   ProtocolManager
 public:
 
 
+    void    addPeriodicMessage(const Messages::AbstractMessage *pMsgPtr);
+
     void    sendMessage(const Messages::AbstractMessage *pMsgPtr);
+    void    sendPeriodicMessages(void);
 
 
 
@@ -38,6 +41,12 @@ private:
 public:
 protected:
 private:
+
+    static const uint8_t    C_PERIODICMSG_MAXCOUNT  = 20;
+
+
+    const Comm::Messages::AbstractMessage*  m_periodicMessagesList[C_PERIODICMSG_MAXCOUNT];
+    uint8_t                                 m_periodicMessagesCount;
 
 };
 

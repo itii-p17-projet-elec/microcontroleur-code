@@ -15,6 +15,7 @@ namespace Comm {
 /* ########################################################################## */
 
 ProtocolManager::ProtocolManager(void)
+    :   m_periodicMessagesCount(0)
 {
 
 }
@@ -22,9 +23,38 @@ ProtocolManager::ProtocolManager(void)
 /* ########################################################################## */
 /* ########################################################################## */
 
-void ProtocolManager::sendMessage(const Messages::AbstractMessage *pMsgPtr)
+void    ProtocolManager::addPeriodicMessage(
+                const Messages::AbstractMessage*    pMsgPtr)
+{
+    if( this->m_periodicMessagesCount >= C_PERIODICMSG_MAXCOUNT )
+    {
+        Serial.println( "** CRITICAL ERROR ** :: Trying to add too many message"
+                        " instances in periodic messages list !" );
+    }
+    else
+    {
+        this->m_periodicMessagesList[this->m_periodicMessagesCount++]
+                = pMsgPtr;
+    }
+}
+
+/* ########################################################################## */
+/* ########################################################################## */
+
+void    ProtocolManager::sendMessage(const Messages::AbstractMessage *pMsgPtr)
 {
     Serial.print( pMsgPtr->toString() );
+}
+
+/* ########################################################################## */
+/* ########################################################################## */
+
+void    ProtocolManager::sendPeriodicMessages(void)
+{
+    for(uint8_t i = 0 ; i < this->m_periodicMessagesCount ; ++i)
+    {
+        this->sendMessage( this->m_periodicMessagesList[i] );
+    }
 }
 
 /* ########################################################################## */

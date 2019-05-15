@@ -6,6 +6,8 @@
 /* Project includes */
 #include "hardware_defines.h"
 #include "variables_globales.h"
+#include "comm/protocol/ProtocolManager.h"
+#include "comm/protocol/messages/AMBTMP.h"
 #include "display/FSMContext.h"
 
 
@@ -14,10 +16,23 @@
 /*
  *  Forward declarations
  */
+void    setup_commProtocol(void);
 void    setup_parameters(void);
 void    setup_pins(void);
 void    setup_serial(void);
 void    setup_timer1(void);
+
+/* ########################################################################## */
+/* ########################################################################## */
+
+void    setup_commProtocol(void)
+{
+    Comm::ProtocolManager::Instance()->addPeriodicMessage(
+                Comm::Messages::AMBTMP::Instance() );
+
+    Comm::ProtocolManager::Instance()->addPeriodicMessage(
+                Comm::Messages::BATTMP::Instance() );
+}
 
 /* ########################################################################## */
 /* ########################################################################## */
@@ -36,6 +51,9 @@ void    setup(void)
 
     /* Initialize the display by creating the FSM singleton instance */
     Display::FSMContext::Instance();
+
+
+    setup_commProtocol();
 
 
     /* This shall be done at last as it enables interrupts */
