@@ -61,9 +61,9 @@ void    FSMStateView_CurrCharge::on_button_pressed(const Keypad::TeButtonsID &pB
             break;
 
 
-        case    Keypad::BUTTON_UP:
-            FSMContext::Instance()->changeState(
-                        FSMStateMainMenu_View::Instance() );
+//        case    Keypad::BUTTON_UP:
+//            FSMContext::Instance()->changeState(
+//                        FSMStateMainMenu_View::Instance() );
 
 
         default:
@@ -99,8 +99,7 @@ void    FSMStateView_CurrCharge::on_state_exit(void)
 
 void    FSMStateView_CurrCharge::update_1s(void)
 {
-    displayOnLCD(g_sensors.temperature.temperature_degC(), 0, 1, 2); ///////////// NEED g_sensors.current.getCurrentLoad_Amp(); /////////////
-    displayOnLCD((char*)" C          ");
+    displayOnLCD((char*)"?? C          ");
 }
 
 /* ########################################################################## */

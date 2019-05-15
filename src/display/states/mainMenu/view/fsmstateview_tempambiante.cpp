@@ -47,7 +47,7 @@ void    FSMStateView_TempAmbiante::on_button_pressed(const Keypad::TeButtonsID &
     {
         case    Keypad::BUTTON_LEFT:
             FSMContext::Instance()->changeState(
-                        FSMStateView_PercentageLoadBatt::Instance() );
+                        FSMStateView_Back::Instance() );
             break;
 
 
@@ -58,9 +58,9 @@ void    FSMStateView_TempAmbiante::on_button_pressed(const Keypad::TeButtonsID &
 
 
 
-        case    Keypad::BUTTON_UP:
-            FSMContext::Instance()->changeState(
-                        FSMStateMainMenu_View::Instance());
+//        case    Keypad::BUTTON_UP:
+//            FSMContext::Instance()->changeState(
+//                        FSMStateMainMenu_View::Instance());
 
 
         default:
@@ -86,8 +86,6 @@ void    FSMStateView_TempAmbiante::on_state_enter(void)
 
 void    FSMStateView_TempAmbiante::on_state_exit(void)
 {
-    displayOnLCD((char*)"leaving state", 0, 0);
-    displayOnLCD((char*)"TempAmb", 0, 1);
     return;
 }
 
@@ -97,7 +95,7 @@ void    FSMStateView_TempAmbiante::on_state_exit(void)
 void    FSMStateView_TempAmbiante::update_1s(void)
 {
     displayOnLCD(g_sensors.temperature.temperature_degC(), 0, 1, 2);
-    displayOnLCD((char*)" C          " );
+    displayOnLCD((char*)" *C          " );
 }
 
 /* ########################################################################## */

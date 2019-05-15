@@ -52,9 +52,9 @@ void    FSMStateView_Voltage::on_button_pressed(const Keypad::TeButtonsID &pButt
             break;
 
 
-        case    Keypad::BUTTON_UP:
-            FSMContext::Instance()->changeState(
-                        FSMStateMainMenu_View::Instance());
+//        case    Keypad::BUTTON_UP:
+//            FSMContext::Instance()->changeState(
+//                        FSMStateMainMenu_View::Instance());
 
 
         default:
@@ -70,7 +70,8 @@ void    FSMStateView_Voltage::on_state_enter(void)
     Serial.println( "Entering FSMStateView_Voltage." );
     Display::g_LCD.clear();
 
-    displayOnLCD("< Voltage Batt >", 0, 0);
+    g_LCD.setCursor(0,0);
+    g_LCD.print("< Voltage Batt >");
 
     this->update_1s();
 }
@@ -80,9 +81,7 @@ void    FSMStateView_Voltage::on_state_enter(void)
 
 void    FSMStateView_Voltage::on_state_exit(void)
 {
-    displayOnLCD((char*)"leaving state", 0, 0);
-    displayOnLCD((char*)"Voltage Batt", 0, 1);
-    return;
+    /* nothing to do */
 }
 
 /* ########################################################################## */
@@ -90,45 +89,8 @@ void    FSMStateView_Voltage::on_state_exit(void)
 
 void    FSMStateView_Voltage::update_1s(void)
 {
-    displayOnLCD((char*)"?? C          ");
-}
-
-/* ########################################################################## */
-/* ########################################################################## */
-
-/* @brief returns 1 if it successfully displayed on the LCD, else 0
-*/
-int     FSMStateView_Voltage::displayOnLCD(const char *data)
-{
-    Display::g_LCD.print(data);
-
-    return 1;
-}
-
-/* ########################################################################## */
-/* ########################################################################## */
-
-/* @brief returns 1 if it successfully displayed on the LCD, else 0
-*/
-int     FSMStateView_Voltage::displayOnLCD(const char* data, int posX, int posY)
-{
-    Display::g_LCD.setCursor(posX, posY);
-    Display::g_LCD.print(data);
-
-    return 1;
-}
-
-/* ########################################################################## */
-/* ########################################################################## */
-
-/* @brief returns 1 if it successfully displayed on the LCD, else 0
-*/
-int     FSMStateView_Voltage::displayOnLCD(const char* data, int posX, int posY, int a)
-{
-    Display::g_LCD.setCursor(posX, posY);
-    Display::g_LCD.print(data);
-
-    return 1;
+    g_LCD.setCursor(5,1);
+    g_LCD.print("?? C          ");
 }
 
 /* ########################################################################## */

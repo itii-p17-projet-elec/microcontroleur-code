@@ -11,6 +11,7 @@
 #include "display/FSMContext.h"
 
 #include "../FSMStateMainMenu_View.h"
+#include "fsmstateview_percentageloadbatt.h"
 #include "fsmstateview_tempambiante.h"
 
 
@@ -40,7 +41,7 @@ void    FSMStateView_Back::on_button_pressed(const Keypad::TeButtonsID &pButtonI
     {
         case    Keypad::BUTTON_LEFT:
             FSMContext::Instance()->changeState(
-                        FSMStateView_TempAmbiante::Instance() );
+                        FSMStateView_PercentageLoadBatt::Instance() );
             break;
 
 

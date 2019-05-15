@@ -58,9 +58,9 @@ void    FSMStateView_CurrDecharge::on_button_pressed(const Keypad::TeButtonsID &
             break;
 
 
-        case    Keypad::BUTTON_UP:
-            FSMContext::Instance()->changeState(
-                        FSMStateMainMenu_View::Instance());
+//        case    Keypad::BUTTON_UP:
+//            FSMContext::Instance()->changeState(
+//                        FSMStateMainMenu_View::Instance());
 
 
         default:
@@ -86,9 +86,7 @@ void    FSMStateView_CurrDecharge::on_state_enter(void)
 
 void    FSMStateView_CurrDecharge::on_state_exit(void)
 {
-    displayOnLCD((char*)"leaving state", 0, 0);
-    displayOnLCD((char*)"Curr Decharge", 0, 1);
-    return;
+    /* Nothing to do */
 }
 
 /* ########################################################################## */
@@ -96,8 +94,7 @@ void    FSMStateView_CurrDecharge::on_state_exit(void)
 
 void    FSMStateView_CurrDecharge::update_1s(void)
 {
-    displayOnLCD(g_sensors.temperature.temperature_degC(), 0, 1, 2); ///////////// NEED g_sensors.current.getCurrentDeload_Amp(); /////////////
-    displayOnLCD((char*)" C          ");
+    displayOnLCD((char*)"?? C          ");
 }
 
 /* ########################################################################## */

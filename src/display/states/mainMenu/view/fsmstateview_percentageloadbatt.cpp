@@ -56,13 +56,13 @@ void    FSMStateView_PercentageLoadBatt::on_button_pressed(const Keypad::TeButto
 
         case    Keypad::BUTTON_RIGHT:
             FSMContext::Instance()->changeState(
-                        FSMStateView_TempAmbiante::Instance() );
+                        FSMStateView_Back::Instance() );
             break;
 
 
-        case    Keypad::BUTTON_UP:
-            FSMContext::Instance()->changeState(
-                        FSMStateMainMenu_View::Instance());
+//        case    Keypad::BUTTON_UP:
+//            FSMContext::Instance()->changeState(
+//                        FSMStateMainMenu_View::Instance());
 
 
         default:
@@ -78,7 +78,8 @@ void    FSMStateView_PercentageLoadBatt::on_state_enter(void)
     Serial.println( "Entering FSMStateView_PercentageLoadBatt." );
     Display::g_LCD.clear();
 
-    displayOnLCD("< Voltage Batt >", 0, 0);
+    g_LCD.setCursor(0, 0);
+    g_LCD.print("< Batt load pc >");
 
     this->update_1s();
 }
@@ -88,9 +89,7 @@ void    FSMStateView_PercentageLoadBatt::on_state_enter(void)
 
 void    FSMStateView_PercentageLoadBatt::on_state_exit(void)
 {
-    displayOnLCD((char*)"leaving state", 0, 0);
-    displayOnLCD((char*)"Percent LoadBatt", 0, 1);
-    return;
+    /* Nothing to do */
 }
 
 /* ########################################################################## */
@@ -98,44 +97,8 @@ void    FSMStateView_PercentageLoadBatt::on_state_exit(void)
 
 void    FSMStateView_PercentageLoadBatt::update_1s(void)
 {
-    displayOnLCD(" ??? C          ");
-}
-
-/* ########################################################################## */
-/* ########################################################################## */
-
-/* @brief returns 1 if it successfully displayed on the LCD, else 0
-*/
-int     FSMStateView_PercentageLoadBatt::displayOnLCD(const char* data)
-{
-    Display::g_LCD.print(data);
-    return 1;
-}
-
-/* ########################################################################## */
-/* ########################################################################## */
-
-/* @brief returns 1 if it successfully displayed on the LCD, else 0
-*/
-int     FSMStateView_PercentageLoadBatt::displayOnLCD(const char* data, int posX, int posY)
-{
-    Display::g_LCD.setCursor(posX, posY);
-    Display::g_LCD.print(data);
-
-    return 1;
-}
-
-/* ########################################################################## */
-/* ########################################################################## */
-
-/* @brief returns 1 if it successfully displayed on the LCD, else 0
-*/
-int     FSMStateView_PercentageLoadBatt::displayOnLCD(const char* data, int posX, int posY, int a)
-{
-    Display::g_LCD.setCursor(posX, posY);
-    Display::g_LCD.print(data);
-
-    return 1;
+    g_LCD.setCursor(5,1);
+    g_LCD.print("?? C          ");
 }
 
 /* ########################################################################## */
