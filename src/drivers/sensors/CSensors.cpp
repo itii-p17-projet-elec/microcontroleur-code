@@ -30,7 +30,7 @@ void    CSensors::initialize(void)
 
 void    CSensors::update(void)
 {
-    if( this->temperature.measure() != 0 )
+    if( this->temperature.measure() != true )
     {
         Serial.print(__PRETTY_FUNCTION__);
         Serial.print(" :: WARN : An error occured while updating"
