@@ -30,11 +30,28 @@ void    CSensors::initialize(void)
 
 void    CSensors::update(void)
 {
-    if( this->temperature.readData() != 0 )
+    if( this->temperature.measure() != 0 )
     {
         Serial.print(__PRETTY_FUNCTION__);
-        Serial.println(" :: WARN : An error occured while updating"
-                       " AM2320 sensor data.");
+        Serial.print(" :: WARN : An error occured while updating"
+                       " AM2320 sensor data : ");
+
+        switch (this->temperature.getErrorCode())
+        {
+            case 1:
+                Serial.println("Sensor is offline");
+                break;
+
+
+            case 2:
+                Serial.println("CRC validation failed.");
+                break;
+
+
+            default:
+                Serial.println("Unknown error!");
+                break;
+        }
     }
 }
 
