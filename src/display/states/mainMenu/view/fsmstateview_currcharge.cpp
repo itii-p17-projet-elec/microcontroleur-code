@@ -99,7 +99,8 @@ void    FSMStateView_CurrCharge::on_state_exit(void)
 
 void    FSMStateView_CurrCharge::update_1s(void)
 {
-    displayOnLCD((char*)"?? C          ");
+    displayOnLCD(g_sensors.batteryInputCurrent_mA(), 0, 1, 2);
+    displayOnLCD((char*)" mA          " );
 }
 
 /* ########################################################################## */

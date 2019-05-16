@@ -95,11 +95,11 @@ void    FSMStateView_TempBatt::on_state_exit(void)
 
 void    FSMStateView_TempBatt::update_1s(void)
 {
-    displayOnLCD((char*)"?? C          ");
+    displayOnLCD(g_sensors.batteryTemperature_c(), 0, 1, 2);
+    displayOnLCD((char*)" *C          " );
 }
 
-
-
 /* ########################################################################## */
 /* ########################################################################## */
+
 }   /*< namespace Display */
