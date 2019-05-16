@@ -6,7 +6,7 @@
 /* Project includes */
 #include "hardware_defines.h"
 #include "variables_globales.h"
-#include "comm/interface/IfaceSerial.h"
+#include "comm/interface/IfaceLoRa.h"
 #include "comm/protocol/ProtocolManager.h"
 #include "comm/protocol/messages/AMBTMP.h"
 #include "comm/protocol/messages/BATIIN.h"
@@ -76,7 +76,7 @@ void    setup_commProtocol(void)
      *  Define the communication interface on which to send messages
      */
     Comm::ProtocolManager::Instance()->setInterface(
-                Comm::Interface::IfaceSerial::Instance() );
+                Comm::Interface::IfaceLoRa::Instance() );
 
 
     /*

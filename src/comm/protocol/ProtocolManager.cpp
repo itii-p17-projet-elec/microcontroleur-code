@@ -79,6 +79,7 @@ void    ProtocolManager::setInterface(
     if(pInterfacePtr != nullptr)
     {
         this->m_interfacePtr    = pInterfacePtr;
+        this->m_interfacePtr->initialize();
     }
 }
 
