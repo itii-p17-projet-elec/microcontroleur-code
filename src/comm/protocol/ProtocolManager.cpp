@@ -24,7 +24,7 @@ ProtocolManager::ProtocolManager(void)
 /* ########################################################################## */
 
 void    ProtocolManager::addPeriodicMessage(
-                const Messages::AbstractMessage*    pMsgPtr)
+                Messages::AbstractMessage*  pMsgPtr)
 {
     if( this->m_periodicMessagesCount >= C_PERIODICMSG_MAXCOUNT )
     {
@@ -53,6 +53,7 @@ void    ProtocolManager::sendPeriodicMessages(void)
 {
     for(uint8_t i = 0 ; i < this->m_periodicMessagesCount ; ++i)
     {
+        this->m_periodicMessagesList[i]->setAlert(false);
         this->sendMessage( this->m_periodicMessagesList[i] );
     }
 }
