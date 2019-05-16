@@ -44,6 +44,12 @@ void    EEPROMMgmt::loadData(void)
             +=  EEPROM.read(lBytePos++);
 
 
+    g_parameters.m_data.ambientTemperature_alertMin
+            +=  EEPROM.read(lBytePos++);
+    g_parameters.m_data.ambientTemperature_alertMax
+            +=  EEPROM.read(lBytePos++);
+
+
     // Détection d'une mémoire non initialisée
     bool    lEepromInitialized
             = g_parameters.m_data.magic == CParameters::C_STRUCT_MAGIC;
@@ -85,6 +91,11 @@ void    EEPROMMgmt::saveData(void)
     this->write16(lBytePos,
                   g_parameters.m_data.sensors_periodicTransmissionDelay_s);
     lBytePos    += 2;
+
+    this->write8(lBytePos,  g_parameters.m_data.ambientTemperature_alertMin);
+    lBytePos    += 1;
+    this->write8(lBytePos,  g_parameters.m_data.ambientTemperature_alertMax);
+    lBytePos    += 1;
 #endif
 }
 

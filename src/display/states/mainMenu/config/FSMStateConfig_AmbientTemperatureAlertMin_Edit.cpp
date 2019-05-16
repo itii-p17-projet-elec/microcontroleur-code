@@ -1,17 +1,15 @@
 /* Corresponding header inclusion */
-#include "FSMStateConfig_EmissionDelay_Edit.h"
+#include "FSMStateConfig_AmbientTemperatureAlertMin_Edit.h"
 
 /* System includes */
 
 /* Libraries includes */
-#include <Arduino.h>
 
 /* Project includes */
 #include "variables_globales.h"
 #include "display/FSMContext.h"
 
-#include "../FSMStateMainMenu_Config.h"
-#include "FSMStateConfig_EmissionDelay.h"
+#include "FSMStateConfig_AmbientTemperatureAlertMin.h"
 
 
 namespace Display {
@@ -19,9 +17,9 @@ namespace Display {
 /* ########################################################################## */
 /* ########################################################################## */
 
-FSMStateConfig_EmissionDelay_Edit::FSMStateConfig_EmissionDelay_Edit(void)
+FSMStateConfig_AmbientTemperatureAlertMin_Edit::FSMStateConfig_AmbientTemperatureAlertMin_Edit(void)
     :   FSMAbstractState()
-    ,   m_editedValue_s( -1 )
+    ,   m_editedValue_degC( -1 )
     ,   m_fastScroll(false)
 {
 
@@ -30,11 +28,11 @@ FSMStateConfig_EmissionDelay_Edit::FSMStateConfig_EmissionDelay_Edit(void)
 /* ########################################################################## */
 /* ########################################################################## */
 
-void    FSMStateConfig_EmissionDelay_Edit::on_button_pressed(const Keypad::TeButtonsID &pButtonID)
+void    FSMStateConfig_AmbientTemperatureAlertMin_Edit::on_button_pressed(const Keypad::TeButtonsID &pButtonID)
 {
     FSMAbstractState::on_button_pressed(pButtonID);
 
-    Serial.print("FSMStateConfig_EmissionDelay_Edit : Pressed button : ");
+    Serial.print("FSMStateConfig_AmbientTemperatureAlertMin_Edit : Pressed button : ");
     Serial.println( Keypad::buttonName(pButtonID) );
 
 
@@ -50,18 +48,18 @@ void    FSMStateConfig_EmissionDelay_Edit::on_button_pressed(const Keypad::TeBut
 
         case    Keypad::BUTTON_SELECT:
             FSMContext::Instance()->changeState(
-                        FSMStateConfig_EmissionDelay::Instance() );
+                        FSMStateConfig_AmbientTemperatureAlertMin::Instance() );
             break;
 
 
         case Keypad::BUTTON_DOWN:
-                this->m_editedValue_s   -= C_INCREMENT_SLOW_s;
+                this->m_editedValue_degC   -= C_INCREMENT_degC;
                 this->updateDisplay();
             break;
 
 
         case Keypad::BUTTON_UP:
-                this->m_editedValue_s   += C_INCREMENT_SLOW_s;
+                this->m_editedValue_degC   += C_INCREMENT_degC;
                 this->updateDisplay();
             break;
 
@@ -74,16 +72,16 @@ void    FSMStateConfig_EmissionDelay_Edit::on_button_pressed(const Keypad::TeBut
 /* ########################################################################## */
 /* ########################################################################## */
 
-void    FSMStateConfig_EmissionDelay_Edit::on_state_enter(void)
+void    FSMStateConfig_AmbientTemperatureAlertMin_Edit::on_state_enter(void)
 {
-    Serial.println( "Entering FSMStateConfig_EmissionDelay_Edit." );
+    Serial.println( "Entering FSMStateConfig_AmbientTemperatureAlertMin_Edit." );
     g_LCD.clear();
 
-    this->m_editedValue_s
-            = g_parameters.m_data.sensors_periodicTransmissionDelay_s;
+    this->m_editedValue_degC
+            = g_parameters.m_data.ambientTemperature_alertMin;
 
     g_LCD.setCursor(0,0);
-    g_LCD.print( "  Emit. period  " );
+    g_LCD.print( "AMBTMP Alrt Min " );
 
     this->updateDisplay();
 }
@@ -91,17 +89,17 @@ void    FSMStateConfig_EmissionDelay_Edit::on_state_enter(void)
 /* ########################################################################## */
 /* ########################################################################## */
 
-void    FSMStateConfig_EmissionDelay_Edit::on_state_exit(void)
+void    FSMStateConfig_AmbientTemperatureAlertMin_Edit::on_state_exit(void)
 {
-    g_parameters.m_data.sensors_periodicTransmissionDelay_s
-            = this->m_editedValue_s;
+    g_parameters.m_data.ambientTemperature_alertMin
+            = this->m_editedValue_degC;
     g_EEPROM.saveData();
 }
 
 /* ########################################################################## */
 /* ########################################################################## */
 
-void    FSMStateConfig_EmissionDelay_Edit::update_1s(void)
+void    FSMStateConfig_AmbientTemperatureAlertMin_Edit::update_1s(void)
 {
     if(     g_keypad.lastPressedButton() != Keypad::BUTTON_NONE
         &&  g_keypad.currentlyPressedButton() == g_keypad.lastPressedButton() )
@@ -144,7 +142,7 @@ void    FSMStateConfig_EmissionDelay_Edit::update_1s(void)
 /* ########################################################################## */
 /* ########################################################################## */
 
-void    FSMStateConfig_EmissionDelay_Edit::update_50ms(void)
+void    FSMStateConfig_AmbientTemperatureAlertMin_Edit::update_50ms(void)
 {
     if(     g_keypad.lastPressedButton() != Keypad::BUTTON_NONE
         &&  g_keypad.currentlyPressedButton() == g_keypad.lastPressedButton()
@@ -153,12 +151,12 @@ void    FSMStateConfig_EmissionDelay_Edit::update_50ms(void)
         switch( g_keypad.lastPressedButton() )
         {
             case Keypad::BUTTON_DOWN:
-                this->m_editedValue_s   -= C_INCREMENT_SLOW_s;
+                this->m_editedValue_degC   -= C_INCREMENT_degC;
                 break;
 
 
             case Keypad::BUTTON_UP:
-                this->m_editedValue_s   += C_INCREMENT_SLOW_s;
+                this->m_editedValue_degC   += C_INCREMENT_degC;
                 break;
 
 
@@ -178,27 +176,27 @@ void    FSMStateConfig_EmissionDelay_Edit::update_50ms(void)
 /* ########################################################################## */
 /* ########################################################################## */
 
-void    FSMStateConfig_EmissionDelay_Edit::updateDisplay(void)
+void    FSMStateConfig_AmbientTemperatureAlertMin_Edit::updateDisplay(void)
 {
     this->verifyValue();
 
     g_LCD.setCursor(5,1);
-    g_LCD.print( this->m_editedValue_s );
-    g_LCD.print( " s                 " );
+    g_LCD.print( this->m_editedValue_degC );
+    g_LCD.print( " deg C                 " );
 }
 
 /* ########################################################################## */
 /* ########################################################################## */
 
-void    FSMStateConfig_EmissionDelay_Edit::verifyValue(void)
+void    FSMStateConfig_AmbientTemperatureAlertMin_Edit::verifyValue(void)
 {
-    if(this->m_editedValue_s < C_VALUE_MIN)
+    if(this->m_editedValue_degC < C_VALUE_MIN)
     {
-        this->m_editedValue_s   = C_VALUE_MIN;
+        this->m_editedValue_degC   = C_VALUE_MIN;
     }
-    else if(this->m_editedValue_s > C_VALUE_MAX)
+    else if(this->m_editedValue_degC > C_VALUE_MAX)
     {
-        this->m_editedValue_s   = C_VALUE_MAX;
+        this->m_editedValue_degC   = C_VALUE_MAX;
     }
 }
 

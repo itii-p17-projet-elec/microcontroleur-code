@@ -11,6 +11,7 @@
 #include "display/FSMContext.h"
 
 #include "../FSMStateMainMenu_Config.h"
+#include "FSMStateConfig_AmbientTemperatureAlertMin.h"
 #include "FSMStateConfig_EmissionDelay.h"
 
 
@@ -40,7 +41,7 @@ void    FSMStateConfig_Back::on_button_pressed(const Keypad::TeButtonsID &pButto
     {
         case    Keypad::BUTTON_LEFT:
             FSMContext::Instance()->changeState(
-                        FSMStateConfig_EmissionDelay::Instance() );
+                        FSMStateConfig_AmbientTemperatureAlertMin::Instance() );
             break;
 
 

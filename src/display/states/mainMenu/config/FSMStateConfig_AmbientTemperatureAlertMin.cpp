@@ -1,5 +1,5 @@
 /* Corresponding header inclusion */
-#include "FSMStateConfig_EmissionDelay.h"
+#include "FSMStateConfig_AmbientTemperatureAlertMin.h"
 
 /* System includes */
 
@@ -10,10 +10,10 @@
 #include "variables_globales.h"
 #include "display/FSMContext.h"
 
-#include "../FSMStateMainMenu_Config.h"
-#include "FSMStateConfig_AmbientTemperatureAlertMin.h"
+
+#include "FSMStateConfig_AmbientTemperatureAlertMin_Edit.h"
 #include "FSMStateConfig_Back.h"
-#include "FSMStateConfig_EmissionDelay_Edit.h"
+#include "FSMStateConfig_EmissionDelay.h"
 
 
 namespace Display {
@@ -21,8 +21,7 @@ namespace Display {
 /* ########################################################################## */
 /* ########################################################################## */
 
-FSMStateConfig_EmissionDelay::FSMStateConfig_EmissionDelay(void)
-    :   FSMAbstractState()
+FSMStateConfig_AmbientTemperatureAlertMin::FSMStateConfig_AmbientTemperatureAlertMin(void)
 {
 
 }
@@ -30,11 +29,11 @@ FSMStateConfig_EmissionDelay::FSMStateConfig_EmissionDelay(void)
 /* ########################################################################## */
 /* ########################################################################## */
 
-void    FSMStateConfig_EmissionDelay::on_button_pressed(const Keypad::TeButtonsID &pButtonID)
+void    FSMStateConfig_AmbientTemperatureAlertMin::on_button_pressed(const Keypad::TeButtonsID &pButtonID)
 {
     FSMAbstractState::on_button_pressed(pButtonID);
 
-    Serial.print("FSMStateConfig_EmissionDelay : Pressed button : ");
+    Serial.print("FSMStateConfig_AmbientTemperatureAlertMin : Pressed button : ");
     Serial.println( Keypad::buttonName(pButtonID) );
 
 
@@ -42,19 +41,19 @@ void    FSMStateConfig_EmissionDelay::on_button_pressed(const Keypad::TeButtonsI
     {
         case    Keypad::BUTTON_LEFT:
             FSMContext::Instance()->changeState(
-                        FSMStateConfig_Back::Instance() );
+                        FSMStateConfig_EmissionDelay::Instance() );
             break;
 
 
         case    Keypad::BUTTON_RIGHT:
             FSMContext::Instance()->changeState(
-                        FSMStateConfig_AmbientTemperatureAlertMin::Instance() );
+                        FSMStateConfig_Back::Instance() );
             break;
 
 
         case    Keypad::BUTTON_SELECT:
             FSMContext::Instance()->changeState(
-                        FSMStateConfig_EmissionDelay_Edit::Instance() );
+                        FSMStateConfig_AmbientTemperatureAlertMin_Edit::Instance() );
             break;
 
 
@@ -74,23 +73,23 @@ void    FSMStateConfig_EmissionDelay::on_button_pressed(const Keypad::TeButtonsI
 /* ########################################################################## */
 /* ########################################################################## */
 
-void    FSMStateConfig_EmissionDelay::on_state_enter(void)
+void    FSMStateConfig_AmbientTemperatureAlertMin::on_state_enter(void)
 {
-    Serial.println( "Entering FSMStateConfig_EmissionDelay." );
+    Serial.println( "Entering FSMStateConfig_AmbientTemperatureAlertMin." );
     g_LCD.clear();
 
     g_LCD.setCursor(0,0);
-    g_LCD.print( "< Emit. period >" );
+    g_LCD.print( "< AMBTMP A. Min>" );
 
     g_LCD.setCursor(5,1);
-    g_LCD.print( g_parameters.m_data.sensors_periodicTransmissionDelay_s );
-    g_LCD.print( " s          " );
+    g_LCD.print( g_parameters.m_data.ambientTemperature_alertMin );
+    g_LCD.print( " deg C          " );
 }
 
 /* ########################################################################## */
 /* ########################################################################## */
 
-void    FSMStateConfig_EmissionDelay::on_state_exit(void)
+void    FSMStateConfig_AmbientTemperatureAlertMin::on_state_exit(void)
 {
     /* Nothing to do */
 }
@@ -98,7 +97,7 @@ void    FSMStateConfig_EmissionDelay::on_state_exit(void)
 /* ########################################################################## */
 /* ########################################################################## */
 
-void    FSMStateConfig_EmissionDelay::update_1s(void)
+void    FSMStateConfig_AmbientTemperatureAlertMin::update_1s(void)
 {
     /* Nothing to do */
 }
@@ -106,4 +105,4 @@ void    FSMStateConfig_EmissionDelay::update_1s(void)
 /* ########################################################################## */
 /* ########################################################################## */
 
-}   /*< namespace Display */
+} // namespace Display

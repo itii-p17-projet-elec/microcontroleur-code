@@ -8,6 +8,9 @@
 #include <Arduino.h>
 
 /* Project includes */
+#include "variables_globales.h"
+#include "comm/protocol/ProtocolManager.h"
+#include "comm/protocol/messages/AMBTMP.h"
 
 
 #define C_SENSOR_DEFAULTVALUE_F         (-999.99)
@@ -204,6 +207,20 @@ void    CSensors::update(void)
             = this->m_INA3221.getBusVoltage_V(C_SENSOR_INA3321_CH_OUTPUT)
             + ( this->m_INA3221.getShuntVoltage_mV(
                     C_SENSOR_INA3321_CH_OUTPUT) / 1000.0);
+
+
+    /*
+     *  Verify alert triggers
+     */
+    if(     (   this->ambientTemperature_c()
+            <=  g_parameters.m_data.ambientTemperature_alertMin)
+        ||  (   this->ambientTemperature_c()
+            >=  g_parameters.m_data.ambientTemperature_alertMax) )
+    {
+        Comm::Messages::AMBTMP::Instance()->setAlert(true);
+        Comm::ProtocolManager::Instance()
+                ->sendMessage(Comm::Messages::AMBTMP::Instance());
+    }
 }
 
 /* ########################################################################## */

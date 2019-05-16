@@ -53,6 +53,9 @@ public:
          */
         uint16_t    sensors_periodicTransmissionDelay_s;
 
+        int8_t      ambientTemperature_alertMin;
+        int8_t      ambientTemperature_alertMax;
+
     }   m_data;
 
 
