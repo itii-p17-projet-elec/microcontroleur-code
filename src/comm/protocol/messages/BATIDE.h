@@ -1,46 +1,44 @@
-#ifndef CSENSORS_H
-#define CSENSORS_H
+#ifndef BATIDE_H
+#define BATIDE_H
 
 /* Inherited classes */
-
+#include "AbstractMessage.h"
+#include "common/TSingleton.hpp"
 
 /* System includes */
 
 /* Libraries includes */
 
 /* Project includes */
-#include "drivers/sensors/AM2320.h"
+
+
+namespace Comm {
+namespace Messages {
+
 
 /* ########################################################################## */
 /* ########################################################################## */
 
-class   CSensors
+class   BATIDE
+        :   public  AbstractMessage
+        ,   public  TSingleton<BATIDE>
 {
+    friend class    TSingleton<BATIDE>;
+
 public:
-
-    CSensors(void);
-
-
-    void    initialize(void);
-
-    void    update(void);
-
-
-
 protected:
+
+    virtual String  generatePayload(void) const;
+
+
+
 private:
 
+    BATIDE(void);
+
 
 
 public:
-
-    /**
-     *  @brief  This object represents the external temperature sensor.
-     */
-    AM2320  temperature;
-
-
-
 protected:
 private:
 
@@ -49,4 +47,7 @@ private:
 /* ########################################################################## */
 /* ########################################################################## */
 
-#endif  /*< CSENSORS_H */
+}   /*< namespace Messages */
+}   /*< namespace Comm */
+
+#endif  /*< BATIDE_H */

@@ -6,6 +6,11 @@
 /* Project includes */
 #include "hardware_defines.h"
 #include "variables_globales.h"
+#include "comm/protocol/ProtocolManager.h"
+#include "comm/protocol/messages/AMBTMP.h"
+#include "comm/protocol/messages/BATICH.h"
+#include "comm/protocol/messages/BATIDE.h"
+#include "comm/protocol/messages/BATTMP.h"
 #include "display/FSMContext.h"
 
 
@@ -14,9 +19,29 @@
 /*
  *  Forward declarations
  */
+void    setup_commProtocol(void);
+void    setup_parameters(void);
 void    setup_pins(void);
 void    setup_serial(void);
 void    setup_timer1(void);
+
+/* ########################################################################## */
+/* ########################################################################## */
+
+void    setup_commProtocol(void)
+{
+    Comm::ProtocolManager::Instance()->addPeriodicMessage(
+                Comm::Messages::AMBTMP::Instance() );
+
+    Comm::ProtocolManager::Instance()->addPeriodicMessage(
+                Comm::Messages::BATICH::Instance() );
+
+    Comm::ProtocolManager::Instance()->addPeriodicMessage(
+                Comm::Messages::BATIDE::Instance() );
+
+    Comm::ProtocolManager::Instance()->addPeriodicMessage(
+                Comm::Messages::BATTMP::Instance() );
+}
 
 /* ########################################################################## */
 /* ########################################################################## */
@@ -27,6 +52,8 @@ void    setup(void)
 
     setup_serial();
 
+    setup_parameters();
+
 
     g_sensors.initialize();
 
@@ -35,9 +62,21 @@ void    setup(void)
     Display::FSMContext::Instance();
 
 
+    setup_commProtocol();
+
+
     /* This shall be done at last as it enables interrupts */
     setup_timer1();
     digitalWrite(C_PIN_LED_ACTIVITY, LOW);
+}
+
+/* ########################################################################## */
+/* ########################################################################## */
+
+void    setup_parameters(void)
+{
+    g_parameters.initialize();
+    g_EEPROM.loadData();
 }
 
 /* ########################################################################## */
@@ -60,7 +99,7 @@ void    setup_pins(void)
 void    setup_serial(void)
 {
     //Initialize serial and wait for port to open:
-    Serial.begin(9600);
+    Serial.begin(115200);
     while (!Serial)
     {
         ; // wait for serial port to connect. Needed for Leonardo only

@@ -1,18 +1,21 @@
 /* Corresponding header inclusion */
-#include "CSensors.h"
+#include "CParameters.h"
 
 /* System includes */
 
 /* Libraries includes */
-#include <Arduino.h>
 
 /* Project includes */
 
+/* ########################################################################## */
+/* ########################################################################## */
+
+
 
 /* ########################################################################## */
 /* ########################################################################## */
 
-CSensors::CSensors(void)
+CParameters::CParameters(void)
 {
 
 }
@@ -20,39 +23,12 @@ CSensors::CSensors(void)
 /* ########################################################################## */
 /* ########################################################################## */
 
-void    CSensors::initialize(void)
+void    CParameters::initialize()
 {
-    this->temperature.begin();
-}
+    this->m_data.magic          = C_STRUCT_MAGIC;
+    this->m_data.struct_version = C_STRUCT_VERSION;
 
-/* ########################################################################## */
-/* ########################################################################## */
-
-void    CSensors::update(void)
-{
-    if( this->temperature.measure() != true )
-    {
-        Serial.print(__PRETTY_FUNCTION__);
-        Serial.print(" :: WARN : An error occured while updating"
-                       " AM2320 sensor data : ");
-
-        switch (this->temperature.getErrorCode())
-        {
-            case 1:
-                Serial.println("Sensor is offline");
-                break;
-
-
-            case 2:
-                Serial.println("CRC validation failed.");
-                break;
-
-
-            default:
-                Serial.println("Unknown error!");
-                break;
-        }
-    }
+    this->m_data.sensors_periodicTransmissionDelay_s    = 10;
 }
 
 /* ########################################################################## */

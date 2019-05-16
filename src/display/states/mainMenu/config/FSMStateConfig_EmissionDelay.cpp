@@ -1,5 +1,5 @@
 /* Corresponding header inclusion */
-#include "FSMStateDefault.h"
+#include "FSMStateConfig_EmissionDelay.h"
 
 /* System includes */
 
@@ -7,8 +7,12 @@
 #include <Arduino.h>
 
 /* Project includes */
-#include "../FSMContext.h"
-#include "mainMenu/FSMStateMainMenu_View.h"
+#include "variables_globales.h"
+#include "display/FSMContext.h"
+
+#include "../FSMStateMainMenu_Config.h"
+#include "FSMStateConfig_Back.h"
+#include "FSMStateConfig_EmissionDelay_Edit.h"
 
 
 namespace Display {
@@ -16,8 +20,8 @@ namespace Display {
 /* ########################################################################## */
 /* ########################################################################## */
 
-FSMStateDefault::FSMStateDefault(void)
-    :   m_updatesCount( 0 )
+FSMStateConfig_EmissionDelay::FSMStateConfig_EmissionDelay(void)
+    :   FSMAbstractState()
 {
 
 }
@@ -25,19 +29,39 @@ FSMStateDefault::FSMStateDefault(void)
 /* ########################################################################## */
 /* ########################################################################## */
 
-void    FSMStateDefault::on_button_pressed(const Keypad::TeButtonsID &pButtonID)
+void    FSMStateConfig_EmissionDelay::on_button_pressed(const Keypad::TeButtonsID &pButtonID)
 {
     FSMAbstractState::on_button_pressed(pButtonID);
 
-    Serial.print("StateDefault : Pressed button : ");
+    Serial.print("FSMStateConfig_EmissionDelay : Pressed button : ");
     Serial.println( Keypad::buttonName(pButtonID) );
 
 
     switch( pButtonID )
     {
+        case    Keypad::BUTTON_LEFT:
+            FSMContext::Instance()->changeState(
+                        FSMStateConfig_Back::Instance() );
+            break;
+
+
+        case    Keypad::BUTTON_RIGHT:
+            FSMContext::Instance()->changeState(
+                        FSMStateConfig_Back::Instance() );
+            break;
+
+
         case    Keypad::BUTTON_SELECT:
             FSMContext::Instance()->changeState(
-                        FSMStateMainMenu_View::Instance() );
+                        FSMStateConfig_EmissionDelay_Edit::Instance() );
+            break;
+
+
+        case Keypad::BUTTON_DOWN:
+            break;
+
+
+        case Keypad::BUTTON_UP:
             break;
 
 
@@ -49,31 +73,31 @@ void    FSMStateDefault::on_button_pressed(const Keypad::TeButtonsID &pButtonID)
 /* ########################################################################## */
 /* ########################################################################## */
 
-void    FSMStateDefault::on_state_enter(void)
+void    FSMStateConfig_EmissionDelay::on_state_enter(void)
 {
-    Serial.println( "Entering FSMStateDefault." );
-    g_LCD_backlightValue    = 0xFF;
+    Serial.println( "Entering FSMStateConfig_EmissionDelay." );
     g_LCD.clear();
 
     g_LCD.setCursor(0,0);
-    g_LCD.print( "  ITII-EII-P17" );
+    g_LCD.print( "< Emit. period >" );
 
-    g_LCD.setCursor(0,1);
-    g_LCD.print( "Chargeur solaire" );
+    g_LCD.setCursor(5,1);
+    g_LCD.print( g_parameters.m_data.sensors_periodicTransmissionDelay_s );
+    g_LCD.print( " s          " );
 }
 
 /* ########################################################################## */
 /* ########################################################################## */
 
-void    FSMStateDefault::on_state_exit(void)
+void    FSMStateConfig_EmissionDelay::on_state_exit(void)
 {
-    g_LCD_backlightValue    = 0xFF;
+    /* Nothing to do */
 }
 
 /* ########################################################################## */
 /* ########################################################################## */
 
-void    FSMStateDefault::update_1s(void)
+void    FSMStateConfig_EmissionDelay::update_1s(void)
 {
     /* Nothing to do */
 }

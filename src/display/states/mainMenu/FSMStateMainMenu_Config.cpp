@@ -10,6 +10,7 @@
 #include "../../FSMContext.h"
 #include "FSMStateMainMenu_Back.h"
 #include "FSMStateMainMenu_View.h"
+#include "config/FSMStateConfig_EmissionDelay.h"
 
 
 namespace Display {
@@ -49,7 +50,8 @@ void    FSMStateMainMenu_Config::on_button_pressed(const Keypad::TeButtonsID &pB
 
 
         case    Keypad::BUTTON_SELECT:
-            // TODO
+            FSMContext::Instance()->changeState(
+                        FSMStateConfig_EmissionDelay::Instance() );
             break;
 
 

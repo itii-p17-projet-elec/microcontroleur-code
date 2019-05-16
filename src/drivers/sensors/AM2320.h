@@ -1,63 +1,59 @@
-#ifndef AM2320_H
-#define AM2320_H
-
-/* Inherited classes */
-
-
-/* System includes */
-#include <stdint.h>
-
-/* Libraries includes */
-
-/* Project includes */
-
-/* ########################################################################## */
-/* ########################################################################## */
 /**
- *  @brief The AM2320 class
- *
- *  @see    Datasheet : https://www.mouser.fr/datasheet/2/737/AM2320-1313931.pdf
- */
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+    Copyright 2016 Ratthanan Nalintasnai
+**/
+
+#ifndef AM2303_H
+#define AM2303_H
+
+#include <Arduino.h>
+
+/** Address of AM2320 */
+#define AM2320_ADDR (0x5C)
+
+/** maximum number of bytes that can be read consequtively before sensor splits
+ * out error */
+#define AM2320_MAX_BYTES_READ   (10)
+
+
 class   AM2320
 {
-public:
+    public:
+        AM2320();
 
-    AM2320(uint8_t pI2C_ADDR=I2C_ADDR);
+        // initialize AM2320
+        void begin();
+//        void begin(int sda, int scl);
 
+        bool measure();
 
-    void    begin(void);
+        float getTemperature();
+        float getHumidity();
 
+        int getErrorCode();
 
-    int     readData(void);
+    private:
+        byte _buf[ AM2320_MAX_BYTES_READ ];
+        float _temperature;
+        float _humidity;
+        int _errorCode;
+        void _wake();
+        bool _read_registers(int startAddress, int numByte);
 
-
-    uint8_t i2cAddress(void) const;
-    float   humidity_pc(void) const;
-    float   temperature_degC(void) const;
-
-
-
-protected:
-private:
-
-
-
-public:
-
-    static const uint8_t    I2C_ADDR;
-
-
-
-protected:
-private:
-
-    uint8_t     m_i2c_addr;
-    float       m_humidity_pc;
-    float       m_temperature_degC;
+        unsigned int crc16(byte *byte, unsigned int numByte);
 
 };
 
-/* ########################################################################## */
-/* ########################################################################## */
-
-#endif  /*< AM2320_H */
+#endif

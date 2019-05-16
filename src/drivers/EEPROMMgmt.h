@@ -1,46 +1,45 @@
-#ifndef CSENSORS_H
-#define CSENSORS_H
+#ifndef EEPROMMGMT_H
+#define EEPROMMGMT_H
 
 /* Inherited classes */
 
 
 /* System includes */
+#include <stdint.h>
 
 /* Libraries includes */
 
 /* Project includes */
-#include "drivers/sensors/AM2320.h"
 
 /* ########################################################################## */
 /* ########################################################################## */
 
-class   CSensors
+class   EEPROMMgmt
 {
 public:
 
-    CSensors(void);
+    EEPROMMgmt(void);
 
 
-    void    initialize(void);
-
-    void    update(void);
+    void    loadData(void);
+    void    saveData(void);
 
 
 
 protected:
 private:
 
+    uint8_t     read8(int pAddr);
+    uint16_t    read16(int pAddr);
+    uint32_t    read32(int pAddr);
+
+    void        write8(int pAddr,   const uint8_t&  pData );
+    void        write16(int pAddr,  const uint16_t& pData );
+    void        write32(int pAddr,  const uint32_t& pData );
+
 
 
 public:
-
-    /**
-     *  @brief  This object represents the external temperature sensor.
-     */
-    AM2320  temperature;
-
-
-
 protected:
 private:
 
@@ -49,4 +48,4 @@ private:
 /* ########################################################################## */
 /* ########################################################################## */
 
-#endif  /*< CSENSORS_H */
+#endif  /*< EEPROMMGMT_H */

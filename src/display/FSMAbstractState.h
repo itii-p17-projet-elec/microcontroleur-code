@@ -69,9 +69,12 @@ private:
 
 public:
 protected:
-private:
 
     uint8_t _m_lcdBacklightDimmer;
+
+
+
+private:
 
 };
 

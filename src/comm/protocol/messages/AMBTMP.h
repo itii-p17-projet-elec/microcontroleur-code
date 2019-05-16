@@ -1,46 +1,47 @@
-#ifndef CSENSORS_H
-#define CSENSORS_H
+#ifndef AMBTMP_H
+#define AMBTMP_H
 
 /* Inherited classes */
-
+#include "AbstractMessage.h"
+#include "common/TSingleton.hpp"
 
 /* System includes */
 
 /* Libraries includes */
 
 /* Project includes */
-#include "drivers/sensors/AM2320.h"
+
+
+namespace Comm {
+namespace Messages {
+
 
 /* ########################################################################## */
 /* ########################################################################## */
 
-class   CSensors
+class   AMBTMP
+        :   public  AbstractMessage
+        ,   public  TSingleton<AMBTMP>
 {
+    friend class    TSingleton<AMBTMP>;
+
 public:
-
-    CSensors(void);
-
-
-    void    initialize(void);
-
-    void    update(void);
 
 
 
 protected:
+
+    virtual String  generatePayload(void) const;
+
+
+
 private:
+
+    AMBTMP(void);
 
 
 
 public:
-
-    /**
-     *  @brief  This object represents the external temperature sensor.
-     */
-    AM2320  temperature;
-
-
-
 protected:
 private:
 
@@ -49,4 +50,7 @@ private:
 /* ########################################################################## */
 /* ########################################################################## */
 
-#endif  /*< CSENSORS_H */
+} /*< namespace Messages */
+} /*< namespace Comm */
+
+#endif  /*< AMBTMP_H */
