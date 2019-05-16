@@ -9,6 +9,7 @@
 #include "comm/protocol/ProtocolManager.h"
 #include "comm/protocol/messages/AMBTMP.h"
 #include "comm/protocol/messages/BATICH.h"
+#include "comm/protocol/messages/BATIDE.h"
 #include "comm/protocol/messages/BATTMP.h"
 #include "display/FSMContext.h"
 
@@ -34,6 +35,9 @@ void    setup_commProtocol(void)
 
     Comm::ProtocolManager::Instance()->addPeriodicMessage(
                 Comm::Messages::BATICH::Instance() );
+
+    Comm::ProtocolManager::Instance()->addPeriodicMessage(
+                Comm::Messages::BATIDE::Instance() );
 
     Comm::ProtocolManager::Instance()->addPeriodicMessage(
                 Comm::Messages::BATTMP::Instance() );
