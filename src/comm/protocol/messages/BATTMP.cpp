@@ -6,6 +6,7 @@
 /* Libraries includes */
 
 /* Project includes */
+#include "variables_globales.h"
 
 
 namespace Comm {
@@ -46,9 +47,9 @@ String  BATTMP::generatePayload(void) const
      *  Add "value" field
      */
     retval  += C_FRAME_SEP;
-#if 0
+#if 1
     char    lBuffer[16] = {0};
-    dtostrf(g_sensors.battery_temperature,
+    dtostrf(g_sensors.batteryTemperature_c(),
             4,2,
             lBuffer);
 
