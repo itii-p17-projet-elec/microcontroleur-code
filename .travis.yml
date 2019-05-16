@@ -39,6 +39,7 @@ before_install:
 
 script:
   - make
+  - cd tests/demos/ADS1015 && make
   - cd tests/demos/display-LCD_2_16 && make
   - cd tests/demos/INA3221 && make
 #  - make tests
