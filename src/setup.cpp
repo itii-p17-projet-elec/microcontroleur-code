@@ -12,6 +12,7 @@
 #include "comm/protocol/messages/BATIOU.h"
 #include "comm/protocol/messages/BATTMP.h"
 #include "comm/protocol/messages/BATVIN.h"
+#include "comm/protocol/messages/BATVOU.h"
 #include "display/FSMContext.h"
 
 
@@ -45,6 +46,9 @@ void    setup_commProtocol(void)
 
     Comm::ProtocolManager::Instance()->addPeriodicMessage(
                 Comm::Messages::BATVIN::Instance() );
+
+    Comm::ProtocolManager::Instance()->addPeriodicMessage(
+                Comm::Messages::BATVOU::Instance() );
 }
 
 /* ########################################################################## */
