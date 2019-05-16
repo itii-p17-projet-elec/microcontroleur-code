@@ -6,6 +6,7 @@
 /* System includes */
 
 /* Libraries includes */
+#include <Arduino.h>
 
 /* Project includes */
 
@@ -22,6 +23,10 @@ class   AbstractInterface
 public:
 
     AbstractInterface(void);
+
+
+    virtual void    initialize(void)    {}
+    virtual void    sendData(const String& pData)   = 0;
 
 
 
