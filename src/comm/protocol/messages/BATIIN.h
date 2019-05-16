@@ -1,5 +1,5 @@
-#ifndef BATICH_H
-#define BATICH_H
+#ifndef BATIIN_H
+#define BATIIN_H
 
 /* Inherited classes */
 #include "AbstractMessage.h"
@@ -19,11 +19,11 @@ namespace Messages {
 /* ########################################################################## */
 /* ########################################################################## */
 
-class   BATICH
+class   BATIIN
         :   public  AbstractMessage
-        ,   public  TSingleton<BATICH>
+        ,   public  TSingleton<BATIIN>
 {
-    friend class    TSingleton<BATICH>;
+    friend class    TSingleton<BATIIN>;
 
 public:
 
@@ -37,7 +37,7 @@ protected:
 
 private:
 
-    BATICH(void);
+    BATIIN(void);
 
 
 
@@ -53,4 +53,4 @@ private:
 }   /*< namespace Messages */
 }   /*< namespace Comm */
 
-#endif  /*< BATICH_H */
+#endif  /*< BATIIN_H */
