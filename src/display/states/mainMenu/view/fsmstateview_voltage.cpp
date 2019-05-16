@@ -8,6 +8,7 @@
 
 /* Project includes */
 #include "variables_globales.h"
+#include "common/trace.h"
 #include "display/FSMContext.h"
 
 #include "../FSMStateMainMenu_View.h"
@@ -34,8 +35,8 @@ void    FSMStateView_Voltage::on_button_pressed(const Keypad::TeButtonsID &pButt
 {
     FSMAbstractState::on_button_pressed(pButtonID);
 
-    Serial.print("FSMStateView_Voltage : Pressed button : ");
-    Serial.println( Keypad::buttonName(pButtonID) );
+    TRACE("FSMStateView_Voltage : Pressed button : ");
+    TRACELN( Keypad::buttonName(pButtonID) );
 
 
     switch( pButtonID )
@@ -67,7 +68,7 @@ void    FSMStateView_Voltage::on_button_pressed(const Keypad::TeButtonsID &pButt
 
 void    FSMStateView_Voltage::on_state_enter(void)
 {
-    Serial.println( "Entering FSMStateView_Voltage." );
+    TRACELN( "Entering FSMStateView_Voltage." );
     Display::g_LCD.clear();
 
     g_LCD.setCursor(0,0);

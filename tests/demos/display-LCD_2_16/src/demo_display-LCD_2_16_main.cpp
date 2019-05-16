@@ -13,6 +13,8 @@
 
 #include <LiquidCrystal.h>
 
+#include "common/trace.h"
+
 #include "LCDKeypadShield.h"
 
 /**
@@ -64,7 +66,7 @@ ISR(TIMER1_OVF_vect)        // interrupt service routine
 {
     /* Reset timer */
     TCNT1   = C_TIMER1_COUNTER_PRELOAD; // preload timer
-    Serial.println("<INT>");
+    TRACELN("<INT>");
 
 
     digitalWrite(C_PIN_LED, HIGH);   // set the LED on
@@ -113,16 +115,16 @@ void setup()
 
 
     Serial.begin(9600);
-    Serial.println("\n~~~ Hello, World ! ~~~");
-    Serial.println("# Demo for DFRobot's \"LCD Keypad Shield\".\n");
+    TRACELN("\n~~~ Hello, World ! ~~~");
+    TRACELN("# Demo for DFRobot's \"LCD Keypad Shield\".\n");
 
-    Serial.println("+-- Initialization...");
+    TRACELN("+-- Initialization...");
     lcd.begin(16, 2);
     lcd.print("Hello World !");
-    Serial.println("    +-- Done.");
+    TRACELN("    +-- Done.");
 
 
-    Serial.println("+-- Initialize Timer 1...");
+    TRACELN("+-- Initialize Timer 1...");
     TCCR1A = 0;
     TCCR1B = 0;
 
@@ -131,7 +133,7 @@ void setup()
 
 
     delay(1000);
-    Serial.println("+-- Now starting main loop.");
+    TRACELN("+-- Now starting main loop.");
 
     lcd.clear();
     lcd.setCursor(0, 0);

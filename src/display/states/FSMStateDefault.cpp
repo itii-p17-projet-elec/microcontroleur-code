@@ -8,6 +8,7 @@
 
 /* Project includes */
 #include "../FSMContext.h"
+#include "common/trace.h"
 #include "mainMenu/FSMStateMainMenu_View.h"
 
 
@@ -29,8 +30,8 @@ void    FSMStateDefault::on_button_pressed(const Keypad::TeButtonsID &pButtonID)
 {
     FSMAbstractState::on_button_pressed(pButtonID);
 
-    Serial.print("StateDefault : Pressed button : ");
-    Serial.println( Keypad::buttonName(pButtonID) );
+    TRACE("StateDefault : Pressed button : ");
+    TRACELN( Keypad::buttonName(pButtonID) );
 
 
     switch( pButtonID )
@@ -51,7 +52,7 @@ void    FSMStateDefault::on_button_pressed(const Keypad::TeButtonsID &pButtonID)
 
 void    FSMStateDefault::on_state_enter(void)
 {
-    Serial.println( "Entering FSMStateDefault." );
+    TRACELN( "Entering FSMStateDefault." );
     g_LCD_backlightValue    = 0xFF;
     g_LCD.clear();
 

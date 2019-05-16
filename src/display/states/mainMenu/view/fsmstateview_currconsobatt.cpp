@@ -8,6 +8,7 @@
 
 /* Project includes */
 #include "variables_globales.h"
+#include "common/trace.h"
 #include "display/FSMContext.h"
 
 #include "../../../FSMContext.h"
@@ -41,8 +42,8 @@ void    FSMStateView_CurrConsoBatt::on_button_pressed(const Keypad::TeButtonsID 
 {
     FSMAbstractState::on_button_pressed(pButtonID);
 
-    Serial.print("FSMStateView_CurrConsoBatt : Pressed button : ");
-    Serial.println( Keypad::buttonName(pButtonID) );
+    TRACE("FSMStateView_CurrConsoBatt : Pressed button : ");
+    TRACELN( Keypad::buttonName(pButtonID) );
 
 
     switch( pButtonID )
@@ -74,7 +75,7 @@ void    FSMStateView_CurrConsoBatt::on_button_pressed(const Keypad::TeButtonsID 
 
 void    FSMStateView_CurrConsoBatt::on_state_enter(void)
 {
-    Serial.println( "Entering FSMStateView_CurrConsoBatt." );
+    TRACELN( "Entering FSMStateView_CurrConsoBatt." );
     Display::g_LCD.clear();
 
     displayOnLCD("< Curr Cons.Batt >", 0, 0);
