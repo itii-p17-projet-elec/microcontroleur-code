@@ -49,7 +49,7 @@ String  AMBTMP::generatePayload(void) const
     retval  += C_FRAME_SEP;
 
     char    lBuffer[16] = {0};
-    dtostrf(g_sensors.temperature.getTemperature(),
+    dtostrf(g_sensors.ambientTemperature_c(),
             4,2,
             lBuffer);
 
