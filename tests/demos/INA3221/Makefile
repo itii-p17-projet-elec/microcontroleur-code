@@ -67,7 +67,7 @@
 # ##############################################################################
 SHELL:=/bin/bash
 
-MK_INCDIR   := mk-inc
+MK_INCDIR   := ../../../mk-inc
 
 
 
@@ -78,6 +78,8 @@ default: target
 
 include $(MK_INCDIR)/project-config.mk
 
+# Override this variable (declared in project-config)
+TARGETNAME	:= demo-INA3221
 
 
 include $(MK_INCDIR)/arduino-config.mk
@@ -91,8 +93,6 @@ include $(MK_INCDIR)/directories.mk
 # ------------------------------------------------------------------------------
 
 # Please note : Order is important here !
-include $(MK_INCDIR)/arduino-lib-EEPROM.mk
-include $(MK_INCDIR)/arduino-lib-LiquidCrystal.mk
 include $(MK_INCDIR)/arduino-lib-wire.mk
 include $(MK_INCDIR)/arduino-lib-core.mk
 
@@ -100,6 +100,7 @@ include $(MK_INCDIR)/arduino-lib-core.mk
 
 # ------------------------------------------------------------------------------
 include $(MK_INCDIR)/build-options.mk
+INC+= -I$(MK_INCDIR)/../src/
 
 
 
