@@ -1,5 +1,5 @@
-#ifndef BATIDE_H
-#define BATIDE_H
+#ifndef BATVOU_H
+#define BATVOU_H
 
 /* Inherited classes */
 #include "AbstractMessage.h"
@@ -19,11 +19,11 @@ namespace Messages {
 /* ########################################################################## */
 /* ########################################################################## */
 
-class   BATIDE
+class   BATVOU
         :   public  AbstractMessage
-        ,   public  TSingleton<BATIDE>
+        ,   public  TSingleton<BATVOU>
 {
-    friend class    TSingleton<BATIDE>;
+    friend class    TSingleton<BATVOU>;
 
 public:
 protected:
@@ -34,7 +34,7 @@ protected:
 
 private:
 
-    BATIDE(void);
+    BATVOU(void);
 
 
 
@@ -50,4 +50,4 @@ private:
 }   /*< namespace Messages */
 }   /*< namespace Comm */
 
-#endif  /*< BATIDE_H */
+#endif  /*< BATVOU_H */

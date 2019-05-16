@@ -8,9 +8,11 @@
 #include "variables_globales.h"
 #include "comm/protocol/ProtocolManager.h"
 #include "comm/protocol/messages/AMBTMP.h"
-#include "comm/protocol/messages/BATICH.h"
-#include "comm/protocol/messages/BATIDE.h"
+#include "comm/protocol/messages/BATIIN.h"
+#include "comm/protocol/messages/BATIOU.h"
 #include "comm/protocol/messages/BATTMP.h"
+#include "comm/protocol/messages/BATVIN.h"
+#include "comm/protocol/messages/BATVOU.h"
 #include "display/FSMContext.h"
 
 
@@ -34,13 +36,19 @@ void    setup_commProtocol(void)
                 Comm::Messages::AMBTMP::Instance() );
 
     Comm::ProtocolManager::Instance()->addPeriodicMessage(
-                Comm::Messages::BATICH::Instance() );
+                Comm::Messages::BATIIN::Instance() );
 
     Comm::ProtocolManager::Instance()->addPeriodicMessage(
-                Comm::Messages::BATIDE::Instance() );
+                Comm::Messages::BATIOU::Instance() );
 
     Comm::ProtocolManager::Instance()->addPeriodicMessage(
                 Comm::Messages::BATTMP::Instance() );
+
+    Comm::ProtocolManager::Instance()->addPeriodicMessage(
+                Comm::Messages::BATVIN::Instance() );
+
+    Comm::ProtocolManager::Instance()->addPeriodicMessage(
+                Comm::Messages::BATVOU::Instance() );
 }
 
 /* ########################################################################## */

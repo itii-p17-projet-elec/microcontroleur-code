@@ -1,5 +1,5 @@
 /* Corresponding header inclusion */
-#include "BATTMP.h"
+#include "BATVOU.h"
 
 /* System includes */
 
@@ -15,8 +15,8 @@ namespace Messages {
 /* ########################################################################## */
 /* ########################################################################## */
 
-BATTMP::BATTMP(void)
-    :   AbstractMessage("BATTMP")
+BATVOU::BATVOU(void)
+    :   AbstractMessage("BATVOU")
 {
 
 }
@@ -24,7 +24,7 @@ BATTMP::BATTMP(void)
 /* ########################################################################## */
 /* ########################################################################## */
 
-String  BATTMP::generatePayload(void) const
+String  BATVOU::generatePayload(void) const
 {
     String  retval(this->m_identifier);
 
@@ -49,7 +49,7 @@ String  BATTMP::generatePayload(void) const
     retval  += C_FRAME_SEP;
 #if 1
     char    lBuffer[16] = {0};
-    dtostrf(g_sensors.batteryTemperature_c(),
+    dtostrf(g_sensors.batteryOutputVoltage_V(),
             4,2,
             lBuffer);
 

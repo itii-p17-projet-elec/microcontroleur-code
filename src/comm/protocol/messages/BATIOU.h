@@ -1,5 +1,5 @@
-#ifndef BATICH_H
-#define BATICH_H
+#ifndef BATIOU_H
+#define BATIOU_H
 
 /* Inherited classes */
 #include "AbstractMessage.h"
@@ -19,16 +19,13 @@ namespace Messages {
 /* ########################################################################## */
 /* ########################################################################## */
 
-class   BATICH
+class   BATIOU
         :   public  AbstractMessage
-        ,   public  TSingleton<BATICH>
+        ,   public  TSingleton<BATIOU>
 {
-    friend class    TSingleton<BATICH>;
+    friend class    TSingleton<BATIOU>;
 
 public:
-
-
-
 protected:
 
     virtual String  generatePayload(void) const;
@@ -37,7 +34,7 @@ protected:
 
 private:
 
-    BATICH(void);
+    BATIOU(void);
 
 
 
@@ -53,4 +50,4 @@ private:
 }   /*< namespace Messages */
 }   /*< namespace Comm */
 
-#endif  /*< BATICH_H */
+#endif  /*< BATIOU_H */

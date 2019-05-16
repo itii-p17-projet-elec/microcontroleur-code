@@ -1,11 +1,12 @@
 /* Corresponding header inclusion */
-#include "BATICH.h"
+#include "BATIIN.h"
 
 /* System includes */
 
 /* Libraries includes */
 
 /* Project includes */
+#include "variables_globales.h"
 
 
 namespace Comm {
@@ -14,8 +15,8 @@ namespace Messages {
 /* ########################################################################## */
 /* ########################################################################## */
 
-BATICH::BATICH(void)
-    :   AbstractMessage("BATICH")
+BATIIN::BATIIN(void)
+    :   AbstractMessage("BATIIN")
 {
 
 }
@@ -23,7 +24,7 @@ BATICH::BATICH(void)
 /* ########################################################################## */
 /* ########################################################################## */
 
-String  BATICH::generatePayload(void) const
+String  BATIIN::generatePayload(void) const
 {
     String  retval(this->m_identifier);
 
@@ -46,9 +47,9 @@ String  BATICH::generatePayload(void) const
      *  Add "value" field
      */
     retval  += C_FRAME_SEP;
-#if 0
+#if 1
     char    lBuffer[16] = {0};
-    dtostrf(g_sensors.battery_intensity_load,
+    dtostrf(g_sensors.batteryInputCurrent_mA(),
             4,2,
             lBuffer);
 

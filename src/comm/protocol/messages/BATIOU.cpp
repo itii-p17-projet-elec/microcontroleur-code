@@ -1,11 +1,12 @@
 /* Corresponding header inclusion */
-#include "BATIDE.h"
+#include "BATIOU.h"
 
 /* System includes */
 
 /* Libraries includes */
 
 /* Project includes */
+#include "variables_globales.h"
 
 
 namespace Comm {
@@ -14,8 +15,8 @@ namespace Messages {
 /* ########################################################################## */
 /* ########################################################################## */
 
-BATIDE::BATIDE(void)
-    :   AbstractMessage("BATIDE")
+BATIOU::BATIOU(void)
+    :   AbstractMessage("BATIOU")
 {
 
 }
@@ -23,7 +24,7 @@ BATIDE::BATIDE(void)
 /* ########################################################################## */
 /* ########################################################################## */
 
-String  BATIDE::generatePayload(void) const
+String  BATIOU::generatePayload(void) const
 {
     String  retval(this->m_identifier);
 
@@ -46,9 +47,9 @@ String  BATIDE::generatePayload(void) const
      *  Add "value" field
      */
     retval  += C_FRAME_SEP;
-#if 0
+#if 1
     char    lBuffer[16] = {0};
-    dtostrf(g_sensors.battery_intensity_decharge,
+    dtostrf(g_sensors.batteryOutputCurrent_mA(),
             4,2,
             lBuffer);
 
