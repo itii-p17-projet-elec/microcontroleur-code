@@ -28,7 +28,7 @@ public:
     void    setAlert(const bool& pAlert);
 
 
-    String  toString(void) const;
+    String  encode(void) const;
 
 
 

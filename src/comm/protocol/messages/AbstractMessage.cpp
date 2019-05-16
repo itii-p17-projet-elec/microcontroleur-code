@@ -59,7 +59,7 @@ void    AbstractMessage::setAlert(const bool &pAlert)
 /* ########################################################################## */
 /* ########################################################################## */
 
-String  AbstractMessage::toString() const
+String  AbstractMessage::encode() const
 {
     String  retval;
 
