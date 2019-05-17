@@ -1,5 +1,6 @@
 #include <Arduino.h>
 
+#include "common/trace.h"
 #include "drivers/ADC/Adafruit_ADS1015.h"
 
 const int   C_PIN_LED   =  13;    // LED connected to digital pin 13
@@ -20,11 +21,11 @@ void setup()
 
 
     Serial.begin(9600);
-    Serial.println("\n~~~ Hello, World ! ~~~");
-    Serial.println("# Demo for TI ADS1015 sensor.");
+    TRACELN("\n~~~ Hello, World ! ~~~");
+    TRACELN("# Demo for TI ADS1015 sensor.");
 
-    Serial.println("Getting single-ended readings from AIN0..3");
-    Serial.println("ADC Range: +/- 6.144V (1 bit = 3mV)");
+    TRACELN("Getting single-ended readings from AIN0..3");
+    TRACELN("ADC Range: +/- 6.144V (1 bit = 3mV)");
     ads1015.begin();
 }
 
@@ -45,41 +46,41 @@ void loop()
     digitalWrite(C_PIN_LED, LOW);
 
 #if 1
-    Serial.println("+-- New measure :");
-    Serial.print("    +-- AIN0: "); Serial.print(adc0);Serial.print(" ( "); Serial.print(adc0 * 3);Serial.println(" mV )");
-    Serial.print("    +-- AIN1: "); Serial.print(adc1);Serial.print(" ( "); Serial.print(adc1 * 3);Serial.println(" mV )");
-    Serial.print("    +-- AIN2: "); Serial.print(adc2);Serial.print(" ( "); Serial.print(adc2 * 3);Serial.println(" mV )");
-    Serial.print("    +-- AIN3: "); Serial.print(adc3);Serial.print(" ( "); Serial.print(adc3 * 3);Serial.println(" mV )");
+    TRACELN("+-- New measure :");
+    TRACE("    +-- AIN0: "); TRACE(adc0);TRACE(" ( "); TRACE(adc0 * 3);TRACELN(" mV )");
+    TRACE("    +-- AIN1: "); TRACE(adc1);TRACE(" ( "); TRACE(adc1 * 3);TRACELN(" mV )");
+    TRACE("    +-- AIN2: "); TRACE(adc2);TRACE(" ( "); TRACE(adc2 * 3);TRACELN(" mV )");
+    TRACE("    +-- AIN3: "); TRACE(adc3);TRACE(" ( "); TRACE(adc3 * 3);TRACELN(" mV )");
 
-    Serial.print("    +-- D01: ");
-    Serial.print(adc_diff_0_1);
-    Serial.print("(");
-    Serial.print(adc_diff_0_1 * 3);
-    Serial.println("mV)");
+    TRACE("    +-- D01: ");
+    TRACE(adc_diff_0_1);
+    TRACE("(");
+    TRACE(adc_diff_0_1 * 3);
+    TRACELN("mV)");
 
-    Serial.print("    +-- D23: ");
-    Serial.print(adc_diff_2_3);
-    Serial.print("(");
-    Serial.print(adc_diff_2_3 * 3);
-    Serial.println("mV)");
-    Serial.println("");
+    TRACE("    +-- D23: ");
+    TRACE(adc_diff_2_3);
+    TRACE("(");
+    TRACE(adc_diff_2_3 * 3);
+    TRACELN("mV)");
+    TRACELN("");
 
     delay(1000);
 #else
-    Serial.print("$");
-    Serial.print(adc0);
-    Serial.print(C_CHAR_SEP);
-    Serial.print(adc1);
-    Serial.print(C_CHAR_SEP);
-    Serial.print(adc2);
-    Serial.print(C_CHAR_SEP);
-    Serial.print(adc3);
-    Serial.print(C_CHAR_SEP);
-    Serial.print(adc_diff_0_1);
-    Serial.print(C_CHAR_SEP);
-    Serial.print(adc_diff_2_3);
-    Serial.print(C_CHAR_SEP);
-    Serial.print("*\r\n");
+    TRACE("$");
+    TRACE(adc0);
+    TRACE(C_CHAR_SEP);
+    TRACE(adc1);
+    TRACE(C_CHAR_SEP);
+    TRACE(adc2);
+    TRACE(C_CHAR_SEP);
+    TRACE(adc3);
+    TRACE(C_CHAR_SEP);
+    TRACE(adc_diff_0_1);
+    TRACE(C_CHAR_SEP);
+    TRACE(adc_diff_2_3);
+    TRACE(C_CHAR_SEP);
+    TRACE("*\r\n");
     delay(100);
 #endif
 

@@ -9,6 +9,7 @@
 
 /* Project includes */
 #include "variables_globales.h"
+#include "common/trace.h"
 
 /* ########################################################################## */
 /* ########################################################################## */
@@ -23,7 +24,7 @@ EEPROMMgmt::EEPROMMgmt(void)
 
 void    EEPROMMgmt::loadData(void)
 {
-    Serial.println( __PRETTY_FUNCTION__ );
+    TRACELN( __PRETTY_FUNCTION__ );
 
 
     /*
@@ -50,12 +51,12 @@ void    EEPROMMgmt::loadData(void)
 
     if( ! lEepromInitialized )
     {
-        Serial.print( __FUNCTION__ );
-        Serial.print( "EEPROM is not initialized ! (" );
-        Serial.print(g_parameters.m_data.magic);
-        Serial.print(" vs ");
-        Serial.print(CParameters::C_STRUCT_MAGIC);
-        Serial.println(")");
+        TRACE( __FUNCTION__ );
+        TRACE( "EEPROM is not initialized ! (" );
+        TRACE(g_parameters.m_data.magic);
+        TRACE(" vs ");
+        TRACE(CParameters::C_STRUCT_MAGIC);
+        TRACELN(")");
 
         g_parameters.initialize();
     }
@@ -129,11 +130,11 @@ uint32_t    EEPROMMgmt::read32(int pAddr)
 
 void    EEPROMMgmt::write8(int pAddr, const uint8_t &pData)
 {
-    Serial.print( __FUNCTION__);
-    Serial.print( " :: Writing " );
-    Serial.print( pData );
-    Serial.print( " @ ");
-    Serial.println( pAddr);
+    TRACE( __FUNCTION__);
+    TRACE( " :: Writing " );
+    TRACE( pData );
+    TRACE( " @ ");
+    TRACELN( pAddr);
 
 
     EEPROM.write(pAddr, pData );

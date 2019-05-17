@@ -3,6 +3,8 @@
 #include <Arduino.h>
 #include <avr/power.h>
 
+#include "common/trace.h"
+
 /* ########################################################################## */
 /* ########################################################################## */
 
@@ -72,8 +74,8 @@ LCDKeypadShield::TeButtonsID LCDKeypadShield::getPressedButton(uint8_t pPinNbr)
     power_adc_enable();
     int value = analogRead(pPinNbr);
     power_adc_disable();
-    Serial.print( "Value = " );
-    Serial.println( value );
+    TRACE( "Value = " );
+    TRACELN( value );
 
 
     /* Calcul de l'état des boutons */

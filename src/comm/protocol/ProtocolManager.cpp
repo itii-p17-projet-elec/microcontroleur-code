@@ -7,6 +7,7 @@
 #include <Arduino.h>
 
 /* Project includes */
+#include "common/trace.h"
 
 
 namespace Comm {
@@ -15,7 +16,8 @@ namespace Comm {
 /* ########################################################################## */
 
 ProtocolManager::ProtocolManager(void)
-    :   m_periodicMessagesCount(0)
+    :   m_interfacePtr(nullptr)
+    ,   m_periodicMessagesCount(0)
 {
 
 }
@@ -28,7 +30,7 @@ void    ProtocolManager::addPeriodicMessage(
 {
     if( this->m_periodicMessagesCount >= C_PERIODICMSG_MAXCOUNT )
     {
-        Serial.println( "** CRITICAL ERROR ** :: Trying to add too many message"
+        TRACELN( "** CRITICAL ERROR ** :: Trying to add too many message"
                         " instances in periodic messages list !" );
     }
     else
@@ -43,7 +45,17 @@ void    ProtocolManager::addPeriodicMessage(
 
 void    ProtocolManager::sendMessage(const Messages::AbstractMessage *pMsgPtr)
 {
-    Serial.print( pMsgPtr->toString() );
+    if( this->m_interfacePtr == nullptr )
+    {
+        TRACE( "*** ERROR *** " );
+        TRACE( __PRETTY_FUNCTION__ );
+        TRACELN( " : Trying to send message whereas no interface has"
+                        " been set !" );
+    }
+    else
+    {
+        this->m_interfacePtr->sendData( pMsgPtr->encode() );
+    }
 }
 
 /* ########################################################################## */
@@ -55,6 +67,19 @@ void    ProtocolManager::sendPeriodicMessages(void)
     {
         this->m_periodicMessagesList[i]->setAlert(false);
         this->sendMessage( this->m_periodicMessagesList[i] );
+    }
+}
+
+/* ########################################################################## */
+/* ########################################################################## */
+
+void    ProtocolManager::setInterface(
+                Interface::AbstractInterface *pInterfacePtr)
+{
+    if(pInterfacePtr != nullptr)
+    {
+        this->m_interfacePtr    = pInterfacePtr;
+        this->m_interfacePtr->initialize();
     }
 }
 

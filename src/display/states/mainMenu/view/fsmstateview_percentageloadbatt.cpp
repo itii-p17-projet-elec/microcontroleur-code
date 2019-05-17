@@ -8,6 +8,7 @@
 
 /* Project includes */
 #include "variables_globales.h"
+#include "common/trace.h"
 #include "display/FSMContext.h"
 
 #include "../../../FSMContext.h"
@@ -42,8 +43,8 @@ void    FSMStateView_PercentageLoadBatt::on_button_pressed(const Keypad::TeButto
 {
     FSMAbstractState::on_button_pressed(pButtonID);
 
-    Serial.print("FSMStateView_PercentageLoadBatt : Pressed button : ");
-    Serial.println( Keypad::buttonName(pButtonID) );
+    TRACE("FSMStateView_PercentageLoadBatt : Pressed button : ");
+    TRACELN( Keypad::buttonName(pButtonID) );
 
 
     switch( pButtonID )
@@ -75,7 +76,7 @@ void    FSMStateView_PercentageLoadBatt::on_button_pressed(const Keypad::TeButto
 
 void    FSMStateView_PercentageLoadBatt::on_state_enter(void)
 {
-    Serial.println( "Entering FSMStateView_PercentageLoadBatt." );
+    TRACELN( "Entering FSMStateView_PercentageLoadBatt." );
     Display::g_LCD.clear();
 
     g_LCD.setCursor(0, 0);

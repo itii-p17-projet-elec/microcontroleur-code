@@ -6,6 +6,7 @@
 /* Project includes */
 #include "hardware_defines.h"
 #include "variables_globales.h"
+#include "comm/interface/IfaceLoRa.h"
 #include "comm/protocol/ProtocolManager.h"
 #include "comm/protocol/messages/AMBTMP.h"
 #include "comm/protocol/messages/BATIIN.h"
@@ -13,6 +14,7 @@
 #include "comm/protocol/messages/BATTMP.h"
 #include "comm/protocol/messages/BATVIN.h"
 #include "comm/protocol/messages/BATVOU.h"
+#include "common/trace.h"
 #include "display/FSMContext.h"
 
 
@@ -21,35 +23,11 @@
 /*
  *  Forward declarations
  */
+void    setup_commInterfaces(void);
 void    setup_commProtocol(void);
 void    setup_parameters(void);
 void    setup_pins(void);
-void    setup_serial(void);
 void    setup_timer1(void);
-
-/* ########################################################################## */
-/* ########################################################################## */
-
-void    setup_commProtocol(void)
-{
-    Comm::ProtocolManager::Instance()->addPeriodicMessage(
-                Comm::Messages::AMBTMP::Instance() );
-
-    Comm::ProtocolManager::Instance()->addPeriodicMessage(
-                Comm::Messages::BATIIN::Instance() );
-
-    Comm::ProtocolManager::Instance()->addPeriodicMessage(
-                Comm::Messages::BATIOU::Instance() );
-
-    Comm::ProtocolManager::Instance()->addPeriodicMessage(
-                Comm::Messages::BATTMP::Instance() );
-
-    Comm::ProtocolManager::Instance()->addPeriodicMessage(
-                Comm::Messages::BATVIN::Instance() );
-
-    Comm::ProtocolManager::Instance()->addPeriodicMessage(
-                Comm::Messages::BATVOU::Instance() );
-}
 
 /* ########################################################################## */
 /* ########################################################################## */
@@ -58,7 +36,7 @@ void    setup(void)
 {
     setup_pins();
 
-    setup_serial();
+    setup_commInterfaces();
 
     setup_parameters();
 
@@ -76,6 +54,51 @@ void    setup(void)
     /* This shall be done at last as it enables interrupts */
     setup_timer1();
     digitalWrite(C_PIN_LED_ACTIVITY, LOW);
+}
+
+/* ########################################################################## */
+/* ########################################################################## */
+
+void    setup_commInterfaces(void)
+{
+    Comm::Interface::IfaceSerial::Instance()->initialize();
+
+    // prints title with ending line break
+    TRACELN("\n~~~ Hello, World ! ~~~");
+}
+
+/* ########################################################################## */
+/* ########################################################################## */
+
+void    setup_commProtocol(void)
+{
+    /*
+     *  Define the communication interface on which to send messages
+     */
+    Comm::ProtocolManager::Instance()->setInterface(
+                Comm::Interface::IfaceLoRa::Instance() );
+
+
+    /*
+     *  Declare all periodic message factories
+     */
+    Comm::ProtocolManager::Instance()->addPeriodicMessage(
+                Comm::Messages::AMBTMP::Instance() );
+
+    Comm::ProtocolManager::Instance()->addPeriodicMessage(
+                Comm::Messages::BATIIN::Instance() );
+
+    Comm::ProtocolManager::Instance()->addPeriodicMessage(
+                Comm::Messages::BATIOU::Instance() );
+
+    Comm::ProtocolManager::Instance()->addPeriodicMessage(
+                Comm::Messages::BATTMP::Instance() );
+
+    Comm::ProtocolManager::Instance()->addPeriodicMessage(
+                Comm::Messages::BATVIN::Instance() );
+
+    Comm::ProtocolManager::Instance()->addPeriodicMessage(
+                Comm::Messages::BATVOU::Instance() );
 }
 
 /* ########################################################################## */
@@ -99,22 +122,6 @@ void    setup_pins(void)
 
 
     digitalWrite(C_PIN_LCD_BACKLIGHT, HIGH);
-}
-
-/* ########################################################################## */
-/* ########################################################################## */
-
-void    setup_serial(void)
-{
-    //Initialize serial and wait for port to open:
-    Serial.begin(115200);
-    while (!Serial)
-    {
-        ; // wait for serial port to connect. Needed for Leonardo only
-    }
-
-    // prints title with ending line break
-    Serial.println("\n~~~ Hello, World ! ~~~");
 }
 
 /* ########################################################################## */

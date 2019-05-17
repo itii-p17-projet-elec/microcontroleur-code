@@ -11,6 +11,9 @@
 
 
 #include <Wire.h>
+
+#include "common/trace.h"
+
 #include "INA3221.h"
 
 INA3221 ina3221;
@@ -24,16 +27,16 @@ void setup(void)
 {
 
     Serial.begin(115200);
-    Serial.println("SDA_Arduino_INA3221_Test");
+    TRACELN("SDA_Arduino_INA3221_Test");
 
-    Serial.println("Measuring voltage and current with ina3221 ...");
+    TRACELN("Measuring voltage and current with ina3221 ...");
     ina3221.begin();
 }
 
 void loop(void)
 {
 
-    Serial.println("------------------------------");
+    TRACELN("------------------------------");
     float shuntvoltage1 = 0;
     float busvoltage1 = 0;
     float current_mA1 = 0;
@@ -45,11 +48,11 @@ void loop(void)
     current_mA1 = -ina3221.getCurrent_mA(LIPO_BATTERY_CHANNEL);  // minus is to get the "sense" right.   - means the battery is charging, + that it is discharging
     loadvoltage1 = busvoltage1 + (shuntvoltage1 / 1000);
 
-    Serial.print("LIPO_Battery Bus Voltage:   "); Serial.print(busvoltage1); Serial.println(" V");
-    Serial.print("LIPO_Battery Shunt Voltage: "); Serial.print(shuntvoltage1); Serial.println(" mV");
-    Serial.print("LIPO_Battery Load Voltage:  "); Serial.print(loadvoltage1); Serial.println(" V");
-    Serial.print("LIPO_Battery Current 1:       "); Serial.print(current_mA1); Serial.println(" mA");
-    Serial.println("");
+    TRACE("LIPO_Battery Bus Voltage:   "); TRACE(busvoltage1); TRACELN(" V");
+    TRACE("LIPO_Battery Shunt Voltage: "); TRACE(shuntvoltage1); TRACELN(" mV");
+    TRACE("LIPO_Battery Load Voltage:  "); TRACE(loadvoltage1); TRACELN(" V");
+    TRACE("LIPO_Battery Current 1:       "); TRACE(current_mA1); TRACELN(" mA");
+    TRACELN("");
 
     float shuntvoltage2 = 0;
     float busvoltage2 = 0;
@@ -61,11 +64,11 @@ void loop(void)
     current_mA2 = -ina3221.getCurrent_mA(SOLAR_CELL_CHANNEL);
     loadvoltage2 = busvoltage2 + (shuntvoltage2 / 1000);
 
-    Serial.print("Solar Cell Bus Voltage 2:   "); Serial.print(busvoltage2); Serial.println(" V");
-    Serial.print("Solar Cell Shunt Voltage 2: "); Serial.print(shuntvoltage2); Serial.println(" mV");
-    Serial.print("Solar Cell Load Voltage 2:  "); Serial.print(loadvoltage2); Serial.println(" V");
-    Serial.print("Solar Cell Current 2:       "); Serial.print(current_mA2); Serial.println(" mA");
-    Serial.println("");
+    TRACE("Solar Cell Bus Voltage 2:   "); TRACE(busvoltage2); TRACELN(" V");
+    TRACE("Solar Cell Shunt Voltage 2: "); TRACE(shuntvoltage2); TRACELN(" mV");
+    TRACE("Solar Cell Load Voltage 2:  "); TRACE(loadvoltage2); TRACELN(" V");
+    TRACE("Solar Cell Current 2:       "); TRACE(current_mA2); TRACELN(" mA");
+    TRACELN("");
 
     float shuntvoltage3 = 0;
     float busvoltage3 = 0;
@@ -77,11 +80,11 @@ void loop(void)
     current_mA3 = ina3221.getCurrent_mA(OUTPUT_CHANNEL);
     loadvoltage3 = busvoltage3 + (shuntvoltage3 / 1000);
 
-    Serial.print("Output Bus Voltage 3:   "); Serial.print(busvoltage3); Serial.println(" V");
-    Serial.print("Output Shunt Voltage 3: "); Serial.print(shuntvoltage3); Serial.println(" mV");
-    Serial.print("Output Load Voltage 3:  "); Serial.print(loadvoltage3); Serial.println(" V");
-    Serial.print("Output Current 3:       "); Serial.print(current_mA3); Serial.println(" mA");
-    Serial.println("");
+    TRACE("Output Bus Voltage 3:   "); TRACE(busvoltage3); TRACELN(" V");
+    TRACE("Output Shunt Voltage 3: "); TRACE(shuntvoltage3); TRACELN(" mV");
+    TRACE("Output Load Voltage 3:  "); TRACE(loadvoltage3); TRACELN(" V");
+    TRACE("Output Current 3:       "); TRACE(current_mA3); TRACELN(" mA");
+    TRACELN("");
 
     delay(2000);
 }

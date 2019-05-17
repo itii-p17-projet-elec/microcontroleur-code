@@ -8,6 +8,7 @@
 
 /* Project includes */
 #include "variables_globales.h"
+#include "common/trace.h"
 #include "display/FSMContext.h"
 
 #include "../FSMStateMainMenu_Config.h"
@@ -34,8 +35,8 @@ void    FSMStateConfig_EmissionDelay_Edit::on_button_pressed(const Keypad::TeBut
 {
     FSMAbstractState::on_button_pressed(pButtonID);
 
-    Serial.print("FSMStateConfig_EmissionDelay_Edit : Pressed button : ");
-    Serial.println( Keypad::buttonName(pButtonID) );
+    TRACE("FSMStateConfig_EmissionDelay_Edit : Pressed button : ");
+    TRACELN( Keypad::buttonName(pButtonID) );
 
 
     switch( pButtonID )
@@ -76,7 +77,7 @@ void    FSMStateConfig_EmissionDelay_Edit::on_button_pressed(const Keypad::TeBut
 
 void    FSMStateConfig_EmissionDelay_Edit::on_state_enter(void)
 {
-    Serial.println( "Entering FSMStateConfig_EmissionDelay_Edit." );
+    TRACELN( "Entering FSMStateConfig_EmissionDelay_Edit." );
     g_LCD.clear();
 
     this->m_editedValue_s

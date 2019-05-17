@@ -8,6 +8,8 @@ LD:=/usr/share/arduino/hardware/tools/avr/bin/avr-gcc
 #   Build commands options
 # Flags, Libraries and Includes
 # ------------------------------------------------------------------------------
+DEFINES += -DTRACES
+
 INC         += -I$(SRCDIR)
 INC         += -I$(INCDIR)
 INC         += -I/usr/share/arduino/libraries

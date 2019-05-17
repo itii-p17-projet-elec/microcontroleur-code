@@ -7,6 +7,8 @@
 /* Libraries includes */
 
 /* Project includes */
+#include "common/trace.h"
+
 #include "FSMAbstractState.h"
 #include "hardware_defines.h"
 #include "states/FSMStateDefault.h"
@@ -56,14 +58,14 @@ FSMContext::FSMContext(void)
 
 void    FSMContext::changeState(FSMAbstractState *pFutureState)
 {
-    Serial.println( "FSMContext : Entering changeState." );
+    TRACELN( "FSMContext : Entering changeState." );
     /*
      *  Verify pre-requisites
      */
     /* Refuse to go to a null state */
     if( pFutureState == 0 )
     {
-        Serial.println( "ERR Future state is null !" );
+        TRACELN( "ERR Future state is null !" );
         return;
     }
 
@@ -71,7 +73,7 @@ void    FSMContext::changeState(FSMAbstractState *pFutureState)
     /* Do not change state if it's the same as the current one */
     if( pFutureState == this->m_currentStatePtr )
     {
-        Serial.println( "ERR Future state is current state !" );
+        TRACELN( "ERR Future state is current state !" );
         return;
     }
 

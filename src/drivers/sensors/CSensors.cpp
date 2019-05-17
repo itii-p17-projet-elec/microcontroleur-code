@@ -8,6 +8,7 @@
 #include <Arduino.h>
 
 /* Project includes */
+#include "common/trace.h"
 
 
 #define C_SENSOR_DEFAULTVALUE_F         (-999.99)
@@ -38,15 +39,15 @@ double  CTN_calculateTemperature(const double& pVoltage_mv)
 
     //Calcul de la résistance de la thermistance
     double Rth = (Rref * V ) / (V_IN - V);
-    Serial.print("Rth = ");
-    Serial.print(Rth);
+    TRACE("Rth = ");
+    TRACE(Rth);
 
     //Calcul de la température en kelvin( Steinhart and Hart)
     double kelvin = SteinhartHart(Rth);
     double celsius = kelvin - 273.15; //Conversion en celsius
-    Serial.print("Ohm  -  T = ");
-    Serial.print(celsius);
-    Serial.print("C\n");
+    TRACE("Ohm  -  T = ");
+    TRACE(celsius);
+    TRACE("C\n");
 #else
     float R1 = 10000;
     float logR2, R2, T;
@@ -152,24 +153,24 @@ void    CSensors::update(void)
 {
     if( this->m_AM2320_ambient.measure() != true )
     {
-        Serial.print(__PRETTY_FUNCTION__);
-        Serial.print(" :: WARN : An error occured while updating"
+        TRACE(__PRETTY_FUNCTION__);
+        TRACE(" :: WARN : An error occured while updating"
                        " AM2320 sensor data : ");
 
         switch (this->m_AM2320_ambient.getErrorCode())
         {
             case 1:
-                Serial.println("Sensor is offline");
+                TRACELN("Sensor is offline");
                 break;
 
 
             case 2:
-                Serial.println("CRC validation failed.");
+                TRACELN("CRC validation failed.");
                 break;
 
 
             default:
-                Serial.println("Unknown error!");
+                TRACELN("Unknown error!");
                 break;
         }
     }

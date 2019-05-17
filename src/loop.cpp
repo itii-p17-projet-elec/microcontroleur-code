@@ -6,6 +6,7 @@
 
 #include "PowerMgmt.h"
 #include "comm/protocol/ProtocolManager.h"
+#include "common/trace.h"
 #include "display/FSMContext.h"
 
 
@@ -28,8 +29,8 @@ void    processDelayedEvents_1s(void)
             %   g_parameters.m_data.sensors_periodicTransmissionDelay_s )
         ==  0 )
     {
-        Serial.print( __FUNCTION__ );
-        Serial.println( " :: Sending data..." );
+        TRACE( __FUNCTION__ );
+        TRACELN( " :: Sending data..." );
 
 
         Comm::ProtocolManager::Instance()->sendPeriodicMessages();
@@ -75,7 +76,7 @@ void loop()
 
         if( g_flag_processDelayedEvents_50ms )
         {
-            Serial.println( "WARNING"
+            TRACELN( "WARNING"
                             " : Over-run on 50ms delayed events process !" );
         }
     }
@@ -89,7 +90,7 @@ void loop()
 
         if( g_flag_processDelayedEvents_1s )
         {
-            Serial.println( "WARNING"
+            TRACELN( "WARNING"
                             " : Over-run on 1s delayed events process !" );
         }
     }

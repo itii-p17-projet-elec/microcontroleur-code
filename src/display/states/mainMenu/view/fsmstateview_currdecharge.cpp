@@ -8,6 +8,7 @@
 
 /* Project includes */
 #include "variables_globales.h"
+#include "common/trace.h"
 #include "display/FSMContext.h"
 
 #include "../../../FSMContext.h"
@@ -40,8 +41,8 @@ void    FSMStateView_CurrDecharge::on_button_pressed(const Keypad::TeButtonsID &
 {
     FSMAbstractState::on_button_pressed(pButtonID);
 
-    Serial.print("FSMStateView_CurrDecharge : Pressed button : ");
-    Serial.println( Keypad::buttonName(pButtonID) );
+    TRACE("FSMStateView_CurrDecharge : Pressed button : ");
+    TRACELN( Keypad::buttonName(pButtonID) );
 
 
     switch( pButtonID )
@@ -73,7 +74,7 @@ void    FSMStateView_CurrDecharge::on_button_pressed(const Keypad::TeButtonsID &
 
 void    FSMStateView_CurrDecharge::on_state_enter(void)
 {
-    Serial.println( "Entering FSMStateView_CurrDecharge." );
+    TRACELN( "Entering FSMStateView_CurrDecharge." );
     Display::g_LCD.clear();
 
     displayOnLCD("< Curr Decharge >", 0, 0);

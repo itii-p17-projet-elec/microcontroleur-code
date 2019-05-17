@@ -8,6 +8,7 @@
 
 /* Project includes */
 #include "variables_globales.h"
+#include "common/trace.h"
 #include "display/FSMContext.h"
 
 #include "../FSMStateMainMenu_Config.h"
@@ -32,8 +33,8 @@ void    FSMStateConfig_Back::on_button_pressed(const Keypad::TeButtonsID &pButto
 {
     FSMAbstractState::on_button_pressed(pButtonID);
 
-    Serial.print("FSMStateConfig_Back : Pressed button : ");
-    Serial.println( Keypad::buttonName(pButtonID) );
+    TRACE("FSMStateConfig_Back : Pressed button : ");
+    TRACELN( Keypad::buttonName(pButtonID) );
 
 
     switch( pButtonID )
@@ -66,7 +67,7 @@ void    FSMStateConfig_Back::on_button_pressed(const Keypad::TeButtonsID &pButto
 
 void    FSMStateConfig_Back::on_state_enter(void)
 {
-    Serial.println( "Entering FSMStateConfig_Back." );
+    TRACELN( "Entering FSMStateConfig_Back." );
     g_LCD.clear();
 
     g_LCD.setCursor(0,0);

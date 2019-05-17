@@ -18,6 +18,10 @@ enum    E_PIN_USAGE
     /** Internal LED connected to digital pin 13 */
     C_PIN_LED_ACTIVITY          = 13,
 
+    C_PIN_RFM95_RST             = 16,
+    C_PIN_RFM95_CS              = 17,
+    C_PIN_RFM95_INT             = 18,
+
     C_PIN_KEYPAD_SW             = 54 /*< This is A0 on mega2560 */
 };
 #endif

@@ -8,6 +8,7 @@
 
 /* Project includes */
 #include "variables_globales.h"
+#include "common/trace.h"
 #include "display/FSMContext.h"
 
 #include "../../../FSMContext.h"
@@ -41,8 +42,8 @@ void    FSMStateView_TempBatt::on_button_pressed(const Keypad::TeButtonsID &pBut
 {
     FSMAbstractState::on_button_pressed(pButtonID);
 
-    Serial.print("FSMStateView_TempBatt : Pressed button : ");
-    Serial.println( Keypad::buttonName(pButtonID) );
+    TRACE("FSMStateView_TempBatt : Pressed button : ");
+    TRACELN( Keypad::buttonName(pButtonID) );
 
 
     switch( pButtonID )
@@ -74,7 +75,7 @@ void    FSMStateView_TempBatt::on_button_pressed(const Keypad::TeButtonsID &pBut
 
 void    FSMStateView_TempBatt::on_state_enter(void)
 {
-    Serial.println( "Entering FSMStateView_TempBatt." );
+    TRACELN( "Entering FSMStateView_TempBatt." );
     Display::g_LCD.clear();
 
     displayOnLCD("< Battery temp >", 0, 0);

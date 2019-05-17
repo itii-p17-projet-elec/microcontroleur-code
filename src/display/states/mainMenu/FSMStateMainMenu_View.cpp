@@ -7,6 +7,8 @@
 #include <Arduino.h>
 
 /* Project includes */
+#include "common/trace.h"
+
 #include "../../FSMContext.h"
 #include "../FSMStateDefault.h"
 #include "FSMStateMainMenu_Back.h"
@@ -32,8 +34,8 @@ void    FSMStateMainMenu_View::on_button_pressed(const Keypad::TeButtonsID &pBut
 {
     FSMAbstractState::on_button_pressed(pButtonID);
 
-    Serial.print("FSMStateMainMenu_View : Pressed button : ");
-    Serial.println( Keypad::buttonName(pButtonID) );
+    TRACE("FSMStateMainMenu_View : Pressed button : ");
+    TRACELN( Keypad::buttonName(pButtonID) );
 
 
     switch( pButtonID )
@@ -66,7 +68,7 @@ void    FSMStateMainMenu_View::on_button_pressed(const Keypad::TeButtonsID &pBut
 
 void    FSMStateMainMenu_View::on_state_enter(void)
 {
-    Serial.println( "Entering FSMStateMainMenu_View." );
+    TRACELN( "Entering FSMStateMainMenu_View." );
     g_LCD.clear();
 
     g_LCD.setCursor(0,0);
