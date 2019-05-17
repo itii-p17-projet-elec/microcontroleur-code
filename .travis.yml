@@ -42,6 +42,7 @@ script:
   - cd tests/demos/ADS1015 && make
   - cd tests/demos/display-LCD_2_16 && make
   - cd tests/demos/INA3221 && make
+  - cd tests/demos/LoRa-RX && make
 #  - make tests
 #  - make run-tests-auto
 #  - make distclean
