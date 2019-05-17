@@ -8,10 +8,10 @@
 
 #ifdef  TRACES
 
-#define TRACE(arg)  Comm::Interface::IfaceSerial::Instance()->sendData(#arg);
+#define TRACE(arg)  Comm::Interface::IfaceSerial::Instance()->sendData(String(arg));
 #define TRACELN(arg)    \
-        Comm::Interface::IfaceSerial::Instance()->sendData(#arg); \
-        Comm::Interface::IfaceSerial::Instance()->sendData("\n");
+        Comm::Interface::IfaceSerial::Instance()->sendData(String(arg)); \
+        Comm::Interface::IfaceSerial::Instance()->sendData(("\n"));
 
 #else   /* no TRACES defined */
 
