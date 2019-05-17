@@ -57,7 +57,12 @@ void    IfaceLoRa::initialize()
     }
     else
     {
-        TRACE("Set Freq to: "); TRACELN(RF95_FREQ);
+        char    lBuff[16]   = {0};
+
+        dtostre(RF95_FREQ, lBuff, 3, 0 );
+
+        TRACE("Set Freq to: ");
+        TRACELN(lBuff);
     }
 
     // set transmitter powers from 5 to 23 dBm:
@@ -69,7 +74,8 @@ void    IfaceLoRa::initialize()
 
 void    IfaceLoRa::sendData(const String &pData)
 {
-    TRACELN("Sending to rf95_server");
+    TRACE("Sending to rf95_server : ");
+    TRACELN((String)pData);
 
     static char s_buffer[100]   = {0};
 
@@ -77,33 +83,37 @@ void    IfaceLoRa::sendData(const String &pData)
     rf95.send((uint8_t *)s_buffer,
               pData.length());
 
-    Serial.println("Waiting for packet to complete..."); delay(10);
+    TRACELN("Waiting for packet to complete...");
+    delay(10);
     rf95.waitPacketSent();
+    delay(50);
 
-#if 0
     // Now wait for a reply
+#if 0
     uint8_t buf[RH_RF95_MAX_MESSAGE_LEN];
     uint8_t len = sizeof(buf);
 
-    Serial.println("Waiting for reply..."); delay(10);
-    if (rf95.waitAvailableTimeout(1000))
+    TRACELN("Waiting for reply...");
+    delay(10);
+
+    if (rf95.waitAvailableTimeout(200)) /*< default was 1000 */
     {
         // Should be a reply message for us now
         if (rf95.recv(buf, &len))
         {
-            Serial.print("Got reply: ");
-            Serial.println((char*)buf);
-            Serial.print("RSSI: ");
-            Serial.println(rf95.lastRssi(), DEC);
+            TRACE("Got reply: ");
+            TRACELN((char*)buf);
+            TRACE("RSSI: ");
+            TRACELN(rf95.lastRssi());
         }
         else
         {
-            Serial.println("Receive failed");
+            TRACELN("Receive failed");
         }
     }
     else
     {
-        Serial.println("No reply, is there a listener around?");
+        TRACELN("No reply, is there a listener around?");
     }
 #endif
 }
