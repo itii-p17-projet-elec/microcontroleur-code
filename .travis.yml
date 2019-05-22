@@ -38,11 +38,12 @@ before_install:
 
 
 script:
-  - make
-  - cd tests/demos/ADS1015 && make
-  - cd tests/demos/display-LCD_2_16 && make
-  - cd tests/demos/INA3221 && make
-  - cd tests/demos/LoRa-RX && make
+  - bash scripts/build-travis.sh
+#  - make
+#  - pushd tests/demos/ADS1015           && make && popd
+#  - pushd tests/demos/display-LCD_2_16  && make && popd
+#  - pushd tests/demos/INA3221           && make && popd
+#  - pushd tests/demos/LoRa-RX           && make && popd
 #  - make tests
 #  - make run-tests-auto
 #  - make distclean
